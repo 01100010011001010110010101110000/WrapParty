@@ -238,3 +238,7 @@ public struct Collection: Codable {
     case backdropPath = "backdrop_path"
   }
 }
+
+// MARK: - Movie + Identifiable
+
+extension Movie: Identifiable {}

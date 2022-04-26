@@ -14,40 +14,30 @@
 
 import Foundation
 
-import Logging
-
-// MARK: - Configuration
-
-public protocol Configuration {
-  var logger: Logger { get }
-  var loader: DataLoading { get }
-  var apiToken: String { get }
-}
-
-// MARK: - DefaultConfiguration
-
-public struct DefaultConfiguration: Configuration {
+actor TokenManager {
   // MARK: Lifecycle
 
-  init() {
-    logger = Logger(label: "com.knossos.WrapParty.logger")
-    loader = DataLoader()
-    apiToken = ProcessInfo.processInfo.environment[Self.apiTokenEnvVar, default: ""]
-  }
-
-  init(apiToken: String) {
-    logger = Logger(label: "com.knossos.WrapParty.logger")
-    loader = DataLoader()
-    self.apiToken = apiToken
+  init(token: String) {
+    apiToken = token
   }
 
   // MARK: Public
 
-  public let logger: Logger
-  public let loader: DataLoading
-  public let apiToken: String
+  public private(set) var apiToken: String
+
+  public func configure(token: String) {
+    apiToken = token
+  }
+
+  // MARK: Internal
+
+  func authenticatingRequest(request: inout URLRequest) {
+    request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
+  }
 
   // MARK: Private
 
-  private static let apiTokenEnvVar: String = "TMDB_API_TOKEN"
+  private var authorizationHeader: String {
+    "Bearer \(apiToken)"
+  }
 }

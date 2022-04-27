@@ -49,5 +49,5 @@ public struct DefaultConfiguration: Configuration {
 
   // MARK: Private
 
-  private static let apiTokenEnvVar: String = "TMDB_API_TOKEN"
+  private static let apiTokenEnvVar: String = "TMDB_API_READ_ACCESS_TOKEN"
 }

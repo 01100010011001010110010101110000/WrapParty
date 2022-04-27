@@ -37,7 +37,8 @@ struct MovieService: MovieServiceProviding {
   let tokenManager: TokenManager
 
   func details(for id: Int, including: [Appendable] = [], language: String? = nil) async throws -> Movie {
-    let (data, response) = try await dataLoader.loadData(for: Router.details(id: id, appending: including, language: language).asUrlRequest())
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.details(id: id, appending: including, language: language))
+    let (data, response) = try await dataLoader.loadData(for: request)
     // TODO: - Implement response status code checking
     return try WrapParty.jsonDecoder.decode(Movie.self, from: data)
   }
@@ -72,7 +73,7 @@ extension MovieService {
     func asUrl() -> URL {
       switch self {
       case let .details(id, appending, language):
-        var components = URLComponents(url: URL(string: "/movie/\(id)", relativeTo: WrapParty.baseUrl)!,
+        var components = URLComponents(url: URL(string: "movie/\(id)", relativeTo: WrapParty.baseUrl)!,
                                        resolvingAgainstBaseURL: true)!
         components.queryItems = [
           URLQueryItem(name: "language", value: language),

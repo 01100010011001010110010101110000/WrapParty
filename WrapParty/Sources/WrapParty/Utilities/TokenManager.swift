@@ -31,8 +31,10 @@ actor TokenManager {
 
   // MARK: Internal
 
-  func authenticatingRequest(request: inout URLRequest) {
+  func vendAuthenticatedRequest<C: UrlRequestConvertible>(for convertible: C) -> URLRequest {
+    var request = convertible.asUrlRequest()
     request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
+    return request
   }
 
   // MARK: Private

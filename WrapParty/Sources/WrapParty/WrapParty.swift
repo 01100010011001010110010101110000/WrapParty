@@ -36,7 +36,7 @@ public class WrapParty {
 
   // MARK: Internal
 
-  static let baseUrl = URL(string: "https://api.themoviedb.org/3")!
+  static let baseUrl = URL(string: "https://api.themoviedb.org/3/")!
   static let jsonDecoder = { () -> JSONDecoder in
     var decoder = JSONDecoder()
     return decoder

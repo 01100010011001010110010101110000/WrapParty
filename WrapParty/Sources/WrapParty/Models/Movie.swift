@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: String, belongsToCollection: [Collection]?, budget: Int, genres: [Genre], homepage: String, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: String, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: String, tagline: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: String, tagline: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.backdropPath = backdropPath
     self.belongsToCollection = belongsToCollection
@@ -51,11 +51,11 @@ public struct Movie: Codable {
   // MARK: Public
 
   public let adult: Bool
-  public let backdropPath: String
+  public let backdropPath: URL
   public let belongsToCollection: [Collection]?
   public let budget: Int
   public let genres: [Genre]
-  public let homepage: String
+  public let homepage: URL
   public let id: Int
   public let images: MovieImages?
   public let imdbId: String
@@ -63,7 +63,7 @@ public struct Movie: Codable {
   public let originalTitle: String
   public let overview: String
   public let popularity: Double
-  public let posterPath: String
+  public let posterPath: URL
   public let productionCompanies: [ProductionCompany]
   public let productionCountries: [ProductionCountry]
   public let releaseDate: String

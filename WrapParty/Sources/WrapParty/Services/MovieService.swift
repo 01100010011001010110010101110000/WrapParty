@@ -52,6 +52,7 @@ struct MovieService: MovieServiceProviding {
 
 extension MovieService {
   enum Appendable: String {
+    case alternativeTitles = "alternative_titles"
     case images
     case videos
   }

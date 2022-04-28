@@ -20,14 +20,31 @@ final class MoviceServiceIntegrationTests: XCTestCase {
 
   func testGetDetails() async throws {
     let movieId = 680
-    let movie = try await Self.client.details(for: movieId)
+    let movie = try await Self.service.details(for: movieId)
 
-    XCTAssert(movie.id == movieId)
+    XCTAssertTrue(movie.id == movieId)
+  }
+
+  func testAppending() async throws {
+    let movieId = 680
+    let movie = try await Self.service.details(for: movieId, including: [.alternativeTitles, .images, .videos])
+
+    // Alternative Titles
+    XCTAssertNotNil(movie.alternativeTitles)
+    XCTAssertNil(movie.alternativeTitles?.id)
+
+    // Images
+    XCTAssertNotNil(movie.images)
+    XCTAssertNil(movie.images?.id)
+
+    // Videos
+    XCTAssertNotNil(movie.videos)
+    XCTAssertNil(movie.videos.id)
   }
 
   // MARK: Private
 
-  private static let client: MovieService = {
+  private static let service: MovieService = {
     let config = DefaultConfiguration()
     return MovieService(dataLoader: config.loader, tokenManager: TokenManager(token: config.apiToken))
   }()

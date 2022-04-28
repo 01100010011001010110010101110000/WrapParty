@@ -17,7 +17,7 @@ import Foundation
 // MARK: - MovieServiceProviding
 
 protocol MovieServiceProviding: ServiceProviding & DetailAppendable {
-  func details(for id: Int, including: [Appendable], language: String?) async throws -> Movie
+  func details(for id: Int, including: Set<Appendable>, language: String?) async throws -> Movie
   func images(for id: Int) async throws -> MovieImages
 }
 
@@ -36,14 +36,14 @@ struct MovieService: MovieServiceProviding {
   let dataLoader: DataLoading
   let tokenManager: TokenManager
 
-  func details(for id: Int, including: [Appendable] = [], language: String? = nil) async throws -> Movie {
+  func details(for id: Int, including: Set<Appendable> = [], language: String? = nil) async throws -> Movie {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.details(id: id, appending: including, language: language))
     let (data, response) = try await dataLoader.loadData(for: request)
     // TODO: - Implement response status code checking
     return try WrapParty.jsonDecoder.decode(Movie.self, from: data)
   }
 
-  func details(for id: Int, including: [Appendable] = []) async throws -> Movie {
+  func details(for id: Int, including: Set<Appendable> = []) async throws -> Movie {
     try await details(for: id, including: including, language: nil)
   }
 
@@ -60,7 +60,7 @@ extension MovieService {
 
 extension MovieService {
   enum Router: RequestRouter {
-    case details(id: Int, appending: [Appendable], language: String?)
+    case details(id: Int, appending: Set<Appendable>, language: String?)
 
     // MARK: Internal
 

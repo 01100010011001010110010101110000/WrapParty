@@ -18,7 +18,7 @@ import Foundation
 protocol DetailAppendable: ServiceProviding {
   /// The model this service vends
   associatedtype DetailModel: Identifiable & Codable
-  associatedtype Appendable: RawRepresentable where Appendable.RawValue == String
+  associatedtype Appendable: Hashable & RawRepresentable where Appendable.RawValue == String
 
-  func details(for id: DetailModel.ID, including: [Appendable]) async throws -> DetailModel
+  func details(for id: DetailModel.ID, including: Set<Appendable>) async throws -> DetailModel
 }

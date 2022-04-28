@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: String, tagline: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.backdropPath = backdropPath
     self.belongsToCollection = belongsToCollection
@@ -70,7 +70,7 @@ public struct Movie: Codable {
   public let revenue: Int
   public let runtime: Int
   public let spokenLanguages: [SpokenLanguage]
-  public let status: String
+  public let status: MediaStatus
   public let tagline: String
   public let title: String
   public let video: Bool
@@ -137,7 +137,7 @@ public struct Genre: Codable {
 public struct ProductionCompany: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int, logoPath: String?, name: String, originCountry: String) {
+  public init(id: Int, logoPath: URL?, name: String, originCountry: String) {
     self.id = id
     self.logoPath = logoPath
     self.name = name
@@ -147,7 +147,7 @@ public struct ProductionCompany: Codable {
   // MARK: Public
 
   public let id: Int
-  public let logoPath: String?
+  public let logoPath: URL?
   public let name: String
   public let originCountry: String
 

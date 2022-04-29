@@ -18,6 +18,14 @@ import XCTest
 final class MoviceServiceIntegrationTests: XCTestCase {
   // MARK: Internal
 
+  func testGetAlternativeTitles() async throws {
+    let movieId = 680
+    let titles = try await Self.service.alternativeTitles(for: 680)
+
+    XCTAssertNotNil(titles.id)
+    XCTAssertGreaterThan(titles.titles.count, 0)
+  }
+
   func testGetDetails() async throws {
     let movieId = 680
     let movie = try await Self.service.details(for: movieId)

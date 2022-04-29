@@ -25,13 +25,23 @@ final class MoviceServiceIntegrationTests: XCTestCase {
     XCTAssertTrue(movie.id == movieId)
   }
 
+  func testGetChanges() async throws {
+    let movieId = 680
+    let changes = try? await Self.service.changes(for: movieId)
+
+    XCTAssertNotNil(changes)
+  }
+
   func testAppending() async throws {
     let movieId = 680
-    let movie = try await Self.service.details(for: movieId, including: [.alternativeTitles, .images, .videos])
+    let movie = try await Self.service.details(for: movieId, including: [.alternativeTitles, .changes, .images, .videos])
 
     // Alternative Titles
     XCTAssertNotNil(movie.alternativeTitles)
     XCTAssertNil(movie.alternativeTitles?.id)
+
+    // Changes
+    XCTAssertNotNil(movie.changes)
 
     // Images
     XCTAssertNotNil(movie.images)
@@ -39,7 +49,7 @@ final class MoviceServiceIntegrationTests: XCTestCase {
 
     // Videos
     XCTAssertNotNil(movie.videos)
-    XCTAssertNil(movie.videos.id)
+    XCTAssertNil(movie.videos?.id)
   }
 
   // MARK: Private

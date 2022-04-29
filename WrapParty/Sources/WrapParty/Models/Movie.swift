@@ -19,12 +19,13 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
     self.belongsToCollection = belongsToCollection
     self.budget = budget
+    self.changes = changes
     self.genres = genres
     self.homepage = homepage
     self.id = id
@@ -57,6 +58,7 @@ public struct Movie: Codable {
   public let backdropPath: URL
   public let belongsToCollection: [Collection]?
   public let budget: Int
+  public let changes: MovieChanges?
   public let genres: [Genre]
   public let homepage: URL
   public let id: Int
@@ -77,7 +79,7 @@ public struct Movie: Codable {
   public let tagline: String
   public let title: String
   public let video: Bool
-  public let videos: MovieVideos
+  public let videos: MovieVideos?
   public let voteAverage: Double
   public let voteCount: Int
 
@@ -89,6 +91,7 @@ public struct Movie: Codable {
     case backdropPath = "backdrop_path"
     case belongsToCollection = "belongs_to_collection"
     case budget
+    case changes
     case genres
     case homepage
     case id

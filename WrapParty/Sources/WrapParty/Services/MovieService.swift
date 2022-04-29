@@ -43,6 +43,12 @@ struct MovieService: MovieServiceProviding {
     return try WrapParty.jsonDecoder.decode(Movie.self, from: data)
   }
 
+  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil) async throws -> MovieChanges {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.changes(id: id, startDate: startDate, endDate: endDate))
+    let (data, response) = try await dataLoader.loadData(for: request)
+    return try WrapParty.jsonDecoder.decode(MovieChanges.self, from: data)
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> Movie {
     try await details(for: id, including: including, language: nil)
   }
@@ -53,6 +59,7 @@ struct MovieService: MovieServiceProviding {
 extension MovieService {
   enum Appendable: String {
     case alternativeTitles = "alternative_titles"
+    case changes
     case images
     case videos
   }
@@ -60,6 +67,7 @@ extension MovieService {
 
 extension MovieService {
   enum Router: RequestRouter {
+    case changes(id: Int, startDate: Date?, endDate: Date?)
     case details(id: Int, appending: Set<Appendable>, language: String?)
 
     // MARK: Internal
@@ -73,6 +81,14 @@ extension MovieService {
 
     func asUrl() -> URL {
       switch self {
+      case let .changes(id, startDate, endDate):
+        let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
+        var components = URLComponents(url: URL(string: "movie/\(id)/changes", relativeTo: WrapParty.baseUrl)!,
+                                       resolvingAgainstBaseURL: true)!
+        components.queryItems = []
+        if let date = startDate { components.queryItems?.append(URLQueryItem(name: "start_date", value: dateFormat.format(date))) }
+        if let date = endDate { components.queryItems?.append(URLQueryItem(name: "end_date", value: dateFormat.format(date))) }
+        return components.url!
       case let .details(id, appending, language):
         var components = URLComponents(url: URL(string: "movie/\(id)", relativeTo: WrapParty.baseUrl)!,
                                        resolvingAgainstBaseURL: true)!

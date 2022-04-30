@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -27,6 +27,7 @@ public struct Movie: Codable {
     self.budget = budget
     self.changes = changes
     self.credits = credits
+    self.externalIds = externalIds
     self.genres = genres
     self.homepage = homepage
     self.id = id
@@ -61,6 +62,7 @@ public struct Movie: Codable {
   public let budget: Int
   public let changes: MovieChanges?
   public let credits: MovieCredits?
+  public let externalIds: MovieExternalIds?
   public let genres: [Genre]
   public let homepage: URL
   public let id: Int
@@ -95,6 +97,7 @@ public struct Movie: Codable {
     case budget
     case changes
     case credits
+    case externalIds = "external_ids"
     case genres
     case homepage
     case id

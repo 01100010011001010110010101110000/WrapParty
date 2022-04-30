@@ -52,6 +52,10 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.credits(id: id, language: language))
   }
 
+  func externalIds(for id: Int) async throws -> MovieExternalIds {
+    try await callEndpoint(routable: Router.externalIds(id: id))
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> Movie {
     try await details(for: id, including: including, language: nil)
   }
@@ -70,10 +74,11 @@ struct MovieService: MovieServiceProviding {
 }
 
 extension MovieService {
-  enum Appendable: String {
+  enum Appendable: String, CaseIterable {
     case alternativeTitles = "alternative_titles"
     case changes
     case credits
+    case externalIds = "external_ids"
     case images
     case videos
   }
@@ -85,6 +90,7 @@ extension MovieService {
     case changes(id: Int, startDate: Date?, endDate: Date?)
     case credits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?)
+    case externalIds(id: Int)
 
     // MARK: Internal
 
@@ -120,6 +126,8 @@ extension MovieService {
           "language": language,
         ])
         return components.url!
+      case let .externalIds(id):
+        return componentsForRoute(path: "movie/\(id)/external_ids").url!
       }
     }
 

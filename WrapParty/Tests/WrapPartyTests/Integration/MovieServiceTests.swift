@@ -47,9 +47,16 @@ final class MoviceServiceIntegrationTests: XCTestCase {
     XCTAssertNotNil(credits)
   }
 
+  func testGetExternalIds() async throws {
+    let movieId = 680
+    let externalIds = try await Self.service.externalIds(for: movieId)
+
+    XCTAssertEqual(externalIds.imdbId, "tt0110912")
+  }
+
   func testAppending() async throws {
     let movieId = 680
-    let movie = try await Self.service.details(for: movieId, including: [.alternativeTitles, .changes, .credits, .images, .videos])
+    let movie = try await Self.service.details(for: movieId, including: Set(MovieService.Appendable.allCases))
 
     // Alternative Titles
     XCTAssertNotNil(movie.alternativeTitles)
@@ -60,6 +67,10 @@ final class MoviceServiceIntegrationTests: XCTestCase {
 
     // Credits
     XCTAssertNotNil(movie.credits)
+
+    // External IDs
+    XCTAssertNotNil(movie.externalIds)
+    XCTAssertEqual(movie.externalIds?.imdbId, "tt0110912")
 
     // Images
     XCTAssertNotNil(movie.images)

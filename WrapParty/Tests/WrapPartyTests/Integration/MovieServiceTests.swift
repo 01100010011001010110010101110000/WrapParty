@@ -40,9 +40,16 @@ final class MoviceServiceIntegrationTests: XCTestCase {
     XCTAssertNotNil(changes)
   }
 
+  func testGetCredits() async throws {
+    let movieId = 680
+    let credits = try? await Self.service.credits(for: movieId)
+
+    XCTAssertNotNil(credits)
+  }
+
   func testAppending() async throws {
     let movieId = 680
-    let movie = try await Self.service.details(for: movieId, including: [.alternativeTitles, .changes, .images, .videos])
+    let movie = try await Self.service.details(for: movieId, including: [.alternativeTitles, .changes, .credits, .images, .videos])
 
     // Alternative Titles
     XCTAssertNotNil(movie.alternativeTitles)
@@ -50,6 +57,9 @@ final class MoviceServiceIntegrationTests: XCTestCase {
 
     // Changes
     XCTAssertNotNil(movie.changes)
+
+    // Credits
+    XCTAssertNotNil(movie.credits)
 
     // Images
     XCTAssertNotNil(movie.images)

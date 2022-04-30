@@ -14,7 +14,7 @@
 
 import Foundation
 
-typealias RequestRouter = UrlRequestConvertible & UrlConvertible
+typealias RequestRoutable = UrlRequestConvertible & UrlConvertible
 
 // MARK: - UrlConvertible
 

@@ -18,45 +18,43 @@ import XCTest
 final class MoviceServiceIntegrationTests: XCTestCase {
   // MARK: Internal
 
+  static let pulpFictionTmdbId = 680
+  static let pulpFictionImdbId = "tt0110912"
+
   func testGetAlternativeTitles() async throws {
-    let movieId = 680
-    let titles = try await Self.service.alternativeTitles(for: 680)
+    let titles = try await Self.service.alternativeTitles(for: Self.pulpFictionTmdbId)
 
     XCTAssertNotNil(titles.id)
     XCTAssertGreaterThan(titles.titles.count, 0)
   }
 
   func testGetDetails() async throws {
-    let movieId = 680
-    let movie = try await Self.service.details(for: movieId)
+    let movie = try await Self.service.details(for: Self.pulpFictionTmdbId)
 
-    XCTAssertTrue(movie.id == movieId)
+    XCTAssertTrue(movie.id == Self.pulpFictionTmdbId)
   }
 
   func testGetChanges() async throws {
-    let movieId = 680
-    let changes = try? await Self.service.changes(for: movieId)
+    let changes = try? await Self.service.changes(for: Self.pulpFictionTmdbId)
 
     XCTAssertNotNil(changes)
   }
 
   func testGetCredits() async throws {
-    let movieId = 680
-    let credits = try? await Self.service.credits(for: movieId)
+    let credits = try? await Self.service.credits(for: Self.pulpFictionTmdbId)
 
     XCTAssertNotNil(credits)
   }
 
   func testGetExternalIds() async throws {
-    let movieId = 680
-    let externalIds = try await Self.service.externalIds(for: movieId)
+    let externalIds = try await Self.service.externalIds(for: Self.pulpFictionTmdbId)
 
-    XCTAssertEqual(externalIds.imdbId, "tt0110912")
+    XCTAssertEqual(externalIds.imdbId, Self.pulpFictionImdbId)
   }
 
   func testAppending() async throws {
-    let movieId = 680
-    let movie = try await Self.service.details(for: movieId, including: Set(MovieService.Appendable.allCases))
+    let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
+                                               including: Set(MovieService.Appendable.allCases))
 
     // Alternative Titles
     XCTAssertNotNil(movie.alternativeTitles)
@@ -70,7 +68,7 @@ final class MoviceServiceIntegrationTests: XCTestCase {
 
     // External IDs
     XCTAssertNotNil(movie.externalIds)
-    XCTAssertEqual(movie.externalIds?.imdbId, "tt0110912")
+    XCTAssertEqual(movie.externalIds?.imdbId, Self.pulpFictionImdbId)
 
     // Images
     XCTAssertNotNil(movie.images)

@@ -60,6 +60,10 @@ struct MovieService: MovieServiceProviding {
     try await details(for: id, including: including, language: nil)
   }
 
+  func keywords(for id: Int) async throws -> MovieKeywords {
+    try await callEndpoint(routable: Router.keywords(id: id))
+  }
+
   func images(for _: Int) async throws -> MovieImages { fatalError("images(for:) has not been implemented") }
 
   // MARK: Private
@@ -80,6 +84,7 @@ extension MovieService {
     case credits
     case externalIds = "external_ids"
     case images
+    case keywords
     case videos
   }
 }
@@ -91,6 +96,7 @@ extension MovieService {
     case credits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?)
     case externalIds(id: Int)
+    case keywords(id: Int)
 
     // MARK: Internal
 
@@ -128,6 +134,8 @@ extension MovieService {
         return components.url!
       case let .externalIds(id):
         return componentsForRoute(path: "movie/\(id)/external_ids").url!
+      case let .keywords(id):
+        return componentsForRoute(path: "movie/\(id)/keywords").url!
       }
     }
 

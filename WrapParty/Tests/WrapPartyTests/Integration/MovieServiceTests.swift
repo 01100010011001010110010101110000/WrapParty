@@ -52,6 +52,12 @@ final class MoviceServiceIntegrationTests: XCTestCase {
     XCTAssertEqual(externalIds.imdbId, Self.pulpFictionImdbId)
   }
 
+  func testGetKeywords() async throws {
+    let keywords = try await Self.service.keywords(for: Self.pulpFictionTmdbId)
+
+    XCTAssertTrue(keywords.keywords.contains { $0.id == 2231 })
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))
@@ -73,6 +79,9 @@ final class MoviceServiceIntegrationTests: XCTestCase {
     // Images
     XCTAssertNotNil(movie.images)
     XCTAssertNil(movie.images?.id)
+
+    // Keywords
+    XCTAssertNotNil(movie.keywords?.keywords)
 
     // Videos
     XCTAssertNotNil(movie.videos)

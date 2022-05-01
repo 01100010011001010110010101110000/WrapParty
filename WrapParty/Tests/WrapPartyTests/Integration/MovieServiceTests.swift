@@ -52,6 +52,12 @@ final class MoviceServiceIntegrationTests: XCTestCase {
     XCTAssertEqual(externalIds.imdbId, Self.pulpFictionImdbId)
   }
 
+  func testGetImages() async throws {
+    let images = try await Self.service.images(for: Self.pulpFictionTmdbId)
+
+    XCTAssertTrue(!images.posters.isEmpty)
+  }
+
   func testGetKeywords() async throws {
     let keywords = try await Self.service.keywords(for: Self.pulpFictionTmdbId)
 

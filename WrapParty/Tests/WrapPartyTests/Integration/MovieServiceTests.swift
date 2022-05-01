@@ -65,7 +65,7 @@ final class MovieServiceIntegrationTests: XCTestCase {
   }
 
   func testGetListPage() async throws {
-    let page = try await Self.service.list(for: Self.pulpFictionTmdbId, page: 2)
+    let page = try await Self.service.lists(for: Self.pulpFictionTmdbId, page: 2)
 
     XCTAssertTrue(page.page == 2)
     XCTAssertFalse(page.results.isEmpty)
@@ -78,6 +78,19 @@ final class MovieServiceIntegrationTests: XCTestCase {
 //
 //    XCTAssertFalse(lists.isEmpty)
 //  }
+
+  func testGetAllRecommendations() async throws {
+    let recommendations = try await Self.service.allRecommendations(for: Self.pulpFictionTmdbId)
+
+    XCTAssertFalse(recommendations.isEmpty)
+  }
+
+  func testGetRecommendationPage() async throws {
+    let page = try await Self.service.recommendations(for: Self.pulpFictionTmdbId, page: 2)
+
+    XCTAssertTrue(page.page == 2)
+    XCTAssertFalse(page.results.isEmpty)
+  }
 
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
@@ -103,6 +116,10 @@ final class MovieServiceIntegrationTests: XCTestCase {
 
     // Keywords
     XCTAssertNotNil(movie.keywords?.keywords)
+
+    // Recommendations
+    XCTAssertNotNil(movie.recommendations)
+    XCTAssertFalse(movie.recommendations?.results.isEmpty ?? true)
 
     // Videos
     XCTAssertNotNil(movie.videos)

@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -42,6 +42,7 @@ public struct Movie: Codable {
     self.posterPath = posterPath
     self.productionCompanies = productionCompanies
     self.productionCountries = productionCountries
+    self.recommendations = recommendations
     self.releaseDate = releaseDate
     self.revenue = revenue
     self.runtime = runtime
@@ -79,6 +80,7 @@ public struct Movie: Codable {
   public let posterPath: URL
   public let productionCompanies: [ProductionCompany]
   public let productionCountries: [ProductionCountry]
+  public let recommendations: ResultPage<MovieRecommendation>?
   public let releaseDate: String
   public let revenue: Int
   public let runtime: Int
@@ -116,6 +118,7 @@ public struct Movie: Codable {
     case posterPath = "poster_path"
     case productionCompanies = "production_companies"
     case productionCountries = "production_countries"
+    case recommendations
     case releaseDate = "release_date"
     case revenue
     case runtime

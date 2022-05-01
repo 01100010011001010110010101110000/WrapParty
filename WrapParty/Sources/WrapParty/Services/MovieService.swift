@@ -67,7 +67,7 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.images(id: id, language: language, imageLanguages: imageLanguages))
   }
 
-  func list(for id: Int, language: String? = nil, page: Int) async throws -> ResultPage<MovieList> {
+  func lists(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieList> {
     try await callEndpoint(routable: Router.lists(id: id, language: language, page: page))
   }
 
@@ -79,7 +79,23 @@ struct MovieService: MovieServiceProviding {
   }
 
   func listSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieList> {
-    let request = await tokenManager.vendAuthenticatedRequest(for: Router.lists(id: id, language: language, page: nil))
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.lists(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
+  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieRecommendation> {
+    try await callEndpoint(routable: Router.recommendations(id: id, language: language, page: page))
+  }
+
+  func allRecommendations(for id: Int, language: String? = nil) async throws -> [MovieRecommendation] {
+    let sequence = await recommendationSequence(for: id, language: language)
+    var results: [MovieRecommendation] = []
+    for try await page in sequence { results.append(contentsOf: page.results) }
+    return results
+  }
+
+  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieRecommendation> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader)
   }
 
@@ -103,6 +119,7 @@ extension MovieService {
     case images
     case keywords
     case lists
+    case recommendations
     case videos
   }
 }
@@ -117,6 +134,7 @@ extension MovieService {
     case images(id: Int, language: String?, imageLanguages: Set<String>?)
     case keywords(id: Int)
     case lists(id: Int, language: String?, page: Int?)
+    case recommendations(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -166,6 +184,11 @@ extension MovieService {
         return componentsForRoute(path: "movie/\(id)/keywords").url!
       case let .lists(id, language, page):
         return componentsForRoute(path: "movie/\(id)/lists", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
+      case let .recommendations(id, language, page):
+        return componentsForRoute(path: "movie/\(id)/recommendations", queryItems: [
           "language": language,
           "page": page.map { String($0) },
         ]).url!

@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -34,6 +34,7 @@ public struct Movie: Codable {
     self.images = images
     self.imdbId = imdbId
     self.keywords = keywords
+    self.lists = lists
     self.originalLanguage = originalLanguage
     self.originalTitle = originalTitle
     self.overview = overview
@@ -70,6 +71,7 @@ public struct Movie: Codable {
   public let images: MovieImages?
   public let imdbId: String
   public let keywords: MovieKeywords?
+  public let lists: ResultPage<MovieList>?
   public let originalLanguage: String
   public let originalTitle: String
   public let overview: String
@@ -106,6 +108,7 @@ public struct Movie: Codable {
     case images
     case imdbId = "imdb_id"
     case keywords
+    case lists
     case originalLanguage = "original_language"
     case originalTitle = "original_title"
     case overview

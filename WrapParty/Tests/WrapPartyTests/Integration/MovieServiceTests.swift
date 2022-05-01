@@ -64,6 +64,21 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertTrue(keywords.keywords.contains { $0.id == 2231 })
   }
 
+  func testGetListPage() async throws {
+    let page = try await Self.service.list(for: Self.pulpFictionTmdbId, page: 2)
+
+    XCTAssertTrue(page.page == 2)
+    XCTAssertFalse(page.results.isEmpty)
+  }
+
+  // Disabling this to not hammer TMDB during testing.
+  // TODO: - Develop a flag to conditionally run this test
+//  func testGetAllLists() async throws {
+//    let lists = try await Self.service.allLists(for: Self.pulpFictionTmdbId)
+//
+//    XCTAssertFalse(lists.isEmpty)
+//  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))

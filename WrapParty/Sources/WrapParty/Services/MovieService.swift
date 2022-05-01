@@ -17,7 +17,7 @@ import Foundation
 // MARK: - MovieServiceProviding
 
 protocol MovieServiceProviding: ServiceProviding & DetailAppendable {
-  func details(for id: Int, including: Set<Appendable>, language: String?, imageLanguages: Set<String>?) async throws -> Movie
+  func details(for id: Int, including: Set<Appendable>, language: String?, imageLanguages: Set<String>?, page: Int?) async throws -> Movie
 }
 
 // MARK: - MovieService
@@ -51,8 +51,8 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.externalIds(id: id))
   }
 
-  func details(for id: Int, including: Set<Appendable> = [], language: String? = nil, imageLanguages: Set<String>? = []) async throws -> Movie {
-    try await callEndpoint(routable: Router.details(id: id, appending: including, language: language, imageLanguages: imageLanguages))
+  func details(for id: Int, including: Set<Appendable> = [], language: String? = nil, imageLanguages: Set<String>? = [], page: Int? = nil) async throws -> Movie {
+    try await callEndpoint(routable: Router.details(id: id, appending: including, language: language, imageLanguages: imageLanguages, page: page))
   }
 
   func details(for id: Int, including: Set<Appendable> = []) async throws -> Movie {
@@ -65,6 +65,22 @@ struct MovieService: MovieServiceProviding {
 
   func images(for id: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> MovieImages {
     try await callEndpoint(routable: Router.images(id: id, language: language, imageLanguages: imageLanguages))
+  }
+
+  func list(for id: Int, language: String? = nil, page: Int) async throws -> ResultPage<MovieList> {
+    try await callEndpoint(routable: Router.lists(id: id, language: language, page: page))
+  }
+
+  func allLists(for id: Int, language: String? = nil) async throws -> [MovieList] {
+    let sequence = await listSequence(for: id, language: language)
+    var results: [MovieList] = []
+    for try await page in sequence { results.append(contentsOf: page.results) }
+    return results
+  }
+
+  func listSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieList> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.lists(id: id, language: language, page: nil))
+    return .init(initialRequest: request, dataLoader: dataLoader)
   }
 
   // MARK: Private
@@ -86,6 +102,7 @@ extension MovieService {
     case externalIds = "external_ids"
     case images
     case keywords
+    case lists
     case videos
   }
 }
@@ -95,10 +112,11 @@ extension MovieService {
     case alternativeTitles(id: Int, countryCode: String?)
     case changes(id: Int, startDate: Date?, endDate: Date?)
     case credits(id: Int, language: String?)
-    case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?)
+    case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, page: Int?)
     case externalIds(id: Int)
     case images(id: Int, language: String?, imageLanguages: Set<String>?)
     case keywords(id: Int)
+    case lists(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -128,11 +146,12 @@ extension MovieService {
           "language": language,
         ])
         return components.url!
-      case let .details(id, appending, language, imageLanguages):
+      case let .details(id, appending, language, imageLanguages, page):
         let components = componentsForRoute(path: "movie/\(id)", queryItems: [
           "append_to_response": appending.map(\.rawValue).joined(separator: ","),
           "language": language,
           "include_image_language": imageLanguages?.joined(separator: ","),
+          "page": page.map { String($0) },
         ])
         return components.url!
       case let .externalIds(id):
@@ -145,6 +164,11 @@ extension MovieService {
         return components.url!
       case let .keywords(id):
         return componentsForRoute(path: "movie/\(id)/keywords").url!
+      case let .lists(id, language, page):
+        return componentsForRoute(path: "movie/\(id)/lists", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
       }
     }
 

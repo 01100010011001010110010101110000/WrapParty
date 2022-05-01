@@ -15,7 +15,7 @@
 @testable import WrapParty
 import XCTest
 
-final class MoviceServiceIntegrationTests: XCTestCase {
+final class MovieServiceIntegrationTests: XCTestCase {
   // MARK: Internal
 
   static let pulpFictionTmdbId = 680

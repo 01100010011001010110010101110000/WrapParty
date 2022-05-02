@@ -105,6 +105,12 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(reviews.results.isEmpty)
   }
 
+  func testGetSimilar() async throws {
+    let similar = try await Self.service.similarMovies(for: Self.pulpFictionTmdbId)
+
+    XCTAssertFalse(similar.results.isEmpty)
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))
@@ -141,6 +147,10 @@ final class MovieServiceIntegrationTests: XCTestCase {
     // Reviews
     XCTAssertNotNil(movie.reviews)
     XCTAssertFalse(movie.reviews?.results.isEmpty ?? true)
+
+    // Similar movies
+    XCTAssertNotNil(movie.similar)
+    XCTAssertFalse(movie.similar?.results.isEmpty ?? true)
 
     // Videos
     XCTAssertNotNil(movie.videos)

@@ -119,6 +119,22 @@ struct MovieService: MovieServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader)
   }
 
+  func similarMovies(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<SimilarMovie> {
+    try await callEndpoint(routable: Router.similar(id: id, language: language, page: page))
+  }
+
+  func allSimilarMovies(for id: Int, language: String? = nil) async throws -> [SimilarMovie] {
+    let sequence = await similarMovieSequence(for: id, language: language)
+    var results: [SimilarMovie] = []
+    for try await page in sequence { results.append(contentsOf: page.results) }
+    return results
+  }
+
+  func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<SimilarMovie> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.similar(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
   // MARK: Private
 
   // Might move this out to be used by all services
@@ -142,6 +158,7 @@ extension MovieService {
     case recommendations
     case releaseDates = "release_dates"
     case reviews
+    case similar
     case videos
   }
 }
@@ -159,6 +176,7 @@ extension MovieService {
     case recommendations(id: Int, language: String?, page: Int?)
     case releaseDates(id: Int)
     case reviews(id: Int, language: String?, page: Int?)
+    case similar(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -220,6 +238,11 @@ extension MovieService {
         return componentsForRoute(path: "movie/\(id)/release_dates").url!
       case let .reviews(id, language, page):
         return componentsForRoute(path: "movie/\(id)/reviews", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
+      case let .similar(id, language, page):
+        return componentsForRoute(path: "movie/\(id)/similar", queryItems: [
           "language": language,
           "page": page.map { String($0) },
         ]).url!

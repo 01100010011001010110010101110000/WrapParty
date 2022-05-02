@@ -99,6 +99,12 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertTrue(releaseDates.results.contains { $0.iso3166_1 == "US" })
   }
 
+  func testGetReviews() async throws {
+    let reviews = try await Self.service.reviews(for: Self.pulpFictionTmdbId)
+
+    XCTAssertFalse(reviews.results.isEmpty)
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))
@@ -131,6 +137,10 @@ final class MovieServiceIntegrationTests: XCTestCase {
     // Release dates
     XCTAssertNotNil(movie.releaseDates)
     XCTAssertFalse(movie.releaseDates?.results.isEmpty ?? true)
+
+    // Reviews
+    XCTAssertNotNil(movie.reviews)
+    XCTAssertFalse(movie.reviews?.results.isEmpty ?? true)
 
     // Videos
     XCTAssertNotNil(movie.videos)

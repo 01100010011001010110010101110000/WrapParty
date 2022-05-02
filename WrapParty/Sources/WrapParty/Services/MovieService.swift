@@ -103,6 +103,22 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.releaseDates(id: id))
   }
 
+  func reviews(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieReview> {
+    try await callEndpoint(routable: Router.reviews(id: id, language: language, page: page))
+  }
+
+  func allReviews(for id: Int, language: String? = nil) async throws -> [MovieReview] {
+    let sequence = await reviewsSequence(for: id, language: language)
+    var results: [MovieReview] = []
+    for try await page in sequence { results.append(contentsOf: page.results) }
+    return results
+  }
+
+  func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieReview> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.reviews(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
   // MARK: Private
 
   // Might move this out to be used by all services
@@ -125,6 +141,7 @@ extension MovieService {
     case lists
     case recommendations
     case releaseDates = "release_dates"
+    case reviews
     case videos
   }
 }
@@ -141,6 +158,7 @@ extension MovieService {
     case lists(id: Int, language: String?, page: Int?)
     case recommendations(id: Int, language: String?, page: Int?)
     case releaseDates(id: Int)
+    case reviews(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -200,6 +218,11 @@ extension MovieService {
         ]).url!
       case let .releaseDates(id):
         return componentsForRoute(path: "movie/\(id)/release_dates").url!
+      case let .reviews(id, language, page):
+        return componentsForRoute(path: "movie/\(id)/reviews", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
       }
     }
 

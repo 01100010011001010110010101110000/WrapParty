@@ -99,6 +99,10 @@ struct MovieService: MovieServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader)
   }
 
+  func releaseDates(for id: Int) async throws -> MovieReleaseDates {
+    try await callEndpoint(routable: Router.releaseDates(id: id))
+  }
+
   // MARK: Private
 
   // Might move this out to be used by all services
@@ -120,6 +124,7 @@ extension MovieService {
     case keywords
     case lists
     case recommendations
+    case releaseDates = "release_dates"
     case videos
   }
 }
@@ -135,6 +140,7 @@ extension MovieService {
     case keywords(id: Int)
     case lists(id: Int, language: String?, page: Int?)
     case recommendations(id: Int, language: String?, page: Int?)
+    case releaseDates(id: Int)
 
     // MARK: Internal
 
@@ -192,6 +198,8 @@ extension MovieService {
           "language": language,
           "page": page.map { String($0) },
         ]).url!
+      case let .releaseDates(id):
+        return componentsForRoute(path: "movie/\(id)/release_dates").url!
       }
     }
 

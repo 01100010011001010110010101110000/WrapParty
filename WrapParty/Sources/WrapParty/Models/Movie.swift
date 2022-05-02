@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, releaseDates: MovieReleaseDates?, revenue: Int, runtime: Int, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -44,6 +44,7 @@ public struct Movie: Codable {
     self.productionCountries = productionCountries
     self.recommendations = recommendations
     self.releaseDate = releaseDate
+    self.releaseDates = releaseDates
     self.revenue = revenue
     self.runtime = runtime
     self.spokenLanguages = spokenLanguages
@@ -82,6 +83,7 @@ public struct Movie: Codable {
   public let productionCountries: [ProductionCountry]
   public let recommendations: ResultPage<MovieRecommendation>?
   public let releaseDate: String
+  public let releaseDates: MovieReleaseDates?
   public let revenue: Int
   public let runtime: Int
   public let spokenLanguages: [SpokenLanguage]
@@ -120,6 +122,7 @@ public struct Movie: Codable {
     case productionCountries = "production_countries"
     case recommendations
     case releaseDate = "release_date"
+    case releaseDates = "release_dates"
     case revenue
     case runtime
     case spokenLanguages = "spoken_languages"

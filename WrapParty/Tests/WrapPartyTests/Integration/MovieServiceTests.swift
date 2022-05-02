@@ -112,12 +112,15 @@ final class MovieServiceIntegrationTests: XCTestCase {
   }
 
   func testGetTranslations() async throws {
-    do {
-      let translations = try await Self.service.translations(for: Self.pulpFictionTmdbId)
-      XCTAssertFalse(translations.translations.isEmpty)
-    } catch {
-      print(error)
-    }
+    let translations = try await Self.service.translations(for: Self.pulpFictionTmdbId)
+
+    XCTAssertFalse(translations.translations.isEmpty)
+  }
+
+  func testGetVideos() async throws {
+    let videos = try await Self.service.videos(for: Self.pulpFictionTmdbId)
+
+    XCTAssertFalse(videos.results.isEmpty)
   }
 
   func testAppending() async throws {

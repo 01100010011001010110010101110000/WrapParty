@@ -147,6 +147,12 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.watchProviders(id: id))
   }
 
+  // Meta endpoints
+
+  func latest(language: String? = nil) async throws -> Movie {
+    try await callEndpoint(routable: Router.latest(language: language))
+  }
+
   // MARK: Private
 
   // Might move this out to be used by all services
@@ -194,6 +200,8 @@ extension MovieService {
     case translations(id: Int)
     case videos(id: Int, language: String?, videoLanguages: Set<String>?)
     case watchProviders(id: Int)
+
+    case latest(language: String?)
 
     // MARK: Internal
 
@@ -272,6 +280,10 @@ extension MovieService {
         ]).url!
       case let .watchProviders(id):
         return componentsForRoute(path: "movie/\(id)/watch/providers").url!
+      case let .latest(language):
+        return componentsForRoute(path: "movie/latest", queryItems: [
+          "language": language,
+        ]).url!
       }
     }
 

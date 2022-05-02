@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, releaseDates: MovieReleaseDates?, revenue: Int, reviews: ResultPage<MovieReview>?, runtime: Int, similar: ResultPage<SimilarMovie>?, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, translations: MovieTranslations?, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL?, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: String, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, releaseDates: MovieReleaseDates?, revenue: Int, reviews: ResultPage<MovieReview>?, runtime: Int, similar: ResultPage<SimilarMovie>?, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, translations: MovieTranslations?, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -65,14 +65,14 @@ public struct Movie: Codable {
 
   public let adult: Bool
   public let alternativeTitles: MovieAlternativeTitle?
-  public let backdropPath: URL
+  public let backdropPath: URL?
   public let belongsToCollection: [Collection]?
   public let budget: Int
   public let changes: MovieChanges?
   public let credits: MovieCredits?
   public let externalIds: MovieExternalIds?
   public let genres: [Genre]
-  public let homepage: URL
+  public let homepage: String
   public let id: Int
   public let images: MovieImages?
   public let imdbId: String
@@ -82,7 +82,7 @@ public struct Movie: Codable {
   public let originalTitle: String
   public let overview: String
   public let popularity: Double
-  public let posterPath: URL
+  public let posterPath: URL?
   public let productionCompanies: [ProductionCompany]
   public let productionCountries: [ProductionCountry]
   public let recommendations: ResultPage<MovieRecommendation>?

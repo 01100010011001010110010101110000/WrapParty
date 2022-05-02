@@ -129,6 +129,12 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(providers.results.isEmpty)
   }
 
+  func testGetLatest() async throws {
+    let latest = try await Self.service.latest()
+
+    XCTAssertGreaterThan(latest.id, 0)
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))

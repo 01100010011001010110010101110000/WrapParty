@@ -19,7 +19,8 @@ import Foundation
 public struct ResultPage<Result: Codable>: Codable {
   // MARK: Lifecycle
 
-  init(id: Int?, page: Int, results: [Result], totalPages: Int, totalResults: Int) {
+  init(dates: Dates?, id: Int?, page: Int, results: [Result], totalPages: Int, totalResults: Int) {
+    self.dates = dates
     self.id = id
     self.page = page
     self.results = results
@@ -29,6 +30,12 @@ public struct ResultPage<Result: Codable>: Codable {
 
   // MARK: Public
 
+  public struct Dates: Codable {
+    public let minimum: String
+    public let maximum: String
+  }
+
+  public let dates: Dates?
   public let id: Int?
   public let page: Int
   public let results: [Result]
@@ -38,6 +45,7 @@ public struct ResultPage<Result: Codable>: Codable {
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
+    case dates
     case id
     case page
     case results

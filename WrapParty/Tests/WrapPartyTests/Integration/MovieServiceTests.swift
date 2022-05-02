@@ -135,6 +135,30 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertGreaterThan(latest.id, 0)
   }
 
+  func testGetNowPlaying() async throws {
+    let nowPlaying = try await Self.service.nowPlaying()
+
+    XCTAssertFalse(nowPlaying.results.isEmpty)
+  }
+
+  func testGetPopular() async throws {
+    let popular = try await Self.service.popular()
+
+    XCTAssertFalse(popular.results.isEmpty)
+  }
+
+  func testGetTopRated() async throws {
+    let topRated = try await Self.service.topRated()
+
+    XCTAssertFalse(topRated.results.isEmpty)
+  }
+
+  func testGetUpcoming() async throws {
+    let upcoming = try await Self.service.upcoming()
+
+    XCTAssertFalse(upcoming.results.isEmpty)
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))

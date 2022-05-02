@@ -153,6 +153,42 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.latest(language: language))
   }
 
+  func nowPlaying(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
+    try await callEndpoint(routable: Router.nowPlaying(page: page, language: language, region: region))
+  }
+
+  func nowPlayingSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.nowPlaying(page: 1, language: language, region: region))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
+  func popular(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
+    try await callEndpoint(routable: Router.popular(page: page, language: language, region: region))
+  }
+
+  func popularSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(page: 1, language: language, region: region))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
+  func topRated(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
+    try await callEndpoint(routable: Router.topRated(page: page, language: language, region: region))
+  }
+
+  func topRatedSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.topRated(page: 1, language: language, region: region))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
+  func upcoming(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
+    try await callEndpoint(routable: Router.upcoming(page: page, language: language, region: region))
+  }
+
+  func upcomingSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.upcoming(page: 1, language: language, region: region))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
+
   // MARK: Private
 
   // Might move this out to be used by all services
@@ -202,6 +238,10 @@ extension MovieService {
     case watchProviders(id: Int)
 
     case latest(language: String?)
+    case nowPlaying(page: Int?, language: String?, region: String?)
+    case popular(page: Int?, language: String?, region: String?)
+    case topRated(page: Int?, language: String?, region: String?)
+    case upcoming(page: Int?, language: String?, region: String?)
 
     // MARK: Internal
 
@@ -283,6 +323,30 @@ extension MovieService {
       case let .latest(language):
         return componentsForRoute(path: "movie/latest", queryItems: [
           "language": language,
+        ]).url!
+      case let .nowPlaying(page, language, region):
+        return componentsForRoute(path: "movie/now_playing", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+          "region": region,
+        ]).url!
+      case let .popular(page, language, region):
+        return componentsForRoute(path: "movie/popular", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+          "region": region,
+        ]).url!
+      case let .topRated(page, language, region):
+        return componentsForRoute(path: "movie/top_rated", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+          "region": region,
+        ]).url!
+      case let .upcoming(page, language, region):
+        return componentsForRoute(path: "movie/upcoming", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+          "region": region,
         ]).url!
       }
     }

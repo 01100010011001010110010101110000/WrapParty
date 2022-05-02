@@ -78,7 +78,7 @@ public extension PagedQuerySequence {
       guard page <= totalPages else { return nil }
 
       let (data, response) = try await dataLoader.loadData(for: request)
-      let result = try WrapParty.jsonDecoder.decode(ResultPage<Result>.self, from: data)
+      let result = try WrapParty.jsonDecode(ResultPage<Result>.self, from: data)
 
       page = result.page + 1
       // This questionable, might need to set only once

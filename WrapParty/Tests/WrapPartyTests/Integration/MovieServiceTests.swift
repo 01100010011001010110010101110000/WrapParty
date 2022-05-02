@@ -123,6 +123,12 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(videos.results.isEmpty)
   }
 
+  func testGetWatchProviders() async throws {
+    let providers = try await Self.service.watchProviders(for: Self.pulpFictionTmdbId)
+
+    XCTAssertFalse(providers.results.isEmpty)
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))
@@ -171,6 +177,11 @@ final class MovieServiceIntegrationTests: XCTestCase {
     // Videos
     XCTAssertNotNil(movie.videos)
     XCTAssertNil(movie.videos?.id)
+
+    // Watch providers
+
+    XCTAssertNotNil(movie.watchProviders)
+    XCTAssertFalse(movie.watchProviders?.results.isEmpty ?? true)
   }
 
   // MARK: Private

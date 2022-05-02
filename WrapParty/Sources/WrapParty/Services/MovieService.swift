@@ -143,6 +143,10 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.videos(id: id, language: language, videoLanguages: videoLanguages))
   }
 
+  func watchProviders(for id: Int) async throws -> WatchProviders {
+    try await callEndpoint(routable: Router.watchProviders(id: id))
+  }
+
   // MARK: Private
 
   // Might move this out to be used by all services
@@ -150,7 +154,7 @@ struct MovieService: MovieServiceProviding {
     let request = await tokenManager.vendAuthenticatedRequest(for: routable)
     // TODO: - Implement response status code checking
     let (data, response) = try await dataLoader.loadData(for: request)
-    return try WrapParty.jsonDecoder.decode(Result.self, from: data)
+    return try WrapParty.jsonDecode(Result.self, from: data)
   }
 }
 
@@ -169,6 +173,7 @@ extension MovieService {
     case similar
     case translations
     case videos
+    case watchProviders = "watch/providers"
   }
 }
 
@@ -188,6 +193,7 @@ extension MovieService {
     case similar(id: Int, language: String?, page: Int?)
     case translations(id: Int)
     case videos(id: Int, language: String?, videoLanguages: Set<String>?)
+    case watchProviders(id: Int)
 
     // MARK: Internal
 
@@ -264,6 +270,8 @@ extension MovieService {
           "language": language,
           "include_video_language": videoLanguages?.joined(separator: ","),
         ]).url!
+      case let .watchProviders(id):
+        return componentsForRoute(path: "movie/\(id)/watch/providers").url!
       }
     }
 

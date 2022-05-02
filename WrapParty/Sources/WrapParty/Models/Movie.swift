@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, releaseDates: MovieReleaseDates?, revenue: Int, reviews: ResultPage<MovieReview>?, runtime: Int, similar: ResultPage<SimilarMovie>?, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, translations: MovieTranslations?, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL, belongsToCollection: [Collection]?, budget: Int, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre], homepage: URL, id: Int, images: MovieImages?, imdbId: String, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<MovieRecommendation>?, releaseDate: String, releaseDates: MovieReleaseDates?, revenue: Int, reviews: ResultPage<MovieReview>?, runtime: Int, similar: ResultPage<SimilarMovie>?, spokenLanguages: [SpokenLanguage], status: MediaStatus, tagline: String, title: String, translations: MovieTranslations?, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -58,6 +58,7 @@ public struct Movie: Codable {
     self.videos = videos
     self.voteAverage = voteAverage
     self.voteCount = voteCount
+    self.watchProviders = watchProviders
   }
 
   // MARK: Public
@@ -100,6 +101,7 @@ public struct Movie: Codable {
   public let videos: MovieVideos?
   public let voteAverage: Double
   public let voteCount: Int
+  public let watchProviders: WatchProviders?
 
   // MARK: Internal
 
@@ -142,6 +144,7 @@ public struct Movie: Codable {
     case videos
     case voteAverage = "vote_average"
     case voteCount = "vote_count"
+    case watchProviders = "watch/providers"
   }
 }
 

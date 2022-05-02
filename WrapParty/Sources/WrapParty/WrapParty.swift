@@ -42,6 +42,18 @@ public class WrapParty {
     return decoder
   }()
 
+  static func jsonDecode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
+    do {
+      return try jsonDecoder.decode(type, from: data)
+    } catch let error as DecodingError {
+      // TODO: replace this with actual logging hook
+      #if DEBUG
+      print(error)
+      #endif
+      throw error
+    }
+  }
+
   // MARK: Private
 
   private let tokenManager: TokenManager

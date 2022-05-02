@@ -111,6 +111,15 @@ final class MovieServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(similar.results.isEmpty)
   }
 
+  func testGetTranslations() async throws {
+    do {
+      let translations = try await Self.service.translations(for: Self.pulpFictionTmdbId)
+      XCTAssertFalse(translations.translations.isEmpty)
+    } catch {
+      print(error)
+    }
+  }
+
   func testAppending() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId,
                                                including: Set(MovieService.Appendable.allCases))
@@ -151,6 +160,10 @@ final class MovieServiceIntegrationTests: XCTestCase {
     // Similar movies
     XCTAssertNotNil(movie.similar)
     XCTAssertFalse(movie.similar?.results.isEmpty ?? true)
+
+    // Translations
+    XCTAssertNotNil(movie.translations)
+    XCTAssertFalse(movie.translations?.translations.isEmpty ?? true)
 
     // Videos
     XCTAssertNotNil(movie.videos)

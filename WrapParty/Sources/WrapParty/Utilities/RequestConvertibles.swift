@@ -14,7 +14,27 @@
 
 import Foundation
 
-typealias RequestRoutable = UrlRequestConvertible & UrlConvertible
+// MARK: - RequestRoutable
+
+protocol RequestRoutable: UrlRequestConvertible & UrlConvertible {}
+
+extension RequestRoutable {
+  func asUrlRequest() -> URLRequest {
+    switch self {
+    default:
+      return URLRequest(url: asUrl())
+    }
+  }
+
+  func componentsForRoute(path: String, queryItems: [String: String?] = [:], filterEmptyQueryItems: Bool = true) -> URLComponents {
+    var components = URLComponents(url: URL(string: path, relativeTo: WrapParty.baseUrl)!, resolvingAgainstBaseURL: true)!
+    components.queryItems = queryItems.compactMap { key, value in
+      if filterEmptyQueryItems, value?.isEmpty ?? true { return nil }
+      return URLQueryItem(name: key, value: value)
+    }
+    return components
+  }
+}
 
 // MARK: - UrlConvertible
 

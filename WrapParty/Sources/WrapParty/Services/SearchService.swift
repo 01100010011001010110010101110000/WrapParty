@@ -32,35 +32,90 @@ struct SearchService: SearchServiceProviding {
 
   let dataLoader: DataLoading
   let tokenManager: TokenManager
+
+  func searchMovies(matching query: String, page: Int = 1, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
+    try await callEndpoint(routable: Router.movies(query: query, page: page, parameters))
+  }
+
+  func allMovieSearchResults(matching query: String, parameters: [MovieSearchParams] = []) async throws -> [Movie] {
+    let sequence = await searchMovieSequence(matching: query, parameters: parameters)
+    return try await sequence.reduce(into: []) { $0.append(contentsOf: $1.results) }
+  }
+
+  func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.movies(query: query, page: 1, parameters))
+    return .init(initialRequest: request, dataLoader: dataLoader)
+  }
 }
 
 extension SearchService {
-  enum MovieSearchParams: String {
-    case query
-    case language
-    case page
-    case includeAdult = "include_adult"
-    case region
-    case year
-    case primaryReleaseYear = "primary_release_year"
+  public enum MovieSearchParams {
+    case language(String)
+    case page(Int)
+    case includeAdult(Bool)
+    case region(String)
+    case year(Int)
+    case primaryReleaseYear(Int)
+
+    // MARK: Internal
+
+    var queryKey: String {
+      switch self {
+      case .language:
+        return "language"
+      case .page:
+        return "page"
+      case .includeAdult:
+        return "include_adult"
+      case .region:
+        return "region"
+      case .year:
+        return "year"
+      case .primaryReleaseYear:
+        return "primary_release_year"
+      }
+    }
+
+    var queryValue: String? {
+      switch self {
+      case let .language(language):
+        return language
+      case let .page(page):
+        return String(page)
+      case let .includeAdult(includeAdult):
+        return String(includeAdult)
+      case let .region(region):
+        return region
+      case let .year(year):
+        return String(year)
+      case let .primaryReleaseYear(primaryReleaseYear):
+        return String(primaryReleaseYear)
+      }
+    }
+  }
+}
+
+extension RandomAccessCollection where Element == SearchService.MovieSearchParams {
+  func toQueryItems() -> [String: String] {
+    var results: [String: String] = Dictionary(minimumCapacity: count)
+    forEach { results[$0.queryKey] = $0.queryValue }
+    return results
   }
 }
 
 extension SearchService {
   enum Router: RequestRoutable {
-    case movies(query: String, language: String?, page: Int?, includeAdult: Bool?, region: String?, year: String?, primaryReleaseYear: String?)
+    case movies(query: String, page: Int, [MovieSearchParams])
 
     // MARK: Internal
 
     func asUrl() -> URL {
       switch self {
-//      case let .movies(query, language, page, includeAdult, region, year, primaryReleaseYear):
-//        return componentsForRoute(path: "search/movie", queryItems: [
-//          "query": query,
-//          "language": language,
-//          "page": page.map { String($0) },
-//
-//        ]).url!
+      case let .movies(query, page, parameters):
+        var queryItems = parameters.toQueryItems()
+        queryItems["query"] = query
+        queryItems["page"] = String(page)
+        return componentsForRoute(path: "search/movie", queryItems: queryItems).url!
       }
     }
   }

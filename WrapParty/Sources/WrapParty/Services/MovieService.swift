@@ -188,16 +188,6 @@ struct MovieService: MovieServiceProviding {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.upcoming(page: 1, language: language, region: region))
     return .init(initialRequest: request, dataLoader: dataLoader)
   }
-
-  // MARK: Private
-
-  // Might move this out to be used by all services
-  private func callEndpoint<R: RequestRoutable, Result: Codable>(routable: R) async throws -> Result {
-    let request = await tokenManager.vendAuthenticatedRequest(for: routable)
-    // TODO: - Implement response status code checking
-    let (data, response) = try await dataLoader.loadData(for: request)
-    return try WrapParty.jsonDecode(Result.self, from: data)
-  }
 }
 
 extension MovieService {

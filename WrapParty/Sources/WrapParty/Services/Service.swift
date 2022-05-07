@@ -14,7 +14,18 @@
 
 import Foundation
 
+// MARK: - ServiceProviding
+
 protocol ServiceProviding {
   var dataLoader: DataLoading { get }
   var tokenManager: TokenManager { get }
+}
+
+extension ServiceProviding {
+  func callEndpoint<R: RequestRoutable, Result: Codable>(routable: R) async throws -> Result {
+    let request = await tokenManager.vendAuthenticatedRequest(for: routable)
+    // TODO: - Implement response status code checking
+    let (data, response) = try await dataLoader.loadData(for: request)
+    return try WrapParty.jsonDecode(Result.self, from: data)
+  }
 }

@@ -72,10 +72,7 @@ struct MovieService: MovieServiceProviding {
   }
 
   func allLists(for id: Int, language: String? = nil) async throws -> [MovieList] {
-    let sequence = await listSequence(for: id, language: language)
-    var results: [MovieList] = []
-    for try await page in sequence { results.append(contentsOf: page.results) }
-    return results
+    try await listSequence(for: id, language: language).allResults()
   }
 
   func listSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieList> {
@@ -88,10 +85,7 @@ struct MovieService: MovieServiceProviding {
   }
 
   func allRecommendations(for id: Int, language: String? = nil) async throws -> [MovieRecommendation] {
-    let sequence = await recommendationSequence(for: id, language: language)
-    var results: [MovieRecommendation] = []
-    for try await page in sequence { results.append(contentsOf: page.results) }
-    return results
+    try await recommendationSequence(for: id, language: language).allResults()
   }
 
   func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieRecommendation> {
@@ -108,10 +102,7 @@ struct MovieService: MovieServiceProviding {
   }
 
   func allReviews(for id: Int, language: String? = nil) async throws -> [MovieReview] {
-    let sequence = await reviewsSequence(for: id, language: language)
-    var results: [MovieReview] = []
-    for try await page in sequence { results.append(contentsOf: page.results) }
-    return results
+    try await reviewsSequence(for: id, language: language).allResults()
   }
 
   func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieReview> {
@@ -124,10 +115,7 @@ struct MovieService: MovieServiceProviding {
   }
 
   func allSimilarMovies(for id: Int, language: String? = nil) async throws -> [SimilarMovie] {
-    let sequence = await similarMovieSequence(for: id, language: language)
-    var results: [SimilarMovie] = []
-    for try await page in sequence { results.append(contentsOf: page.results) }
-    return results
+    try await similarMovieSequence(for: id, language: language).allResults()
   }
 
   func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<SimilarMovie> {

@@ -38,8 +38,7 @@ struct SearchService: SearchServiceProviding {
   }
 
   func allMovieSearchResults(matching query: String, parameters: [MovieSearchParams] = []) async throws -> [Movie] {
-    let sequence = await searchMovieSequence(matching: query, parameters: parameters)
-    return try await sequence.reduce(into: []) { $0.append(contentsOf: $1.results) }
+    try await searchMovieSequence(matching: query, parameters: parameters).allResults()
   }
 
   func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {

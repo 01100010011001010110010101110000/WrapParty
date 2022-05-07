@@ -108,4 +108,10 @@ public extension PagedQuerySequence {
       request = result
     }
   }
+
+  func allResults() async throws -> [Result] {
+    await reduce(into: []) { result, page in
+      result.append(contentsOf: page.results)
+    }
+  }
 }

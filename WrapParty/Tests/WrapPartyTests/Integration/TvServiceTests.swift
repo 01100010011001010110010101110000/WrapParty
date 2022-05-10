@@ -20,7 +20,15 @@ import XCTest
 final class TvServiceIntegrationTests: XCTestCase {
   // MARK: Internal
 
+  /// TMDB ID for the Wheel of Time series
   static let wotId = 71914
+
+  func testGetAggregateCredits() async throws {
+    let credits = try await Self.service.aggregateCredits(for: Self.wotId)
+
+    XCTAssertFalse(credits.cast.isEmpty)
+    XCTAssertFalse(credits.crew.isEmpty)
+  }
 
   func testGetDetails() async throws {
     let details = try await Self.service.details(for: Self.wotId)

@@ -37,7 +37,7 @@ extension ServiceProviding {
     do {
       return try decoder.decode(type, from: data)
     } catch let error as DecodingError {
-      logger.log(level: .error, "\(error.localizedDescription)")
+      logger.log(level: .error, "\(error)")
       throw error
     }
   }

@@ -26,6 +26,10 @@ struct TvService: TvServiceProviding {
   let logger: Logger
   let tokenManager: TokenManager
 
+  func aggregateCredits(for id: Int, language: String? = nil) async throws -> TvAggregateCredits {
+    try await callEndpoint(routable: Router.aggregateCredits(id: id, language: language))
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> TvShow {
     try await details(for: id, including: including, language: nil, imageLanguages: [], videoLanguages: [], page: nil)
   }
@@ -58,12 +62,17 @@ extension TvService {
 
 extension TvService {
   enum Router: RequestRoutable {
+    case aggregateCredits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, videoLanguages: Set<String>?, page: Int?)
 
     // MARK: Internal
 
     func asUrl() -> URL {
       switch self {
+      case let .aggregateCredits(id, language):
+        return componentsForRoute(path: "tv/\(id)/aggregate_credits", queryItems: [
+          "language": language,
+        ]).url!
       case let .details(id, appending, language, imageLanguages, videoLanguages, page):
         return componentsForRoute(path: "tv/\(id)", queryItems: [
           "append_to_response": appending.map(\.rawValue).joined(separator: ","),

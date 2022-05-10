@@ -13,36 +13,27 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
-import Logging
 
-public class WrapParty {
+public struct SpokenLanguage: Codable {
   // MARK: Lifecycle
 
-  init<C: Configuration>(configuration: C) {
-    loader = configuration.loader
-    logger = configuration.logger
-    tokenManager = TokenManager(token: configuration.apiToken)
-  }
-
-  convenience init() {
-    let configuration = DefaultConfiguration()
-    self.init(configuration: configuration)
+  public init(englishName: String, iso639_1: String, name: String) {
+    self.englishName = englishName
+    self.iso639_1 = iso639_1
+    self.name = name
   }
 
   // MARK: Public
 
-  public let loader: DataLoading
-  public let logger: Logger
+  public let englishName: String
+  public let iso639_1: String
+  public let name: String
 
   // MARK: Internal
 
-  static let baseUrl = URL(string: "https://api.themoviedb.org/3/")!
-  static let jsonDecoder = { () -> JSONDecoder in
-    var decoder = JSONDecoder()
-    return decoder
-  }()
-
-  // MARK: Private
-
-  private let tokenManager: TokenManager
+  enum CodingKeys: String, CodingKey {
+    case englishName = "english_name"
+    case iso639_1 = "iso_639_1"
+    case name
+  }
 }

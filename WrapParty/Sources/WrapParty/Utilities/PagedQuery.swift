@@ -13,6 +13,7 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import Logging
 
 // MARK: - ResultPage
 
@@ -61,22 +62,25 @@ public struct PagedQuerySequence<Result: Codable>: AsyncSequence {
 
   public let initialRequest: URLRequest
   public let dataLoader: DataLoading
+  public let logger: Logger
 
-  public func makeAsyncIterator() -> PagedQueryIterator<Result> { PagedQueryIterator(initialRequest: initialRequest, dataLoader: dataLoader) }
+  public func makeAsyncIterator() -> PagedQueryIterator<Result> { PagedQueryIterator(initialRequest: initialRequest, dataLoader: dataLoader, logger: logger) }
 }
 
 public extension PagedQuerySequence {
   struct PagedQueryIterator<Result: Codable>: AsyncIteratorProtocol {
     // MARK: Lifecycle
 
-    public init(initialRequest: URLRequest, dataLoader: DataLoading) {
+    public init(initialRequest: URLRequest, dataLoader: DataLoading, logger: Logger) {
       request = initialRequest
       self.dataLoader = dataLoader
+      self.logger = logger
     }
 
     // MARK: Public
 
     public let dataLoader: DataLoading
+    public let logger: Logger
     public private(set) var request: URLRequest
     public private(set) var page = 0
     public private(set) var totalPages = Int.max
@@ -86,7 +90,7 @@ public extension PagedQuerySequence {
       guard page <= totalPages else { return nil }
 
       let (data, response) = try await dataLoader.loadData(for: request)
-      let result = try WrapParty.jsonDecode(ResultPage<Result>.self, from: data)
+      let result = try jsonDecode(ResultPage<Result>.self, from: data)
 
       page = result.page + 1
       // This questionable, might need to set only once
@@ -95,6 +99,17 @@ public extension PagedQuerySequence {
       updateRequest()
 
       return result
+    }
+
+    // MARK: Internal
+
+    func jsonDecode<T>(_ type: T.Type, with decoder: JSONDecoder = WrapParty.jsonDecoder, from data: Data) throws -> T where T: Decodable {
+      do {
+        return try decoder.decode(type, from: data)
+      } catch let error as DecodingError {
+        logger.log(level: .error, "\(error.localizedDescription)")
+        throw error
+      }
     }
 
     // MARK: Private

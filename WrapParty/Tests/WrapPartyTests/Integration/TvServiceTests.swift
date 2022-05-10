@@ -12,37 +12,26 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
+@testable import WrapParty
+
 import Foundation
-import Logging
+import XCTest
 
-public class WrapParty {
-  // MARK: Lifecycle
-
-  init<C: Configuration>(configuration: C) {
-    loader = configuration.loader
-    logger = configuration.logger
-    tokenManager = TokenManager(token: configuration.apiToken)
-  }
-
-  convenience init() {
-    let configuration = DefaultConfiguration()
-    self.init(configuration: configuration)
-  }
-
-  // MARK: Public
-
-  public let loader: DataLoading
-  public let logger: Logger
-
+final class TvServiceIntegrationTests: XCTestCase {
   // MARK: Internal
 
-  static let baseUrl = URL(string: "https://api.themoviedb.org/3/")!
-  static let jsonDecoder = { () -> JSONDecoder in
-    var decoder = JSONDecoder()
-    return decoder
-  }()
+  static let wotId = 71914
+
+  func testGetDetails() async throws {
+    let details = try await Self.service.details(for: Self.wotId)
+
+    XCTAssertTrue(details.id == Self.wotId)
+  }
 
   // MARK: Private
 
-  private let tokenManager: TokenManager
+  private static let service: TvService = {
+    let config = DefaultConfiguration()
+    return TvService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
+  }()
 }

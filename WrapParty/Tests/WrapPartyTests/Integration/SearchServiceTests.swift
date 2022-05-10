@@ -41,6 +41,6 @@ final class SearchServiceIntegrationTests: XCTestCase {
 
   private static let service: SearchService = {
     let config = DefaultConfiguration()
-    return SearchService(dataLoader: config.loader, tokenManager: TokenManager(token: config.apiToken))
+    return SearchService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
   }()
 }

@@ -12,37 +12,25 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import Foundation
-import Logging
+// MARK: - Genre
 
-public class WrapParty {
+public struct Genre: Codable {
   // MARK: Lifecycle
 
-  init<C: Configuration>(configuration: C) {
-    loader = configuration.loader
-    logger = configuration.logger
-    tokenManager = TokenManager(token: configuration.apiToken)
-  }
-
-  convenience init() {
-    let configuration = DefaultConfiguration()
-    self.init(configuration: configuration)
+  public init(id: Int, name: String) {
+    self.id = id
+    self.name = name
   }
 
   // MARK: Public
 
-  public let loader: DataLoading
-  public let logger: Logger
+  public let id: Int
+  public let name: String
 
   // MARK: Internal
 
-  static let baseUrl = URL(string: "https://api.themoviedb.org/3/")!
-  static let jsonDecoder = { () -> JSONDecoder in
-    var decoder = JSONDecoder()
-    return decoder
-  }()
-
-  // MARK: Private
-
-  private let tokenManager: TokenManager
+  enum CodingKeys: String, CodingKey {
+    case id
+    case name
+  }
 }

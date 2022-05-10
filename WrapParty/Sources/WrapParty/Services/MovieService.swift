@@ -13,6 +13,7 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import Logging
 
 // MARK: - MovieServiceProviding
 
@@ -25,14 +26,16 @@ protocol MovieServiceProviding: ServiceProviding & DetailAppendable {
 struct MovieService: MovieServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, tokenManager: TokenManager) {
+  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
+    self.logger = logger
     self.tokenManager = tokenManager
   }
 
   // MARK: Internal
 
   let dataLoader: DataLoading
+  let logger: Logger
   let tokenManager: TokenManager
 
   func alternativeTitles(for id: Int, inCountry code: String? = nil) async throws -> MovieAlternativeTitle {
@@ -77,7 +80,7 @@ struct MovieService: MovieServiceProviding {
 
   func listSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieList> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.lists(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieRecommendation> {
@@ -90,7 +93,7 @@ struct MovieService: MovieServiceProviding {
 
   func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieRecommendation> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func releaseDates(for id: Int) async throws -> MovieReleaseDates {
@@ -107,7 +110,7 @@ struct MovieService: MovieServiceProviding {
 
   func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieReview> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.reviews(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func similarMovies(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<SimilarMovie> {
@@ -120,7 +123,7 @@ struct MovieService: MovieServiceProviding {
 
   func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<SimilarMovie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.similar(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func translations(for id: Int) async throws -> MovieTranslations {
@@ -147,7 +150,7 @@ struct MovieService: MovieServiceProviding {
 
   func nowPlayingSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.nowPlaying(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func popular(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
@@ -156,7 +159,7 @@ struct MovieService: MovieServiceProviding {
 
   func popularSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func topRated(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
@@ -165,7 +168,7 @@ struct MovieService: MovieServiceProviding {
 
   func topRatedSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.topRated(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func upcoming(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
@@ -174,7 +177,7 @@ struct MovieService: MovieServiceProviding {
 
   func upcomingSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.upcoming(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 

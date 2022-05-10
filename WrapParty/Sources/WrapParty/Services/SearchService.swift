@@ -13,6 +13,7 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import Logging
 
 // MARK: - SearchServiceProviding
 
@@ -23,14 +24,16 @@ protocol SearchServiceProviding: ServiceProviding {}
 struct SearchService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, tokenManager: TokenManager) {
+  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
+    self.logger = logger
     self.tokenManager = tokenManager
   }
 
   // MARK: Internal
 
   let dataLoader: DataLoading
+  let logger: Logger
   let tokenManager: TokenManager
 
   func searchMovies(matching query: String, page: Int = 1, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
@@ -43,7 +46,7 @@ struct SearchService: SearchServiceProviding {
 
   func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.movies(query: query, page: 1, parameters))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 

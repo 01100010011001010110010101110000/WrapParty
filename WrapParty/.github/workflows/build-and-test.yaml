@@ -1,0 +1,14 @@
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  buildAndTest:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: swift-actions/setup-swift@d94eab931290b0fb54d9a149df7bea6e5050cc5f
+      - name: Build all targets
+        run: swift build --build-tests
+      - name: Run tests
+        run: swift test --skip-build

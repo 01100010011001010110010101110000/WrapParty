@@ -50,6 +50,7 @@ final class DataLoader: DataLoading {
     let memoryCapacity = 10 * 1024 * 1024
     let diskCapacity = 150 * 1024 * 1024
     configuration.urlCache = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity, directory: cacheDir)
+    // Respect TMDB's cache-control headers
     configuration.requestCachePolicy = .useProtocolCachePolicy
 
     return configuration
@@ -71,6 +72,7 @@ final class DataLoader: DataLoading {
       #if DEBUG
       print("Failed to configure cache dir: \(error)")
       #endif
+      // If we fail, return nil and let URLCache use its default dir
       return nil
     }
   }()

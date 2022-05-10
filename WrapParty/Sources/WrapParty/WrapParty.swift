@@ -12,18 +12,49 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import Foundation
 import Logging
 
 public class WrapParty {
   // MARK: Lifecycle
 
-  init(configuration: Configuration = DefaultConfiguration()) {
+  init<C: Configuration>(configuration: C) {
     loader = configuration.loader
     logger = configuration.logger
+    tokenManager = TokenManager(token: configuration.apiToken)
   }
+
+  convenience init() {
+    let configuration = DefaultConfiguration()
+    self.init(configuration: configuration)
+  }
+
+  // MARK: Public
+
+  public let loader: DataLoading
+  public let logger: Logger
 
   // MARK: Internal
 
-  let loader: DataLoading
-  let logger: Logger
+  static let baseUrl = URL(string: "https://api.themoviedb.org/3/")!
+  static let jsonDecoder = { () -> JSONDecoder in
+    var decoder = JSONDecoder()
+    return decoder
+  }()
+
+  static func jsonDecode<T>(_ type: T.Type, from data: Data) throws -> T where T: Decodable {
+    do {
+      return try jsonDecoder.decode(type, from: data)
+    } catch let error as DecodingError {
+      // TODO: replace this with actual logging hook
+      #if DEBUG
+      print(error)
+      #endif
+      throw error
+    }
+  }
+
+  // MARK: Private
+
+  private let tokenManager: TokenManager
 }

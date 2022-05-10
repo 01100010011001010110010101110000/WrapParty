@@ -14,40 +14,34 @@
 
 import Foundation
 
-import Logging
+// MARK: - MovieExternalId
 
-// MARK: - Configuration
-
-public protocol Configuration {
-  var logger: Logger { get }
-  var loader: DataLoading { get }
-  var apiToken: String { get }
-}
-
-// MARK: - DefaultConfiguration
-
-public struct DefaultConfiguration: Configuration {
+public struct MovieExternalIds: Codable {
   // MARK: Lifecycle
 
-  init() {
-    logger = Logger(label: "com.knossos.WrapParty.logger")
-    loader = DataLoader()
-    apiToken = ProcessInfo.processInfo.environment[Self.apiTokenEnvVar, default: ""]
-  }
-
-  init(apiToken: String) {
-    logger = Logger(label: "com.knossos.WrapParty.logger")
-    loader = DataLoader()
-    self.apiToken = apiToken
+  public init(facebookId: String?, id: Int?, imdbId: String?, instagramId: String?, twitterId: String?) {
+    self.facebookId = facebookId
+    self.id = id
+    self.imdbId = imdbId
+    self.instagramId = instagramId
+    self.twitterId = twitterId
   }
 
   // MARK: Public
 
-  public let logger: Logger
-  public let loader: DataLoading
-  public let apiToken: String
+  public let facebookId: String?
+  public let id: Int?
+  public let imdbId: String?
+  public let instagramId: String?
+  public let twitterId: String?
 
-  // MARK: Private
+  // MARK: Internal
 
-  private static let apiTokenEnvVar: String = "TMDB_API_READ_ACCESS_TOKEN"
+  enum CodingKeys: String, CodingKey {
+    case facebookId = "facebook_id"
+    case id
+    case imdbId = "imdb_id"
+    case instagramId = "instagram_id"
+    case twitterId = "twitter_id"
+  }
 }

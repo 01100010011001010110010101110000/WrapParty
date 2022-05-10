@@ -12,14 +12,50 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
-@testable import WrapParty
-import XCTest
+import Foundation
 
-final class WrapPartyTests: XCTestCase {
-  func testExample() throws {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct
-    // results.
-    XCTAssertEqual(WrapParty().text, "Hello, World!")
+// MARK: - MovieKeywords
+
+public struct MovieKeywords: Codable {
+  // MARK: Lifecycle
+
+  public init(id: Int?, keywords: [Keyword]) {
+    self.id = id
+    self.keywords = keywords
+  }
+
+  // MARK: Public
+
+  // MARK: - Keyword
+
+  public struct Keyword: Codable {
+    // MARK: Lifecycle
+
+    public init(id: Int, name: String) {
+      self.id = id
+      self.name = name
+    }
+
+    // MARK: Public
+
+    public let id: Int
+    public let name: String
+
+    // MARK: Internal
+
+    enum CodingKeys: String, CodingKey {
+      case id
+      case name
+    }
+  }
+
+  public let id: Int?
+  public let keywords: [Keyword]
+
+  // MARK: Internal
+
+  enum CodingKeys: String, CodingKey {
+    case id
+    case keywords
   }
 }

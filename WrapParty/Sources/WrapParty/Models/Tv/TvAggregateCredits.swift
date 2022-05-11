@@ -19,7 +19,7 @@ import Foundation
 public struct TvAggregateCredits: Codable {
   // MARK: Lifecycle
 
-  public init(cast: [Cast], crew: [Cast], id: Int) {
+  public init(cast: [Cast], crew: [Cast], id: Int?) {
     self.cast = cast
     self.crew = crew
     self.id = id
@@ -29,7 +29,7 @@ public struct TvAggregateCredits: Codable {
 
   public let cast: [Cast]
   public let crew: [Cast]
-  public let id: Int
+  public let id: Int?
 
   // MARK: Internal
 

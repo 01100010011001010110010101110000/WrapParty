@@ -16,10 +16,10 @@ import Foundation
 
 // MARK: - MovieAlternativeTitle
 
-public struct MovieAlternativeTitle: Codable {
+public struct MovieAlternativeTitles: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, titles: [Title]) {
+  public init(id: Int?, titles: [AlternativeTitle]) {
     self.id = id
     self.titles = titles
   }
@@ -27,38 +27,12 @@ public struct MovieAlternativeTitle: Codable {
   // MARK: Public
 
   public let id: Int?
-  public let titles: [Title]
+  public let titles: [AlternativeTitle]
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
     case id
     case titles
-  }
-}
-
-public extension MovieAlternativeTitle {
-  struct Title: Codable {
-    // MARK: Lifecycle
-
-    public init(iso3166_1: String, title: String, type: String) {
-      self.iso3166_1 = iso3166_1
-      self.title = title
-      self.type = type
-    }
-
-    // MARK: Public
-
-    public let iso3166_1: String
-    public let title: String
-    public let type: String
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-      case iso3166_1 = "iso_3166_1"
-      case title
-      case type
-    }
   }
 }

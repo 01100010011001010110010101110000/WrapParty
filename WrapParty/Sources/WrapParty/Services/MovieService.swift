@@ -38,7 +38,7 @@ struct MovieService: MovieServiceProviding {
   let logger: Logger
   let tokenManager: TokenManager
 
-  func alternativeTitles(for id: Int, inCountry code: String? = nil) async throws -> MovieAlternativeTitle {
+  func alternativeTitles(for id: Int, inCountry code: String? = nil) async throws -> MovieAlternativeTitles {
     try await callEndpoint(routable: Router.alternativeTitles(id: id, countryCode: code))
   }
 

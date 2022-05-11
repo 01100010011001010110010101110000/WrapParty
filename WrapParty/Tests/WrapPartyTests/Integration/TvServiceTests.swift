@@ -30,6 +30,12 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(credits.crew.isEmpty)
   }
 
+  func testGetAlternativeTitles() async throws {
+    let alternativeTitles = try await Self.service.alternativeTitles(for: Self.wotId)
+
+    XCTAssertFalse(alternativeTitles.results.isEmpty)
+  }
+
   func testGetDetails() async throws {
     let details = try await Self.service.details(for: Self.wotId)
 

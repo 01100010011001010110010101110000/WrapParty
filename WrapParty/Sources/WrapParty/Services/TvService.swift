@@ -38,6 +38,10 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
+  func contentRatings(for id: Int, language: String? = nil) async throws -> TvContentRatings {
+    try await callEndpoint(routable: Router.contentRatings(id: id, language: language))
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> TvShow {
     try await details(for: id, including: including, language: nil, imageLanguages: [], videoLanguages: [], page: nil)
   }
@@ -73,6 +77,7 @@ extension TvService {
     case aggregateCredits(id: Int, language: String?)
     case alternativeTitles(id: Int, language: String?)
     case changes(id: Int, startDate: Date?, endDate: Date?, page: Int?)
+    case contentRatings(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, videoLanguages: Set<String>?, page: Int?)
 
     // MARK: Internal
@@ -89,10 +94,14 @@ extension TvService {
         ]).url!
       case let .changes(id, startDate, endDate, page):
         let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
-        return componentsForRoute(path: "movie/\(id)/changes", queryItems: [
+        return componentsForRoute(path: "tv/\(id)/changes", queryItems: [
           "start_date": startDate?.formatted(dateFormat),
           "end_date": endDate?.formatted(dateFormat),
           "page": page.map { String($0) },
+        ]).url!
+      case let .contentRatings(id, language):
+        return componentsForRoute(path: "tv/\(id)/content_ratings", queryItems: [
+          "language": language,
         ]).url!
       case let .details(id, appending, language, imageLanguages, videoLanguages, page):
         return componentsForRoute(path: "tv/\(id)", queryItems: [

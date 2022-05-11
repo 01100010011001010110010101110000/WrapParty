@@ -34,6 +34,10 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.alternativeTitles(id: id, language: language))
   }
 
+  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
+    try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> TvShow {
     try await details(for: id, including: including, language: nil, imageLanguages: [], videoLanguages: [], page: nil)
   }
@@ -68,6 +72,7 @@ extension TvService {
   enum Router: RequestRoutable {
     case aggregateCredits(id: Int, language: String?)
     case alternativeTitles(id: Int, language: String?)
+    case changes(id: Int, startDate: Date?, endDate: Date?, page: Int?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, videoLanguages: Set<String>?, page: Int?)
 
     // MARK: Internal
@@ -81,6 +86,13 @@ extension TvService {
       case let .alternativeTitles(id, language):
         return componentsForRoute(path: "tv/\(id)/alternative_titles", queryItems: [
           "language": language,
+        ]).url!
+      case let .changes(id, startDate, endDate, page):
+        let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
+        return componentsForRoute(path: "movie/\(id)/changes", queryItems: [
+          "start_date": startDate?.formatted(dateFormat),
+          "end_date": endDate?.formatted(dateFormat),
+          "page": page.map { String($0) },
         ]).url!
       case let .details(id, appending, language, imageLanguages, videoLanguages, page):
         return componentsForRoute(path: "tv/\(id)", queryItems: [

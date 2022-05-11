@@ -42,8 +42,8 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.alternativeTitles(id: id, countryCode: code))
   }
 
-  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil) async throws -> MovieChanges {
-    try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate))
+  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
+    try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
   func credits(for id: Int, language: String? = nil) async throws -> MovieCredits {
@@ -203,7 +203,7 @@ extension MovieService {
 extension MovieService {
   enum Router: RequestRoutable {
     case alternativeTitles(id: Int, countryCode: String?)
-    case changes(id: Int, startDate: Date?, endDate: Date?)
+    case changes(id: Int, startDate: Date?, endDate: Date?, page: Int?)
     case credits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, page: Int?)
     case externalIds(id: Int)
@@ -233,11 +233,12 @@ extension MovieService {
           "country": countryCode,
         ])
         return components.url!
-      case let .changes(id, startDate, endDate):
+      case let .changes(id, startDate, endDate, page):
         let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
         let components = componentsForRoute(path: "movie/\(id)/changes", queryItems: [
           "start_date": startDate?.formatted(dateFormat),
           "end_date": endDate?.formatted(dateFormat),
+          "page": page.map { String($0) },
         ])
         return components.url!
       case let .credits(id, language):

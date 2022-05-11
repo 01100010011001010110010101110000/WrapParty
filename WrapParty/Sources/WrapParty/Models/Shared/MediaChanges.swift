@@ -14,9 +14,9 @@
 
 import Foundation
 
-// MARK: - MovieChanges
+// MARK: - MediaChanges
 
-public struct MovieChanges: Codable {
+public struct MediaChanges: Codable {
   // MARK: Lifecycle
 
   public init(changes: [Change]) {
@@ -34,7 +34,7 @@ public struct MovieChanges: Codable {
   }
 }
 
-public extension MovieChanges {
+public extension MediaChanges {
   // MARK: - Change
 
   struct Change: Codable {
@@ -59,7 +59,7 @@ public extension MovieChanges {
   }
 }
 
-public extension MovieChanges.Change {
+public extension MediaChanges.Change {
   // MARK: - Item
 
   struct Item: Codable {

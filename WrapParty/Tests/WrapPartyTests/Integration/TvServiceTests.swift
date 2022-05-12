@@ -61,6 +61,13 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertTrue(details.id == Self.wotId)
   }
 
+  func testGetEpisodeGroups() async throws {
+    let episodeGroups = try await Self.service.episodeGroups(for: Self.wotId)
+
+    XCTAssertTrue(episodeGroups.id == Self.wotId)
+    XCTAssertFalse(episodeGroups.results.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

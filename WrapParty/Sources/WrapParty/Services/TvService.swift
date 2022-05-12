@@ -53,6 +53,10 @@ struct TvService: TvServiceProviding {
   func details(for id: Int, including: Set<Appendable> = [], language: String? = nil, imageLanguages: Set<String>? = [], videoLanguages: Set<String>? = [], page: Int? = nil) async throws -> TvShow {
     try await callEndpoint(routable: Router.details(id: id, appending: including, language: language, imageLanguages: imageLanguages, videoLanguages: videoLanguages, page: page))
   }
+
+  func episodeGroups(for id: Int, language: String? = nil) async throws -> TvEpisodeGroups {
+    try await callEndpoint(routable: Router.episodeGroups(id: id, language: language))
+  }
 }
 
 extension TvService {
@@ -84,6 +88,7 @@ extension TvService {
     case contentRatings(id: Int, language: String?)
     case credits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, videoLanguages: Set<String>?, page: Int?)
+    case episodeGroups(id: Int, language: String?)
 
     // MARK: Internal
 
@@ -119,6 +124,10 @@ extension TvService {
           "include_image_language": imageLanguages?.joined(separator: ","),
           "include_video_language": videoLanguages?.joined(separator: ","),
           "page": page.map { String($0) },
+        ]).url!
+      case let .episodeGroups(id, language):
+        return componentsForRoute(path: "tv/\(id)/episode_groups", queryItems: [
+          "language": language,
         ]).url!
       }
     }

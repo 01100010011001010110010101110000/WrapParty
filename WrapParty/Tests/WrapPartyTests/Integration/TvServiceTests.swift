@@ -48,6 +48,13 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(ratings.results.isEmpty)
   }
 
+  func testGetCredits() async throws {
+    let credits = try await Self.service.credits(for: Self.wotId)
+
+    XCTAssertFalse(credits.cast.isEmpty)
+    XCTAssertFalse(credits.crew.isEmpty)
+  }
+
   func testGetDetails() async throws {
     let details = try await Self.service.details(for: Self.wotId)
 

@@ -42,6 +42,10 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.contentRatings(id: id, language: language))
   }
 
+  func credits(for id: Int, language: String? = nil) async throws -> Credits {
+    try await callEndpoint(routable: Router.credits(id: id, language: language))
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> TvShow {
     try await details(for: id, including: including, language: nil, imageLanguages: [], videoLanguages: [], page: nil)
   }
@@ -78,6 +82,7 @@ extension TvService {
     case alternativeTitles(id: Int, language: String?)
     case changes(id: Int, startDate: Date?, endDate: Date?, page: Int?)
     case contentRatings(id: Int, language: String?)
+    case credits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, videoLanguages: Set<String>?, page: Int?)
 
     // MARK: Internal
@@ -101,6 +106,10 @@ extension TvService {
         ]).url!
       case let .contentRatings(id, language):
         return componentsForRoute(path: "tv/\(id)/content_ratings", queryItems: [
+          "language": language,
+        ]).url!
+      case let .credits(id, language):
+        return componentsForRoute(path: "tv/\(id)/credits", queryItems: [
           "language": language,
         ]).url!
       case let .details(id, appending, language, imageLanguages, videoLanguages, page):

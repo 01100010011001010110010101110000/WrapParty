@@ -28,10 +28,11 @@ extension RequestRoutable {
 
   func componentsForRoute(path: String, queryItems: [String: String?] = [:], filterEmptyQueryItems: Bool = true) -> URLComponents {
     var components = URLComponents(url: URL(string: path, relativeTo: WrapParty.baseUrl)!, resolvingAgainstBaseURL: true)!
-    components.queryItems = queryItems.compactMap { key, value in
+    let items = queryItems.compactMap { key, value -> URLQueryItem? in
       if filterEmptyQueryItems, value?.isEmpty ?? true { return nil }
       return URLQueryItem(name: key, value: value)
     }
+    components.queryItems = items.isEmpty ? nil : items
     return components
   }
 }

@@ -46,7 +46,7 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
-  func credits(for id: Int, language: String? = nil) async throws -> MovieCredits {
+  func credits(for id: Int, language: String? = nil) async throws -> Credits {
     try await callEndpoint(routable: Router.credits(id: id, language: language))
   }
 

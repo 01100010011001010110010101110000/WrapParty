@@ -14,9 +14,9 @@
 
 import Foundation
 
-// MARK: - MovieImages
+// MARK: - MediaImages
 
-public struct MovieImages: Codable {
+public struct MediaImages: Codable {
   // MARK: Lifecycle
 
   public init(backdrops: [Backdrop], id: Int?, logos: [Backdrop], posters: [Backdrop]) {

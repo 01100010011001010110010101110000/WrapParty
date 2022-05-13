@@ -66,7 +66,7 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.keywords(id: id))
   }
 
-  func images(for id: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> MovieImages {
+  func images(for id: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> MediaImages {
     try await callEndpoint(routable: Router.images(id: id, language: language, imageLanguages: imageLanguages))
   }
 

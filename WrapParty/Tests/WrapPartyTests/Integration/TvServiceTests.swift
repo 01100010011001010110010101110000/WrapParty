@@ -75,6 +75,14 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertTrue(externalIds.tvdbId == 355_730)
   }
 
+  func testGetImages() async throws {
+    let images = try await Self.service.images(for: Self.wotId)
+
+    XCTAssertFalse(images.posters.isEmpty)
+    XCTAssertFalse(images.logos.isEmpty)
+    XCTAssertFalse(images.backdrops.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

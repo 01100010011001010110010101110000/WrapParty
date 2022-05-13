@@ -16,4 +16,5 @@ import Foundation
 
 enum MediaType: String, Codable {
   case movie
+  case tv
 }

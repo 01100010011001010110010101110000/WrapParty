@@ -69,6 +69,19 @@ struct TvService: TvServiceProviding {
   func keywords(for id: Int) async throws -> Results<Keyword> {
     try await callEndpoint(routable: Router.keywords(id: id))
   }
+
+  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<TvRecommendation> {
+    try await callEndpoint(routable: Router.recommendations(id: id, language: language, page: page))
+  }
+
+  func allRecommendations(for id: Int, language: String? = nil) async throws -> [TvRecommendation] {
+    try await recommendationSequence(for: id, language: language).allResults()
+  }
+
+  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<TvRecommendation> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
 }
 
 extension TvService {
@@ -104,6 +117,7 @@ extension TvService {
     case externalIds(id: Int, language: String?)
     case images(id: Int, language: String?, imageLanguages: Set<String>?)
     case keywords(id: Int)
+    case recommendations(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -155,6 +169,11 @@ extension TvService {
         ]).url!
       case let .keywords(id):
         return componentsForRoute(path: "tv/\(id)/keywords").url!
+      case let .recommendations(id, language, page):
+        return componentsForRoute(path: "tv/\(id)/recommendations", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
       }
     }
   }

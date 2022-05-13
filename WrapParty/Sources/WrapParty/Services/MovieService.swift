@@ -50,7 +50,7 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.credits(id: id, language: language))
   }
 
-  func externalIds(for id: Int) async throws -> MovieExternalIds {
+  func externalIds(for id: Int) async throws -> ExternalIds {
     try await callEndpoint(routable: Router.externalIds(id: id))
   }
 

@@ -16,14 +16,15 @@ import Foundation
 
 // MARK: - MovieExternalId
 
-public struct MovieExternalIds: Codable {
+public struct ExternalIds: Codable {
   // MARK: Lifecycle
 
-  public init(facebookId: String?, id: Int?, imdbId: String?, instagramId: String?, twitterId: String?) {
+  public init(facebookId: String?, id: Int?, imdbId: String?, instagramId: String?, tvdbId: Int?, twitterId: String?) {
     self.facebookId = facebookId
     self.id = id
     self.imdbId = imdbId
     self.instagramId = instagramId
+    self.tvdbId = tvdbId
     self.twitterId = twitterId
   }
 
@@ -33,6 +34,7 @@ public struct MovieExternalIds: Codable {
   public let id: Int?
   public let imdbId: String?
   public let instagramId: String?
+  public let tvdbId: Int?
   public let twitterId: String?
 
   // MARK: Internal
@@ -42,6 +44,7 @@ public struct MovieExternalIds: Codable {
     case id
     case imdbId = "imdb_id"
     case instagramId = "instagram_id"
+    case tvdbId = "tvdb_id"
     case twitterId = "twitter_id"
   }
 }

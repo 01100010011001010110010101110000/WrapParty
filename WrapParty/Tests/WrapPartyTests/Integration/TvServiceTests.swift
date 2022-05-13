@@ -68,6 +68,13 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(episodeGroups.results.isEmpty)
   }
 
+  func testGetExternalIds() async throws {
+    let externalIds = try await Self.service.externalIds(for: Self.wotId)
+
+    XCTAssertTrue(externalIds.imdbId == "tt7462410")
+    XCTAssertTrue(externalIds.tvdbId == 355_730)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

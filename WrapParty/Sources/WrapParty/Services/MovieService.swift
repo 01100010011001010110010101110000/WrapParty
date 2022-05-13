@@ -126,7 +126,7 @@ struct MovieService: MovieServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func translations(for id: Int) async throws -> MovieTranslations {
+  func translations(for id: Int) async throws -> MediaTranslations {
     try await callEndpoint(routable: Router.translations(id: id))
   }
 

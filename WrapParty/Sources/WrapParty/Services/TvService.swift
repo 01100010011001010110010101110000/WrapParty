@@ -112,6 +112,10 @@ struct TvService: TvServiceProviding {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.similar(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
+
+  func translations(for id: Int) async throws -> MediaTranslations {
+    try await callEndpoint(routable: Router.translations(id: id))
+  }
 }
 
 extension TvService {
@@ -151,6 +155,7 @@ extension TvService {
     case reviews(id: Int, language: String?, page: Int?)
     case screenedTheatrically(id: Int)
     case similar(id: Int, language: String?, page: Int?)
+    case translations(id: Int)
 
     // MARK: Internal
 
@@ -219,6 +224,8 @@ extension TvService {
           "language": language,
           "page": page.map { String($0) },
         ]).url!
+      case let .translations(id):
+        return componentsForRoute(path: "tv/\(id)/translations").url!
       }
     }
   }

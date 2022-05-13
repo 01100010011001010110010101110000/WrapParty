@@ -114,6 +114,12 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(similarShows.results.isEmpty)
   }
 
+  func testGetTranslations() async throws {
+    let translations = try await Self.service.translations(for: Self.wotId)
+
+    XCTAssertFalse(translations.translations.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

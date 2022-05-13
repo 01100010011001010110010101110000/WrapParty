@@ -100,15 +100,15 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.releaseDates(id: id))
   }
 
-  func reviews(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieReview> {
+  func reviews(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<Review> {
     try await callEndpoint(routable: Router.reviews(id: id, language: language, page: page))
   }
 
-  func allReviews(for id: Int, language: String? = nil) async throws -> [MovieReview] {
+  func allReviews(for id: Int, language: String? = nil) async throws -> [Review] {
     try await reviewsSequence(for: id, language: language).allResults()
   }
 
-  func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieReview> {
+  func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<Review> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.reviews(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }

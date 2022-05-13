@@ -82,6 +82,19 @@ struct TvService: TvServiceProviding {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
+
+  func reviews(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<Review> {
+    try await callEndpoint(routable: Router.reviews(id: id, language: language, page: page))
+  }
+
+  func allReviews(for id: Int, language: String? = nil) async throws -> [Review] {
+    try await reviewsSequence(for: id, language: language).allResults()
+  }
+
+  func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<Review> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.reviews(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
 }
 
 extension TvService {
@@ -118,6 +131,7 @@ extension TvService {
     case images(id: Int, language: String?, imageLanguages: Set<String>?)
     case keywords(id: Int)
     case recommendations(id: Int, language: String?, page: Int?)
+    case reviews(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -171,6 +185,11 @@ extension TvService {
         return componentsForRoute(path: "tv/\(id)/keywords").url!
       case let .recommendations(id, language, page):
         return componentsForRoute(path: "tv/\(id)/recommendations", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
+      case let .reviews(id, language, page):
+        return componentsForRoute(path: "tv/\(id)/reviews", queryItems: [
           "language": language,
           "page": page.map { String($0) },
         ]).url!

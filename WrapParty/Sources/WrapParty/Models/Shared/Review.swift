@@ -14,9 +14,9 @@
 
 import Foundation
 
-// MARK: - MovieReview
+// MARK: - Review
 
-public struct MovieReview: Codable {
+public struct Review: Codable {
   // MARK: Lifecycle
 
   public init(author: String, authorDetails: AuthorDetails, content: String, createdAt: String, id: String, updatedAt: String, url: URL) {
@@ -52,7 +52,7 @@ public struct MovieReview: Codable {
   }
 }
 
-public extension MovieReview {
+public extension Review {
   // MARK: - AuthorDetails
 
   struct AuthorDetails: Codable {

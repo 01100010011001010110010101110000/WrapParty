@@ -14,32 +14,9 @@
 
 import Foundation
 
-// MARK: - TvContentRatings
-
-public struct TvContentRatings: Codable {
-  // MARK: Lifecycle
-
-  public init(id: Int?, results: [Rating]) {
-    self.id = id
-    self.results = results
-  }
-
-  // MARK: Public
-
-  public let id: Int?
-  public let results: [Rating]
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case id
-    case results
-  }
-}
-
 // MARK: - Rating
 
-public struct Rating: Codable {
+public struct TvContentRating: Codable {
   // MARK: Lifecycle
 
   public init(iso3166_1: String, rating: String) {

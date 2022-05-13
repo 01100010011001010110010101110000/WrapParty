@@ -30,7 +30,7 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.aggregateCredits(id: id, language: language))
   }
 
-  func alternativeTitles(for id: Int, language: String? = nil) async throws -> TvAlternativeTitles {
+  func alternativeTitles(for id: Int, language: String? = nil) async throws -> Results<AlternativeTitle> {
     try await callEndpoint(routable: Router.alternativeTitles(id: id, language: language))
   }
 
@@ -38,7 +38,7 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
-  func contentRatings(for id: Int, language: String? = nil) async throws -> TvContentRatings {
+  func contentRatings(for id: Int, language: String? = nil) async throws -> Results<TvContentRating> {
     try await callEndpoint(routable: Router.contentRatings(id: id, language: language))
   }
 
@@ -54,7 +54,7 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.details(id: id, appending: including, language: language, imageLanguages: imageLanguages, videoLanguages: videoLanguages, page: page))
   }
 
-  func episodeGroups(for id: Int, language: String? = nil) async throws -> TvEpisodeGroups {
+  func episodeGroups(for id: Int, language: String? = nil) async throws -> Results<TvEpisodeGroup> {
     try await callEndpoint(routable: Router.episodeGroups(id: id, language: language))
   }
 

@@ -14,72 +14,47 @@
 
 import Foundation
 
-// MARK: - MovieVideos
-
-public struct MovieVideos: Codable {
+public struct MediaVideo: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, results: [Video]) {
+  public init(id: String, iso3166_1: String, iso639_1: String, key: String, name: String, official: Bool, publishedAt: String, site: String, size: Int, type: String) {
     self.id = id
-    self.results = results
+    self.iso3166_1 = iso3166_1
+    self.iso639_1 = iso639_1
+    self.key = key
+    self.name = name
+    self.official = official
+    self.publishedAt = publishedAt
+    self.site = site
+    self.size = size
+    self.type = type
   }
 
   // MARK: Public
 
-  public let id: Int?
-  public let results: [Video]
+  public let id: String
+  public let iso3166_1: String
+  public let iso639_1: String
+  public let key: String
+  public let name: String
+  public let official: Bool
+  public let publishedAt: String
+  public let site: String
+  public let size: Int
+  public let type: String
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
     case id
-    case results
-  }
-}
-
-public extension MovieVideos {
-  struct Video: Codable {
-    // MARK: Lifecycle
-
-    public init(id: String, iso3166_1: String, iso639_1: String, key: String, name: String, official: Bool, publishedAt: String, site: String, size: Int, type: String) {
-      self.id = id
-      self.iso3166_1 = iso3166_1
-      self.iso639_1 = iso639_1
-      self.key = key
-      self.name = name
-      self.official = official
-      self.publishedAt = publishedAt
-      self.site = site
-      self.size = size
-      self.type = type
-    }
-
-    // MARK: Public
-
-    public let id: String
-    public let iso3166_1: String
-    public let iso639_1: String
-    public let key: String
-    public let name: String
-    public let official: Bool
-    public let publishedAt: String
-    public let site: String
-    public let size: Int
-    public let type: String
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-      case id
-      case iso3166_1 = "iso_3166_1"
-      case iso639_1 = "iso_639_1"
-      case key
-      case name
-      case official
-      case publishedAt = "published_at"
-      case site
-      case size
-      case type
-    }
+    case iso3166_1 = "iso_3166_1"
+    case iso639_1 = "iso_639_1"
+    case key
+    case name
+    case official
+    case publishedAt = "published_at"
+    case site
+    case size
+    case type
   }
 }

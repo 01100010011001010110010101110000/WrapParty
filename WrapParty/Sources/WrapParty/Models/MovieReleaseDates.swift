@@ -14,51 +14,30 @@
 
 import Foundation
 
-// MARK: - MovieReleaseDates
+// MARK: - CountryRelease
 
-public struct MovieReleaseDates: Codable {
+public struct CountryRelease: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, results: [CountryRelease]) {
-    self.id = id
-    self.results = results
+  public init(iso3166_1: String, releaseDates: [ReleaseDate]) {
+    self.iso3166_1 = iso3166_1
+    self.releaseDates = releaseDates
   }
 
   // MARK: Public
 
-  public let id: Int?
-  public let results: [CountryRelease]
+  public let iso3166_1: String
+  public let releaseDates: [ReleaseDate]
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case id
-    case results
+    case iso3166_1 = "iso_3166_1"
+    case releaseDates = "release_dates"
   }
 }
 
-public extension MovieReleaseDates {
-  struct CountryRelease: Codable {
-    // MARK: Lifecycle
-
-    public init(iso3166_1: String, releaseDates: [ReleaseDate]) {
-      self.iso3166_1 = iso3166_1
-      self.releaseDates = releaseDates
-    }
-
-    // MARK: Public
-
-    public let iso3166_1: String
-    public let releaseDates: [ReleaseDate]
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-      case iso3166_1 = "iso_3166_1"
-      case releaseDates = "release_dates"
-    }
-  }
-
+public extension CountryRelease {
   // MARK: - ReleaseDate
 
   struct ReleaseDate: Codable {

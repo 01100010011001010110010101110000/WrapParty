@@ -96,7 +96,7 @@ struct MovieService: MovieServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func releaseDates(for id: Int) async throws -> MovieReleaseDates {
+  func releaseDates(for id: Int) async throws -> Results<CountryRelease> {
     try await callEndpoint(routable: Router.releaseDates(id: id))
   }
 
@@ -130,7 +130,7 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.translations(id: id))
   }
 
-  func videos(for id: Int, language: String? = nil, videoLanguages: Set<String> = []) async throws -> MovieVideos {
+  func videos(for id: Int, language: String? = nil, videoLanguages: Set<String> = []) async throws -> Results<MediaVideo> {
     try await callEndpoint(routable: Router.videos(id: id, language: language, videoLanguages: videoLanguages))
   }
 

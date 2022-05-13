@@ -120,6 +120,10 @@ struct TvService: TvServiceProviding {
   func videos(for id: Int, language: String? = nil, videoLanguages: Set<String> = []) async throws -> Results<MediaVideo> {
     try await callEndpoint(routable: Router.videos(id: id, language: language, videoLanguages: videoLanguages))
   }
+
+  func watchProviders(for id: Int) async throws -> WatchProviders {
+    try await callEndpoint(routable: Router.watchProviders(id: id))
+  }
 }
 
 extension TvService {
@@ -161,6 +165,7 @@ extension TvService {
     case similar(id: Int, language: String?, page: Int?)
     case translations(id: Int)
     case videos(id: Int, language: String?, videoLanguages: Set<String>?)
+    case watchProviders(id: Int)
 
     // MARK: Internal
 
@@ -236,6 +241,8 @@ extension TvService {
           "language": language,
           "include_video_language": videoLanguages?.joined(separator: ","),
         ]).url!
+      case let .watchProviders(id):
+        return componentsForRoute(path: "tv/\(id)/watch/providers").url!
       }
     }
   }

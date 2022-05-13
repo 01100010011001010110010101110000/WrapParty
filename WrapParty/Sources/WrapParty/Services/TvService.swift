@@ -65,6 +65,10 @@ struct TvService: TvServiceProviding {
   func images(for id: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> MediaImages {
     try await callEndpoint(routable: Router.images(id: id, language: language, imageLanguages: imageLanguages))
   }
+
+  func keywords(for id: Int) async throws -> Results<Keyword> {
+    try await callEndpoint(routable: Router.keywords(id: id))
+  }
 }
 
 extension TvService {
@@ -99,6 +103,7 @@ extension TvService {
     case episodeGroups(id: Int, language: String?)
     case externalIds(id: Int, language: String?)
     case images(id: Int, language: String?, imageLanguages: Set<String>?)
+    case keywords(id: Int)
 
     // MARK: Internal
 
@@ -148,6 +153,8 @@ extension TvService {
           "language": language,
           "include_image_language": imageLanguages?.joined(separator: ","),
         ]).url!
+      case let .keywords(id):
+        return componentsForRoute(path: "tv/\(id)/keywords").url!
       }
     }
   }

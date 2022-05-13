@@ -83,6 +83,12 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(images.backdrops.isEmpty)
   }
 
+  func testGetKeywords() async throws {
+    let keywords = try await Self.service.keywords(for: Self.wotId)
+
+    XCTAssertFalse(keywords.results.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

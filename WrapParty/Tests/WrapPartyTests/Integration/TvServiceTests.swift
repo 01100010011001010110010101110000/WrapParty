@@ -22,6 +22,7 @@ final class TvServiceIntegrationTests: XCTestCase {
 
   /// TMDB ID for the Wheel of Time series
   static let wotId = 71914
+  static let metalFamilyId = 123_566
 
   func testGetAggregateCredits() async throws {
     let credits = try await Self.service.aggregateCredits(for: Self.wotId)
@@ -99,6 +100,12 @@ final class TvServiceIntegrationTests: XCTestCase {
     let reviews = try await Self.service.reviews(for: Self.wotId)
 
     XCTAssertFalse(reviews.results.isEmpty)
+  }
+
+  func testGetTheatricallyScreenedEpisodes() async throws {
+    let episodes = try await Self.service.episodesScreenedTheatrically(for: Self.metalFamilyId)
+
+    XCTAssertFalse(episodes.results.isEmpty)
   }
 
   // MARK: Private

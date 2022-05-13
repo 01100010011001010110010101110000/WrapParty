@@ -95,6 +95,10 @@ struct TvService: TvServiceProviding {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.reviews(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
+
+  func episodesScreenedTheatrically(for id: Int) async throws -> Results<TvScreenedEpisode> {
+    try await callEndpoint(routable: Router.screenedTheatrically(id: id))
+  }
 }
 
 extension TvService {
@@ -132,6 +136,7 @@ extension TvService {
     case keywords(id: Int)
     case recommendations(id: Int, language: String?, page: Int?)
     case reviews(id: Int, language: String?, page: Int?)
+    case screenedTheatrically(id: Int)
 
     // MARK: Internal
 
@@ -193,6 +198,8 @@ extension TvService {
           "language": language,
           "page": page.map { String($0) },
         ]).url!
+      case let .screenedTheatrically(id):
+        return componentsForRoute(path: "tv/\(id)/screened_theatrically").url!
       }
     }
   }

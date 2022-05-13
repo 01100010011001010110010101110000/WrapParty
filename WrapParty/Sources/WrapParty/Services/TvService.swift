@@ -116,6 +116,10 @@ struct TvService: TvServiceProviding {
   func translations(for id: Int) async throws -> MediaTranslations {
     try await callEndpoint(routable: Router.translations(id: id))
   }
+
+  func videos(for id: Int, language: String? = nil, videoLanguages: Set<String> = []) async throws -> Results<MediaVideo> {
+    try await callEndpoint(routable: Router.videos(id: id, language: language, videoLanguages: videoLanguages))
+  }
 }
 
 extension TvService {
@@ -156,6 +160,7 @@ extension TvService {
     case screenedTheatrically(id: Int)
     case similar(id: Int, language: String?, page: Int?)
     case translations(id: Int)
+    case videos(id: Int, language: String?, videoLanguages: Set<String>?)
 
     // MARK: Internal
 
@@ -226,6 +231,11 @@ extension TvService {
         ]).url!
       case let .translations(id):
         return componentsForRoute(path: "tv/\(id)/translations").url!
+      case let .videos(id, language, videoLanguages):
+        return componentsForRoute(path: "tv/\(id)/videos", queryItems: [
+          "language": language,
+          "include_video_language": videoLanguages?.joined(separator: ","),
+        ]).url!
       }
     }
   }

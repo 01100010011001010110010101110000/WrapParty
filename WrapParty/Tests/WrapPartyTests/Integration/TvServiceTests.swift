@@ -108,6 +108,12 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(episodes.results.isEmpty)
   }
 
+  func testGetSimilarShows() async throws {
+    let similarShows = try await Self.service.similarTvShows(for: Self.wotId)
+
+    XCTAssertFalse(similarShows.results.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

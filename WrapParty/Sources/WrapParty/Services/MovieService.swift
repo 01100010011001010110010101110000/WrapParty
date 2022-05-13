@@ -83,15 +83,15 @@ struct MovieService: MovieServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieRecommendation> {
+  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieListResult> {
     try await callEndpoint(routable: Router.recommendations(id: id, language: language, page: page))
   }
 
-  func allRecommendations(for id: Int, language: String? = nil) async throws -> [MovieRecommendation] {
+  func allRecommendations(for id: Int, language: String? = nil) async throws -> [MovieListResult] {
     try await recommendationSequence(for: id, language: language).allResults()
   }
 
-  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieRecommendation> {
+  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
@@ -113,15 +113,15 @@ struct MovieService: MovieServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func similarMovies(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<SimilarMovie> {
+  func similarMovies(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieListResult> {
     try await callEndpoint(routable: Router.similar(id: id, language: language, page: page))
   }
 
-  func allSimilarMovies(for id: Int, language: String? = nil) async throws -> [SimilarMovie] {
+  func allSimilarMovies(for id: Int, language: String? = nil) async throws -> [MovieListResult] {
     try await similarMovieSequence(for: id, language: language).allResults()
   }
 
-  func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<SimilarMovie> {
+  func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.similar(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }

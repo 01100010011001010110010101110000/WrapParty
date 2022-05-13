@@ -70,15 +70,15 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.keywords(id: id))
   }
 
-  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<TvRecommendation> {
+  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<TvListResult> {
     try await callEndpoint(routable: Router.recommendations(id: id, language: language, page: page))
   }
 
-  func allRecommendations(for id: Int, language: String? = nil) async throws -> [TvRecommendation] {
+  func allRecommendations(for id: Int, language: String? = nil) async throws -> [TvListResult] {
     try await recommendationSequence(for: id, language: language).allResults()
   }
 
-  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<TvRecommendation> {
+  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<TvListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
@@ -98,6 +98,19 @@ struct TvService: TvServiceProviding {
 
   func episodesScreenedTheatrically(for id: Int) async throws -> Results<TvScreenedEpisode> {
     try await callEndpoint(routable: Router.screenedTheatrically(id: id))
+  }
+
+  func similarTvShows(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.similar(id: id, language: language, page: page))
+  }
+
+  func allSimilarTvShows(for id: Int, language: String? = nil) async throws -> [TvListResult] {
+    try await similarTvShowSequence(for: id, language: language).allResults()
+  }
+
+  func similarTvShowSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<TvListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.similar(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 
@@ -137,6 +150,7 @@ extension TvService {
     case recommendations(id: Int, language: String?, page: Int?)
     case reviews(id: Int, language: String?, page: Int?)
     case screenedTheatrically(id: Int)
+    case similar(id: Int, language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -200,6 +214,11 @@ extension TvService {
         ]).url!
       case let .screenedTheatrically(id):
         return componentsForRoute(path: "tv/\(id)/screened_theatrically").url!
+      case let .similar(id, language, page):
+        return componentsForRoute(path: "tv/\(id)/similar", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
+        ]).url!
       }
     }
   }

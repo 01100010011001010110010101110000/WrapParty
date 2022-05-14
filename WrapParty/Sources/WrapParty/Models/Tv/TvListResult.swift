@@ -17,8 +17,7 @@ import Foundation
 public struct TvListResult: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: URL?, firstAirDate: String, genreIds: [Int], id: Int, mediaType: MediaType?, name: String, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, voteAverage: Double, voteCount: Int) {
-    self.adult = adult
+  public init(backdropPath: URL?, firstAirDate: String?, genreIds: [Int], id: Int, mediaType: MediaType?, name: String, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, voteAverage: Double, voteCount: Int) {
     self.backdropPath = backdropPath
     self.firstAirDate = firstAirDate
     self.genreIds = genreIds
@@ -37,9 +36,8 @@ public struct TvListResult: Codable {
 
   // MARK: Public
 
-  public let adult: Bool
   public let backdropPath: URL?
-  public let firstAirDate: String
+  public let firstAirDate: String?
   public let genreIds: [Int]
   public let id: Int
   public let mediaType: MediaType?
@@ -56,7 +54,6 @@ public struct TvListResult: Codable {
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case adult
     case backdropPath = "backdrop_path"
     case firstAirDate = "first_air_date"
     case genreIds = "genre_ids"

@@ -132,6 +132,36 @@ final class TvServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(providers.results.isEmpty)
   }
 
+  func testGetLatest() async throws {
+    let latest = try await Self.service.latest()
+
+    XCTAssertGreaterThan(latest.id, 0)
+  }
+
+  func testGetPopular() async throws {
+    let popular = try await Self.service.popular()
+
+    XCTAssertFalse(popular.results.isEmpty)
+  }
+
+  func testGetAiringToday() async throws {
+    let airingToday = try await Self.service.airingToday()
+
+    XCTAssertFalse(airingToday.results.isEmpty)
+  }
+
+  func testGetOnTheAir() async throws {
+    let onTheAir = try await Self.service.onTheAir()
+
+    XCTAssertFalse(onTheAir.results.isEmpty)
+  }
+
+  func testGetTopRated() async throws {
+    let topRated = try await Self.service.topRated()
+
+    XCTAssertFalse(topRated.results.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: TvService = {

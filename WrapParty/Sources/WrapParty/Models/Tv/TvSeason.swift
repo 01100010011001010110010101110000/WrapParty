@@ -19,7 +19,7 @@ import Foundation
 public struct Season: Codable {
   // MARK: Lifecycle
 
-  public init(airDate: String, episodeCount: Int, id: Int, name: String, overview: String, posterPath: URL?, seasonNumber: Int) {
+  public init(airDate: String?, episodeCount: Int, id: Int, name: String, overview: String, posterPath: URL?, seasonNumber: Int) {
     self.airDate = airDate
     self.episodeCount = episodeCount
     self.id = id
@@ -31,7 +31,7 @@ public struct Season: Codable {
 
   // MARK: Public
 
-  public let airDate: String
+  public let airDate: String?
   public let episodeCount: Int
   public let id: Int
   public let name: String

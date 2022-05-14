@@ -19,7 +19,7 @@ import Foundation
 public struct TvShow: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: String, createdBy: [CreatedBy], episodeRunTime: [Int], firstAirDate: String, genres: [Genre], homepage: String, id: Int, inProduction: Bool, languages: [String], lastAirDate: String, lastEpisodeToAir: RecentEpisode?, name: String, networks: [Network], nextEpisodeToAir: RecentEpisode?, numberOfEpisodes: Int, numberOfSeasons: Int, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: String, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], seasons: [Season], spokenLanguages: [SpokenLanguage], status: String, tagline: String, type: String, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, backdropPath: String, createdBy: [CreatedBy], episodeRunTime: [Int], firstAirDate: String?, genres: [Genre], homepage: String, id: Int, inProduction: Bool, languages: [String], lastAirDate: String?, lastEpisodeToAir: RecentEpisode?, name: String, networks: [Network], nextEpisodeToAir: RecentEpisode?, numberOfEpisodes: Int, numberOfSeasons: Int, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: String, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], seasons: [Season], spokenLanguages: [SpokenLanguage], status: String, tagline: String, type: String, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.backdropPath = backdropPath
     self.createdBy = createdBy
@@ -60,13 +60,13 @@ public struct TvShow: Codable {
   public let backdropPath: String
   public let createdBy: [CreatedBy]
   public let episodeRunTime: [Int]
-  public let firstAirDate: String
+  public let firstAirDate: String?
   public let genres: [Genre]
   public let homepage: String
   public let id: Int
   public let inProduction: Bool
   public let languages: [String]
-  public let lastAirDate: String
+  public let lastAirDate: String?
   public let lastEpisodeToAir: RecentEpisode?
   public let name: String
   public let networks: [Network]

@@ -124,6 +124,48 @@ struct TvService: TvServiceProviding {
   func watchProviders(for id: Int) async throws -> WatchProviders {
     try await callEndpoint(routable: Router.watchProviders(id: id))
   }
+
+  // Meta endpoints
+
+  func latest(language: String? = nil) async throws -> TvShow {
+    try await callEndpoint(routable: Router.latest(language: language))
+  }
+
+  func popular(page: Int = 1, language: String? = nil, region _: String? = nil) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.popular(page: page, language: language))
+  }
+
+  func popularSequence(language: String? = nil, region _: String? = nil) async -> PagedQuerySequence<TvListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(page: 1, language: language))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func airingToday(page: Int = 1, language: String? = nil, region _: String? = nil) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.airingToday(page: page, language: language))
+  }
+
+  func airingTodaySequence(language: String? = nil, region _: String? = nil) async -> PagedQuerySequence<TvListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.airingToday(page: 1, language: language))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func onTheAir(page: Int = 1, language: String? = nil, region _: String? = nil) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.onTheAir(page: page, language: language))
+  }
+
+  func onTheAirSequence(language: String? = nil, region _: String? = nil) async -> PagedQuerySequence<TvListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.onTheAir(page: 1, language: language))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func topRated(page: Int = 1, language: String? = nil, region _: String? = nil) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.topRated(page: page, language: language))
+  }
+
+  func topRatedSequence(language: String? = nil, region _: String? = nil) async -> PagedQuerySequence<TvListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.topRated(page: 1, language: language))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
 }
 
 extension TvService {
@@ -166,6 +208,12 @@ extension TvService {
     case translations(id: Int)
     case videos(id: Int, language: String?, videoLanguages: Set<String>?)
     case watchProviders(id: Int)
+
+    case latest(language: String?)
+    case airingToday(page: Int?, language: String?)
+    case onTheAir(page: Int?, language: String?)
+    case popular(page: Int?, language: String?)
+    case topRated(page: Int?, language: String?)
 
     // MARK: Internal
 
@@ -243,6 +291,30 @@ extension TvService {
         ]).url!
       case let .watchProviders(id):
         return componentsForRoute(path: "tv/\(id)/watch/providers").url!
+      case let .latest(language):
+        return componentsForRoute(path: "tv/latest", queryItems: [
+          "language": language,
+        ]).url!
+      case let .airingToday(page, language):
+        return componentsForRoute(path: "tv/airing_today", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+        ]).url!
+      case let .onTheAir(page, language):
+        return componentsForRoute(path: "tv/on_the_air", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+        ]).url!
+      case let .popular(page, language):
+        return componentsForRoute(path: "tv/popular", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+        ]).url!
+      case let .topRated(page, language):
+        return componentsForRoute(path: "tv/top_rated", queryItems: [
+          "page": page.map { String($0) },
+          "language": language,
+        ]).url!
       }
     }
   }

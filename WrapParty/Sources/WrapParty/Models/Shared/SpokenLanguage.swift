@@ -14,6 +14,26 @@
 
 import Foundation
 
-enum MediaType: String, Codable {
-  case movie
+public struct SpokenLanguage: Codable {
+  // MARK: Lifecycle
+
+  public init(englishName: String, iso639_1: String, name: String) {
+    self.englishName = englishName
+    self.iso639_1 = iso639_1
+    self.name = name
+  }
+
+  // MARK: Public
+
+  public let englishName: String
+  public let iso639_1: String
+  public let name: String
+
+  // MARK: Internal
+
+  enum CodingKeys: String, CodingKey {
+    case englishName = "english_name"
+    case iso639_1 = "iso_639_1"
+    case name
+  }
 }

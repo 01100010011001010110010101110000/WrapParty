@@ -13,6 +13,7 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import Logging
 
 // MARK: - SearchServiceProviding
 
@@ -23,14 +24,16 @@ protocol SearchServiceProviding: ServiceProviding {}
 struct SearchService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, tokenManager: TokenManager) {
+  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
+    self.logger = logger
     self.tokenManager = tokenManager
   }
 
   // MARK: Internal
 
   let dataLoader: DataLoading
+  let logger: Logger
   let tokenManager: TokenManager
 
   func searchMovies(matching query: String, page: Int = 1, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
@@ -43,12 +46,67 @@ struct SearchService: SearchServiceProviding {
 
   func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.movies(query: query, page: 1, parameters))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func searchTv(matching query: String, page: Int = 1, parameters: [TvSearchParams] = []) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.tv(query: query, page: page, parameters))
+  }
+
+  func allTvSearchResults(matching query: String, parameters: [TvSearchParams] = []) async throws -> [TvListResult] {
+    try await searchTvSequence(matching: query, parameters: parameters).allResults()
+  }
+
+  func searchTvSequence(matching query: String, parameters: [TvSearchParams] = []) async -> PagedQuerySequence<TvListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.tv(query: query, page: 1, parameters))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 
+// MARK: - UrlQueryElement
+
+protocol UrlQueryElement {
+  var queryKey: String { get }
+  var queryValue: String { get }
+}
+
 extension SearchService {
-  public enum MovieSearchParams {
+  public enum TvSearchParams: UrlQueryElement {
+    case language(String)
+    case page(Int)
+    case includeAdult(Bool)
+    case firstAirDateYear(Int)
+
+    // MARK: Internal
+
+    var queryKey: String {
+      switch self {
+      case .language:
+        return "language"
+      case .page:
+        return "page"
+      case .includeAdult:
+        return "include_adult"
+      case .firstAirDateYear:
+        return "first_air_date_year"
+      }
+    }
+
+    var queryValue: String {
+      switch self {
+      case let .language(language):
+        return language
+      case let .page(page):
+        return String(page)
+      case let .includeAdult(includeAdult):
+        return String(includeAdult)
+      case let .firstAirDateYear(year):
+        return String(year)
+      }
+    }
+  }
+
+  public enum MovieSearchParams: UrlQueryElement {
     case language(String)
     case page(Int)
     case includeAdult(Bool)
@@ -75,7 +133,7 @@ extension SearchService {
       }
     }
 
-    var queryValue: String? {
+    var queryValue: String {
       switch self {
       case let .language(language):
         return language
@@ -94,7 +152,7 @@ extension SearchService {
   }
 }
 
-extension RandomAccessCollection where Element == SearchService.MovieSearchParams {
+extension Collection where Element: UrlQueryElement {
   func toQueryItems() -> [String: String] {
     var results: [String: String] = Dictionary(minimumCapacity: count)
     forEach { results[$0.queryKey] = $0.queryValue }
@@ -105,6 +163,7 @@ extension RandomAccessCollection where Element == SearchService.MovieSearchParam
 extension SearchService {
   enum Router: RequestRoutable {
     case movies(query: String, page: Int, [MovieSearchParams])
+    case tv(query: String, page: Int, [TvSearchParams])
 
     // MARK: Internal
 
@@ -115,6 +174,11 @@ extension SearchService {
         queryItems["query"] = query
         queryItems["page"] = String(page)
         return componentsForRoute(path: "search/movie", queryItems: queryItems).url!
+      case let .tv(query, page, parameters):
+        var queryItems = parameters.toQueryItems()
+        queryItems["query"] = query
+        queryItems["page"] = String(page)
+        return componentsForRoute(path: "search/tv", queryItems: queryItems).url!
       }
     }
   }

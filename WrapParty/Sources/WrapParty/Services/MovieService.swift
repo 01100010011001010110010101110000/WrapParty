@@ -13,6 +13,7 @@
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import Logging
 
 // MARK: - MovieServiceProviding
 
@@ -25,29 +26,31 @@ protocol MovieServiceProviding: ServiceProviding & DetailAppendable {
 struct MovieService: MovieServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, tokenManager: TokenManager) {
+  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
+    self.logger = logger
     self.tokenManager = tokenManager
   }
 
   // MARK: Internal
 
   let dataLoader: DataLoading
+  let logger: Logger
   let tokenManager: TokenManager
 
-  func alternativeTitles(for id: Int, inCountry code: String? = nil) async throws -> MovieAlternativeTitle {
+  func alternativeTitles(for id: Int, inCountry code: String? = nil) async throws -> MovieAlternativeTitles {
     try await callEndpoint(routable: Router.alternativeTitles(id: id, countryCode: code))
   }
 
-  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil) async throws -> MovieChanges {
-    try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate))
+  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
+    try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
-  func credits(for id: Int, language: String? = nil) async throws -> MovieCredits {
+  func credits(for id: Int, language: String? = nil) async throws -> Credits {
     try await callEndpoint(routable: Router.credits(id: id, language: language))
   }
 
-  func externalIds(for id: Int) async throws -> MovieExternalIds {
+  func externalIds(for id: Int) async throws -> ExternalIds {
     try await callEndpoint(routable: Router.externalIds(id: id))
   }
 
@@ -63,7 +66,7 @@ struct MovieService: MovieServiceProviding {
     try await callEndpoint(routable: Router.keywords(id: id))
   }
 
-  func images(for id: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> MovieImages {
+  func images(for id: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> MediaImages {
     try await callEndpoint(routable: Router.images(id: id, language: language, imageLanguages: imageLanguages))
   }
 
@@ -77,57 +80,57 @@ struct MovieService: MovieServiceProviding {
 
   func listSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieList> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.lists(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieRecommendation> {
+  func recommendations(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieListResult> {
     try await callEndpoint(routable: Router.recommendations(id: id, language: language, page: page))
   }
 
-  func allRecommendations(for id: Int, language: String? = nil) async throws -> [MovieRecommendation] {
+  func allRecommendations(for id: Int, language: String? = nil) async throws -> [MovieListResult] {
     try await recommendationSequence(for: id, language: language).allResults()
   }
 
-  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieRecommendation> {
+  func recommendationSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.recommendations(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func releaseDates(for id: Int) async throws -> MovieReleaseDates {
+  func releaseDates(for id: Int) async throws -> Results<CountryRelease> {
     try await callEndpoint(routable: Router.releaseDates(id: id))
   }
 
-  func reviews(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieReview> {
+  func reviews(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<Review> {
     try await callEndpoint(routable: Router.reviews(id: id, language: language, page: page))
   }
 
-  func allReviews(for id: Int, language: String? = nil) async throws -> [MovieReview] {
+  func allReviews(for id: Int, language: String? = nil) async throws -> [Review] {
     try await reviewsSequence(for: id, language: language).allResults()
   }
 
-  func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieReview> {
+  func reviewsSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<Review> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.reviews(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func similarMovies(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<SimilarMovie> {
+  func similarMovies(for id: Int, page: Int = 1, language: String? = nil) async throws -> ResultPage<MovieListResult> {
     try await callEndpoint(routable: Router.similar(id: id, language: language, page: page))
   }
 
-  func allSimilarMovies(for id: Int, language: String? = nil) async throws -> [SimilarMovie] {
+  func allSimilarMovies(for id: Int, language: String? = nil) async throws -> [MovieListResult] {
     try await similarMovieSequence(for: id, language: language).allResults()
   }
 
-  func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<SimilarMovie> {
+  func similarMovieSequence(for id: Int, language: String? = nil) async -> PagedQuerySequence<MovieListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.similar(id: id, language: language, page: 1))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func translations(for id: Int) async throws -> MovieTranslations {
+  func translations(for id: Int) async throws -> MediaTranslations {
     try await callEndpoint(routable: Router.translations(id: id))
   }
 
-  func videos(for id: Int, language: String? = nil, videoLanguages: Set<String> = []) async throws -> MovieVideos {
+  func videos(for id: Int, language: String? = nil, videoLanguages: Set<String> = []) async throws -> Results<MediaVideo> {
     try await callEndpoint(routable: Router.videos(id: id, language: language, videoLanguages: videoLanguages))
   }
 
@@ -147,7 +150,7 @@ struct MovieService: MovieServiceProviding {
 
   func nowPlayingSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.nowPlaying(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func popular(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
@@ -156,7 +159,7 @@ struct MovieService: MovieServiceProviding {
 
   func popularSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func topRated(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
@@ -165,7 +168,7 @@ struct MovieService: MovieServiceProviding {
 
   func topRatedSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.topRated(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
   func upcoming(page: Int = 1, language: String? = nil, region: String? = nil) async throws -> ResultPage<Movie> {
@@ -174,7 +177,7 @@ struct MovieService: MovieServiceProviding {
 
   func upcomingSequence(language: String? = nil, region: String? = nil) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.upcoming(page: 1, language: language, region: region))
-    return .init(initialRequest: request, dataLoader: dataLoader)
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 
@@ -200,7 +203,7 @@ extension MovieService {
 extension MovieService {
   enum Router: RequestRoutable {
     case alternativeTitles(id: Int, countryCode: String?)
-    case changes(id: Int, startDate: Date?, endDate: Date?)
+    case changes(id: Int, startDate: Date?, endDate: Date?, page: Int?)
     case credits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, imageLanguages: Set<String>?, page: Int?)
     case externalIds(id: Int)
@@ -230,11 +233,12 @@ extension MovieService {
           "country": countryCode,
         ])
         return components.url!
-      case let .changes(id, startDate, endDate):
+      case let .changes(id, startDate, endDate, page):
         let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
         let components = componentsForRoute(path: "movie/\(id)/changes", queryItems: [
           "start_date": startDate?.formatted(dateFormat),
           "end_date": endDate?.formatted(dateFormat),
+          "page": page.map { String($0) },
         ])
         return components.url!
       case let .credits(id, language):

@@ -14,9 +14,9 @@
 
 import Foundation
 
-// MARK: - MovieTranslations
+// MARK: - MediaTranslations
 
-public struct MovieTranslations: Codable {
+public struct MediaTranslations: Codable {
   // MARK: Lifecycle
 
   public init(id: Int?, translations: [Translation]) {
@@ -74,7 +74,7 @@ public struct Translation: Codable {
 public struct TranslationData: Codable {
   // MARK: Lifecycle
 
-  public init(homepage: String, overview: String, runtime: Int, tagline: String, title: String) {
+  public init(homepage: String, overview: String, runtime: Int?, tagline: String, title: String?) {
     self.homepage = homepage
     self.overview = overview
     self.runtime = runtime
@@ -86,9 +86,9 @@ public struct TranslationData: Codable {
 
   public let homepage: String
   public let overview: String
-  public let runtime: Int
+  public let runtime: Int?
   public let tagline: String
-  public let title: String
+  public let title: String?
 
   // MARK: Internal
 

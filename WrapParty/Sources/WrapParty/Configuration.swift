@@ -30,7 +30,13 @@ public struct DefaultConfiguration: Configuration {
   // MARK: Lifecycle
 
   init() {
-    logger = Logger(label: "com.knossos.WrapParty.logger")
+    var localLogger = Logger(label: "com.knossos.WrapParty.logger")
+    #if DEBUG
+    localLogger.logLevel = .debug
+    #else
+    localLogger.logLevel = .warning
+    #endif
+    logger = localLogger
     loader = DataLoader()
     apiToken = ProcessInfo.processInfo.environment[Self.apiTokenEnvVar, default: ""]
   }

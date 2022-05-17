@@ -12,27 +12,26 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import Foundation
-
-// MARK: - MovieKeywords
-
-public struct MovieKeywords: Codable {
+public struct TvScreenedEpisode: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, keywords: [Keyword]) {
+  public init(episodeNumber: Int, id: Int, seasonNumber: Int) {
+    self.episodeNumber = episodeNumber
     self.id = id
-    self.keywords = keywords
+    self.seasonNumber = seasonNumber
   }
 
   // MARK: Public
 
-  public let id: Int?
-  public let keywords: [Keyword]
+  public let episodeNumber: Int
+  public let id: Int
+  public let seasonNumber: Int
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
+    case episodeNumber = "episode_number"
     case id
-    case keywords
+    case seasonNumber = "season_number"
   }
 }

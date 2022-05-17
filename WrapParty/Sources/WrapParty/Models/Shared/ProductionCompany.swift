@@ -14,34 +14,31 @@
 
 import Foundation
 
-// MARK: - MovieExternalId
+// MARK: - ProductionCompany
 
-public struct MovieExternalIds: Codable {
+public struct ProductionCompany: Codable {
   // MARK: Lifecycle
 
-  public init(facebookId: String?, id: Int?, imdbId: String?, instagramId: String?, twitterId: String?) {
-    self.facebookId = facebookId
+  public init(id: Int, logoPath: URL?, name: String, originCountry: String) {
     self.id = id
-    self.imdbId = imdbId
-    self.instagramId = instagramId
-    self.twitterId = twitterId
+    self.logoPath = logoPath
+    self.name = name
+    self.originCountry = originCountry
   }
 
   // MARK: Public
 
-  public let facebookId: String?
-  public let id: Int?
-  public let imdbId: String?
-  public let instagramId: String?
-  public let twitterId: String?
+  public let id: Int
+  public let logoPath: URL?
+  public let name: String
+  public let originCountry: String
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case facebookId = "facebook_id"
     case id
-    case imdbId = "imdb_id"
-    case instagramId = "instagram_id"
-    case twitterId = "twitter_id"
+    case logoPath = "logo_path"
+    case name
+    case originCountry = "origin_country"
   }
 }

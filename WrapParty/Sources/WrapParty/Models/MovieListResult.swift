@@ -14,14 +14,15 @@
 
 import Foundation
 
-public struct SimilarMovie: Codable {
+public struct MovieListResult: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: URL, genreIds: [Int], id: Int, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL, releaseDate: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, backdropPath: URL?, genreIds: [Int], id: Int, mediaType: MediaType?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, releaseDate: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.backdropPath = backdropPath
     self.genreIds = genreIds
     self.id = id
+    self.mediaType = mediaType
     self.originalLanguage = originalLanguage
     self.originalTitle = originalTitle
     self.overview = overview
@@ -37,14 +38,15 @@ public struct SimilarMovie: Codable {
   // MARK: Public
 
   public let adult: Bool
-  public let backdropPath: URL
+  public let backdropPath: URL?
   public let genreIds: [Int]
   public let id: Int
+  public let mediaType: MediaType?
   public let originalLanguage: String
   public let originalTitle: String
   public let overview: String
   public let popularity: Double
-  public let posterPath: URL
+  public let posterPath: URL?
   public let releaseDate: String
   public let title: String
   public let video: Bool
@@ -58,6 +60,7 @@ public struct SimilarMovie: Codable {
     case backdropPath = "backdrop_path"
     case genreIds = "genre_ids"
     case id
+    case mediaType = "media_type"
     case originalLanguage = "original_language"
     case originalTitle = "original_title"
     case overview

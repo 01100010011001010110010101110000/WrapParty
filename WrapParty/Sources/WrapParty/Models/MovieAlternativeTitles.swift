@@ -14,25 +14,25 @@
 
 import Foundation
 
-// MARK: - MovieKeywords
+// MARK: - MovieAlternativeTitle
 
-public struct MovieKeywords: Codable {
+public struct MovieAlternativeTitles: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, keywords: [Keyword]) {
+  public init(id: Int?, titles: [AlternativeTitle]) {
     self.id = id
-    self.keywords = keywords
+    self.titles = titles
   }
 
   // MARK: Public
 
   public let id: Int?
-  public let keywords: [Keyword]
+  public let titles: [AlternativeTitle]
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
     case id
-    case keywords
+    case titles
   }
 }

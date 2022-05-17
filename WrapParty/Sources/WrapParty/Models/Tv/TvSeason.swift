@@ -14,25 +14,40 @@
 
 import Foundation
 
-// MARK: - MovieKeywords
+// MARK: - Season
 
-public struct MovieKeywords: Codable {
+public struct Season: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, keywords: [Keyword]) {
+  public init(airDate: String?, episodeCount: Int, id: Int, name: String, overview: String, posterPath: URL?, seasonNumber: Int) {
+    self.airDate = airDate
+    self.episodeCount = episodeCount
     self.id = id
-    self.keywords = keywords
+    self.name = name
+    self.overview = overview
+    self.posterPath = posterPath
+    self.seasonNumber = seasonNumber
   }
 
   // MARK: Public
 
-  public let id: Int?
-  public let keywords: [Keyword]
+  public let airDate: String?
+  public let episodeCount: Int
+  public let id: Int
+  public let name: String
+  public let overview: String
+  public let posterPath: URL?
+  public let seasonNumber: Int
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
+    case airDate = "air_date"
+    case episodeCount = "episode_count"
     case id
-    case keywords
+    case name
+    case overview
+    case posterPath = "poster_path"
+    case seasonNumber = "season_number"
   }
 }

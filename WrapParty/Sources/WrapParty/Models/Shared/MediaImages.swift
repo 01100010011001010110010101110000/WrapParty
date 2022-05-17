@@ -14,12 +14,12 @@
 
 import Foundation
 
-// MARK: - MovieImages
+// MARK: - MediaImages
 
-public struct MovieImages: Codable {
+public struct MediaImages: Codable {
   // MARK: Lifecycle
 
-  public init(backdrops: [Backdrop], id: Int?, logos: [Backdrop], posters: [Backdrop]) {
+  public init(backdrops: [MediaImage], id: Int?, logos: [MediaImage], posters: [MediaImage]) {
     self.backdrops = backdrops
     self.id = id
     self.logos = logos
@@ -28,10 +28,10 @@ public struct MovieImages: Codable {
 
   // MARK: Public
 
-  public let backdrops: [Backdrop]
+  public let backdrops: [MediaImage]
   public let id: Int?
-  public let logos: [Backdrop]
-  public let posters: [Backdrop]
+  public let logos: [MediaImage]
+  public let posters: [MediaImage]
 
   // MARK: Internal
 
@@ -43,9 +43,9 @@ public struct MovieImages: Codable {
   }
 }
 
-// MARK: - Backdrop
+// MARK: - MediaImage
 
-public struct Backdrop: Codable {
+public struct MediaImage: Codable {
   // MARK: Lifecycle
 
   public init(aspectRatio: Double, filePath: String, height: Int, iso639_1: String?, voteAverage: Double, voteCount: Int, width: Int) {

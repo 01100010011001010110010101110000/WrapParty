@@ -14,61 +14,58 @@
 
 import Foundation
 
-public struct MovieRecommendation: Codable {
+public struct TvListResult: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: URL?, genreIds: [Int], id: Int, mediaType: String, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, releaseDate: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
-    self.adult = adult
+  public init(backdropPath: URL?, firstAirDate: String?, genreIds: [Int], id: Int, mediaType: MediaType?, name: String, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, voteAverage: Double, voteCount: Int) {
     self.backdropPath = backdropPath
+    self.firstAirDate = firstAirDate
     self.genreIds = genreIds
     self.id = id
     self.mediaType = mediaType
+    self.name = name
+    self.originCountry = originCountry
     self.originalLanguage = originalLanguage
-    self.originalTitle = originalTitle
+    self.originalName = originalName
     self.overview = overview
     self.popularity = popularity
     self.posterPath = posterPath
-    self.releaseDate = releaseDate
-    self.title = title
-    self.video = video
     self.voteAverage = voteAverage
     self.voteCount = voteCount
   }
 
   // MARK: Public
 
-  public let adult: Bool
   public let backdropPath: URL?
+  public let firstAirDate: String?
   public let genreIds: [Int]
   public let id: Int
-  public let mediaType: String
+  public let mediaType: MediaType?
+  public let name: String
+  public let originCountry: [String]
   public let originalLanguage: String
-  public let originalTitle: String
+  public let originalName: String
   public let overview: String
   public let popularity: Double
   public let posterPath: URL?
-  public let releaseDate: String
-  public let title: String
-  public let video: Bool
   public let voteAverage: Double
   public let voteCount: Int
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case adult
     case backdropPath = "backdrop_path"
+    case firstAirDate = "first_air_date"
     case genreIds = "genre_ids"
     case id
     case mediaType = "media_type"
+    case name
+    case originCountry = "origin_country"
     case originalLanguage = "original_language"
-    case originalTitle = "original_title"
+    case originalName = "original_name"
     case overview
     case popularity
     case posterPath = "poster_path"
-    case releaseDate = "release_date"
-    case title
-    case video
     case voteAverage = "vote_average"
     case voteCount = "vote_count"
   }

@@ -218,6 +218,6 @@ final class MovieServiceIntegrationTests: XCTestCase {
 
   private static let service: MovieService = {
     let config = DefaultConfiguration()
-    return MovieService(dataLoader: config.loader, tokenManager: TokenManager(token: config.apiToken))
+    return MovieService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
   }()
 }

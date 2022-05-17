@@ -19,7 +19,7 @@ import Foundation
 public struct Movie: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alternativeTitles: MovieAlternativeTitle?, backdropPath: URL?, belongsToCollection: [Collection]?, budget: Int?, changes: MovieChanges?, credits: MovieCredits?, externalIds: MovieExternalIds?, genres: [Genre]?, homepage: String?, id: Int, images: MovieImages?, imdbId: String?, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, productionCompanies: [ProductionCompany]?, productionCountries: [ProductionCountry]?, recommendations: ResultPage<MovieRecommendation>?, releaseDate: String?, releaseDates: MovieReleaseDates?, revenue: Int?, reviews: ResultPage<MovieReview>?, runtime: Int?, similar: ResultPage<SimilarMovie>?, spokenLanguages: [SpokenLanguage]?, status: MediaStatus?, tagline: String?, title: String, translations: MovieTranslations?, video: Bool, videos: MovieVideos, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
+  public init(adult: Bool, alternativeTitles: MovieAlternativeTitles?, backdropPath: URL?, belongsToCollection: [MovieCollection]?, budget: Int?, changes: MediaChanges?, credits: Credits?, externalIds: ExternalIds?, genres: [Genre]?, homepage: String?, id: Int, images: MediaImages?, imdbId: String?, keywords: MovieKeywords?, lists: ResultPage<MovieList>?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, productionCompanies: [ProductionCompany]?, productionCountries: [ProductionCountry]?, recommendations: ResultPage<MovieListResult>?, releaseDate: String?, releaseDates: Results<CountryRelease>?, revenue: Int?, reviews: ResultPage<Review>?, runtime: Int?, similar: ResultPage<MovieListResult>?, spokenLanguages: [SpokenLanguage]?, status: MediaStatus?, tagline: String?, title: String, translations: MediaTranslations?, video: Bool, videos: Results<MediaVideo>?, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
     self.adult = adult
     self.alternativeTitles = alternativeTitles
     self.backdropPath = backdropPath
@@ -66,18 +66,18 @@ public struct Movie: Codable {
   /// Whether the movie is an adult title
   public let adult: Bool
   /// The movie's alternative titles in various localities
-  public let alternativeTitles: MovieAlternativeTitle?
+  public let alternativeTitles: MovieAlternativeTitles?
   public let backdropPath: URL?
-  public let belongsToCollection: [Collection]?
+  public let belongsToCollection: [MovieCollection]?
   public let budget: Int?
-  public let changes: MovieChanges?
-  public let credits: MovieCredits?
-  public let externalIds: MovieExternalIds?
+  public let changes: MediaChanges?
+  public let credits: Credits?
+  public let externalIds: ExternalIds?
   public let genres: [Genre]?
   public let homepage: String?
   /// The movie's TMDB ID
   public let id: Int
-  public let images: MovieImages?
+  public let images: MediaImages?
   public let imdbId: String?
   public let keywords: MovieKeywords?
   public let lists: ResultPage<MovieList>?
@@ -88,23 +88,23 @@ public struct Movie: Codable {
   public let posterPath: URL?
   public let productionCompanies: [ProductionCompany]?
   public let productionCountries: [ProductionCountry]?
-  public let recommendations: ResultPage<MovieRecommendation>?
+  public let recommendations: ResultPage<MovieListResult>?
   /// The movie's release date
   /// - Note: May be `nil` when the movie is not yet released
   public let releaseDate: String?
-  public let releaseDates: MovieReleaseDates?
+  public let releaseDates: Results<CountryRelease>?
   public let revenue: Int?
-  public let reviews: ResultPage<MovieReview>?
+  public let reviews: ResultPage<Review>?
   public let runtime: Int?
-  public let similar: ResultPage<SimilarMovie>?
+  public let similar: ResultPage<MovieListResult>?
   public let spokenLanguages: [SpokenLanguage]?
   public let status: MediaStatus?
   public let tagline: String?
   /// The movie's primary title
   public let title: String
-  public let translations: MovieTranslations?
+  public let translations: MediaTranslations?
   public let video: Bool
-  public let videos: MovieVideos?
+  public let videos: Results<MediaVideo>?
   public let voteAverage: Double
   public let voteCount: Int
   public let watchProviders: WatchProviders?
@@ -154,113 +154,12 @@ public struct Movie: Codable {
   }
 }
 
-// MARK: - Genre
+// MARK: - MovieCollection
 
-public struct Genre: Codable {
+public struct MovieCollection: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int, name: String) {
-    self.id = id
-    self.name = name
-  }
-
-  // MARK: Public
-
-  public let id: Int
-  public let name: String
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case id
-    case name
-  }
-}
-
-// MARK: - ProductionCompany
-
-public struct ProductionCompany: Codable {
-  // MARK: Lifecycle
-
-  public init(id: Int, logoPath: URL?, name: String, originCountry: String) {
-    self.id = id
-    self.logoPath = logoPath
-    self.name = name
-    self.originCountry = originCountry
-  }
-
-  // MARK: Public
-
-  public let id: Int
-  public let logoPath: URL?
-  public let name: String
-  public let originCountry: String
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case id
-    case logoPath = "logo_path"
-    case name
-    case originCountry = "origin_country"
-  }
-}
-
-// MARK: - ProductionCountry
-
-public struct ProductionCountry: Codable {
-  // MARK: Lifecycle
-
-  public init(iso3166_1: String, name: String) {
-    self.iso3166_1 = iso3166_1
-    self.name = name
-  }
-
-  // MARK: Public
-
-  public let iso3166_1: String
-  public let name: String
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case iso3166_1 = "iso_3166_1"
-    case name
-  }
-}
-
-// MARK: - SpokenLanguage
-
-public struct SpokenLanguage: Codable {
-  // MARK: Lifecycle
-
-  public init(englishName: String, iso639_1: String, name: String) {
-    self.englishName = englishName
-    self.iso639_1 = iso639_1
-    self.name = name
-  }
-
-  // MARK: Public
-
-  public let englishName: String
-  public let iso639_1: String
-  public let name: String
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case englishName = "english_name"
-    case iso639_1 = "iso_639_1"
-    case name
-  }
-}
-
-// MARK: - Collection
-
-public struct Collection: Codable {
-  // MARK: Lifecycle
-
-  public init(id: Int, name: String, posterPath: String?, backdropPath: String?) {
+  public init(id: Int, name: String, posterPath: URL?, backdropPath: URL?) {
     self.id = id
     self.name = name
     self.posterPath = posterPath
@@ -271,8 +170,8 @@ public struct Collection: Codable {
 
   public let id: Int
   public let name: String
-  public let posterPath: String?
-  public let backdropPath: String?
+  public let posterPath: URL?
+  public let backdropPath: URL?
 
   // MARK: Internal
 

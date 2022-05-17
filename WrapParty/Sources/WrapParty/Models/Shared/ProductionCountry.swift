@@ -14,51 +14,25 @@
 
 import Foundation
 
-// MARK: - MovieAlternativeTitle
+// MARK: - ProductionCountry
 
-public struct MovieAlternativeTitle: Codable {
+public struct ProductionCountry: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, titles: [Title]) {
-    self.id = id
-    self.titles = titles
+  public init(iso3166_1: String, name: String) {
+    self.iso3166_1 = iso3166_1
+    self.name = name
   }
 
   // MARK: Public
 
-  public let id: Int?
-  public let titles: [Title]
+  public let iso3166_1: String
+  public let name: String
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case id
-    case titles
-  }
-}
-
-public extension MovieAlternativeTitle {
-  struct Title: Codable {
-    // MARK: Lifecycle
-
-    public init(iso3166_1: String, title: String, type: String) {
-      self.iso3166_1 = iso3166_1
-      self.title = title
-      self.type = type
-    }
-
-    // MARK: Public
-
-    public let iso3166_1: String
-    public let title: String
-    public let type: String
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-      case iso3166_1 = "iso_3166_1"
-      case title
-      case type
-    }
+    case iso3166_1 = "iso_3166_1"
+    case name
   }
 }

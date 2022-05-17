@@ -24,8 +24,18 @@ final class SearchServiceIntegrationTests: XCTestCase {
     ("pulp", [])
   }()
 
+  static let basicTvQuery: (query: String, parameters: [SearchService.TvSearchParams]) = {
+    ("wheel of time", [])
+  }()
+
   func testSearchMovie() async throws {
     let resultPage = try await Self.service.searchMovies(matching: Self.basicMovieQuery.query, parameters: Self.basicMovieQuery.parameters)
+
+    XCTAssertFalse(resultPage.results.isEmpty)
+  }
+
+  func testSearchTv() async throws {
+    let resultPage = try await Self.service.searchTv(matching: Self.basicTvQuery.query, parameters: Self.basicTvQuery.parameters)
 
     XCTAssertFalse(resultPage.results.isEmpty)
   }
@@ -41,6 +51,6 @@ final class SearchServiceIntegrationTests: XCTestCase {
 
   private static let service: SearchService = {
     let config = DefaultConfiguration()
-    return SearchService(dataLoader: config.loader, tokenManager: TokenManager(token: config.apiToken))
+    return SearchService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
   }()
 }

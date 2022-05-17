@@ -14,9 +14,9 @@
 
 import Foundation
 
-// MARK: - MovieCredits
+// MARK: - Credits
 
-public struct MovieCredits: Codable {
+public struct Credits: Codable {
   // MARK: Lifecycle
 
   public init(cast: [Credit], crew: [Credit], id: Int?) {
@@ -40,7 +40,7 @@ public struct MovieCredits: Codable {
   }
 }
 
-public extension MovieCredits {
+public extension Credits {
   // MARK: - Cast
 
   struct Credit: Codable {

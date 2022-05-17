@@ -14,25 +14,57 @@
 
 import Foundation
 
-// MARK: - MovieKeywords
+// MARK: - Results
 
-public struct MovieKeywords: Codable {
+public struct Results<Result: Codable>: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, keywords: [Keyword]) {
+  init(id: Int?, results: [Result]) {
     self.id = id
-    self.keywords = keywords
+    self.results = results
   }
 
   // MARK: Public
 
   public let id: Int?
-  public let keywords: [Keyword]
+  public let results: [Result]
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
     case id
-    case keywords
+    case results
+  }
+}
+
+// MARK: Collection
+
+extension Results: Collection {
+  public subscript(bounds: Range<Int>) -> ArraySlice<Result> {
+    results[bounds]
+  }
+}
+
+// MARK: RandomAccessCollection
+
+extension Results: RandomAccessCollection {
+  public typealias Element = Result
+
+  public typealias Index = Array<Result>.Index
+
+  public typealias SubSequence = Array<Result>.SubSequence
+
+  public typealias Indices = Array<Result>.Indices
+
+  public subscript(position: Array<Result>.Index) -> Array<Result>.Element {
+    results[position]
+  }
+
+  public var startIndex: Array<Result>.Index {
+    results.startIndex
+  }
+
+  public var endIndex: Array<Result>.Index {
+    results.endIndex
   }
 }

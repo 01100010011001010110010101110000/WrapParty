@@ -14,25 +14,7 @@
 
 import Foundation
 
-// MARK: - MovieKeywords
-
-public struct MovieKeywords: Codable {
-  // MARK: Lifecycle
-
-  public init(id: Int?, keywords: [Keyword]) {
-    self.id = id
-    self.keywords = keywords
-  }
-
-  // MARK: Public
-
-  public let id: Int?
-  public let keywords: [Keyword]
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case id
-    case keywords
-  }
+public enum MediaType: String, Codable {
+  case movie
+  case tv
 }

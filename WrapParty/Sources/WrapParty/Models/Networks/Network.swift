@@ -14,25 +14,29 @@
 
 import Foundation
 
-// MARK: - MovieKeywords
-
-public struct MovieKeywords: Codable {
+public struct Network: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, keywords: [Keyword]) {
+  public init(id: Int, logoPath: URL?, name: String, originCountry: String) {
     self.id = id
-    self.keywords = keywords
+    self.logoPath = logoPath
+    self.name = name
+    self.originCountry = originCountry
   }
 
   // MARK: Public
 
-  public let id: Int?
-  public let keywords: [Keyword]
+  public let id: Int
+  public let logoPath: URL?
+  public let name: String
+  public let originCountry: String
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
     case id
-    case keywords
+    case logoPath = "logo_path"
+    case name
+    case originCountry = "origin_country"
   }
 }

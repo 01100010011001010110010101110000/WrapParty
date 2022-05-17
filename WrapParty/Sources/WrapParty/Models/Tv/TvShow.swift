@@ -19,7 +19,7 @@ import Foundation
 public struct TvShow: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: String, createdBy: [CreatedBy], episodeRunTime: [Int], firstAirDate: String?, genres: [Genre], homepage: String, id: Int, inProduction: Bool, languages: [String], lastAirDate: String?, lastEpisodeToAir: RecentEpisode?, name: String, networks: [Network], nextEpisodeToAir: RecentEpisode?, numberOfEpisodes: Int, numberOfSeasons: Int, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: String, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], seasons: [Season], spokenLanguages: [SpokenLanguage], status: String, tagline: String, type: String, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, backdropPath: URL?, createdBy: [CreatedBy], episodeRunTime: [Int], firstAirDate: String?, genres: [Genre], homepage: String, id: Int, inProduction: Bool, languages: [String], lastAirDate: String?, lastEpisodeToAir: RecentEpisode?, name: String, networks: [Network], nextEpisodeToAir: RecentEpisode?, numberOfEpisodes: Int, numberOfSeasons: Int, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], seasons: [Season], spokenLanguages: [SpokenLanguage], status: String, tagline: String, type: String, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.backdropPath = backdropPath
     self.createdBy = createdBy
@@ -57,7 +57,7 @@ public struct TvShow: Codable {
   // MARK: Public
 
   public let adult: Bool
-  public let backdropPath: String
+  public let backdropPath: URL?
   public let createdBy: [CreatedBy]
   public let episodeRunTime: [Int]
   public let firstAirDate: String?
@@ -78,7 +78,7 @@ public struct TvShow: Codable {
   public let originalName: String
   public let overview: String
   public let popularity: Double
-  public let posterPath: String
+  public let posterPath: URL?
   public let productionCompanies: [ProductionCompany]
   public let productionCountries: [ProductionCountry]
   public let seasons: [Season]

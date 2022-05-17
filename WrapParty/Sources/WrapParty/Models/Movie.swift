@@ -159,7 +159,7 @@ public struct Movie: Codable {
 public struct MovieCollection: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int, name: String, posterPath: String?, backdropPath: String?) {
+  public init(id: Int, name: String, posterPath: URL?, backdropPath: URL?) {
     self.id = id
     self.name = name
     self.posterPath = posterPath
@@ -170,8 +170,8 @@ public struct MovieCollection: Codable {
 
   public let id: Int
   public let name: String
-  public let posterPath: String?
-  public let backdropPath: String?
+  public let posterPath: URL?
+  public let backdropPath: URL?
 
   // MARK: Internal
 

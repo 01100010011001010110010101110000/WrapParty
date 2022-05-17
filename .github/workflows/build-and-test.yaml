@@ -4,6 +4,8 @@ on:
       - main
     paths:
       - 'WrapParty/**/*.swift'
+env:
+  PACKAGE: WrapParty
 jobs:
   buildAndTest:
     runs-on: macos-latest
@@ -12,5 +14,7 @@ jobs:
       - uses: swift-actions/setup-swift@d94eab931290b0fb54d9a149df7bea6e5050cc5f
       - name: Build all targets
         run: swift build --build-tests
+        working-directory: ${{ env.PACKAGE }}
       - name: Run tests
         run: swift test --skip-build
+        working-directory: ${{ env.PACKAGE }}

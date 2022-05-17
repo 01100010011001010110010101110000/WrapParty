@@ -22,6 +22,7 @@ final class TvServiceIntegrationTests: XCTestCase {
 
   /// TMDB ID for the Wheel of Time series
   static let wotId = 71914
+  static let wotImdbId = "tt7462410"
   static let metalFamilyId = 123_566
 
   func testGetAggregateCredits() async throws {
@@ -160,6 +161,71 @@ final class TvServiceIntegrationTests: XCTestCase {
     let topRated = try await Self.service.topRated()
 
     XCTAssertFalse(topRated.results.isEmpty)
+  }
+
+  func testAppending() async throws {
+    let tvShow = try await Self.service.details(for: Self.wotId,
+                                                including: Set(TvService.Appendable.allCases))
+
+    // Alternative Titles
+    XCTAssertNotNil(tvShow.aggregateCredits)
+    XCTAssertNil(tvShow.aggregateCredits?.id)
+
+    XCTAssertNotNil(tvShow.alternativeTitles)
+    XCTAssertNil(tvShow.alternativeTitles?.id)
+
+    // Changes
+    XCTAssertNotNil(tvShow.changes)
+
+    // Content ratings
+    XCTAssertNotNil(tvShow.contentRatings)
+    XCTAssertNil(tvShow.contentRatings?.id)
+
+    // Credits
+    XCTAssertNotNil(tvShow.credits)
+
+    // Episode groups
+    XCTAssertNotNil(tvShow.episodeGroups)
+    XCTAssertNil(tvShow.episodeGroups?.id)
+
+    // External IDs
+    XCTAssertNotNil(tvShow.externalIds)
+    XCTAssertEqual(tvShow.externalIds?.imdbId, Self.wotImdbId)
+
+    // Images
+    XCTAssertNotNil(tvShow.images)
+    XCTAssertNil(tvShow.images?.id)
+
+    // Keywords
+    XCTAssertNotNil(tvShow.keywords?.results)
+
+    // Recommendations
+    XCTAssertNotNil(tvShow.recommendations)
+    XCTAssertFalse(tvShow.recommendations?.results.isEmpty ?? true)
+
+    // Reviews
+    XCTAssertNotNil(tvShow.reviews)
+    XCTAssertFalse(tvShow.reviews?.results.isEmpty ?? true)
+
+    // Screened theatrically
+    XCTAssertNotNil(tvShow.screenedTheatrically)
+
+    // Similar movies
+    XCTAssertNotNil(tvShow.similar)
+    XCTAssertFalse(tvShow.similar?.results.isEmpty ?? true)
+
+    // Translations
+    XCTAssertNotNil(tvShow.translations)
+    XCTAssertFalse(tvShow.translations?.translations.isEmpty ?? true)
+
+    // Videos
+    XCTAssertNotNil(tvShow.videos)
+    XCTAssertNil(tvShow.videos?.id)
+
+    // Watch providers
+
+    XCTAssertNotNil(tvShow.watchProviders)
+    XCTAssertFalse(tvShow.watchProviders?.results.isEmpty ?? true)
   }
 
   // MARK: Private

@@ -41,6 +41,10 @@ struct PersonService: PersonServiceProviding {
     try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
+  func combinedCredits(for id: Int, language: String? = nil) async throws -> PersonCombinedCredits {
+    try await callEndpoint(routable: Router.combinedCredits(id: id, language: language))
+  }
+
   func details(for id: Int, including: Set<Appendable> = []) async throws -> Person {
     try await callEndpoint(routable: Router.details(id: id, appending: including, language: nil, page: nil))
   }
@@ -48,18 +52,36 @@ struct PersonService: PersonServiceProviding {
   func details(for id: Int, including: Set<Appendable> = [], language: String? = nil, page: Int? = nil) async throws -> Person {
     try await callEndpoint(routable: Router.details(id: id, appending: including, language: language, page: page))
   }
+
+  func movieCredits(for id: Int, language: String? = nil) async throws -> PersonMovieCredits {
+    try await callEndpoint(routable: Router.movieCredits(id: id, language: language))
+  }
+
+  func tvCredits(for id: Int, language: String? = nil) async throws -> PersonTvCredits {
+    try await callEndpoint(routable: Router.tvCredits(id: id, language: language))
+  }
 }
 
 extension PersonService {
   enum Appendable: String, CaseIterable {
     case changes
+    case combinedCredits = "combined_credits"
+    case externalIds = "external_ids"
+    case images
+    case movieCredits = "movie_credits"
+    case taggedImages = "tagged_images"
+    case translations
+    case tvCredits = "tv_credits"
   }
 }
 
 extension PersonService {
   enum Router: RequestRoutable {
     case changes(id: Int, startDate: Date?, endDate: Date?, page: Int?)
+    case combinedCredits(id: Int, language: String?)
     case details(id: Int, appending: Set<Appendable>, language: String?, page: Int?)
+    case movieCredits(id: Int, language: String?)
+    case tvCredits(id: Int, language: String?)
 
     // MARK: Internal
 
@@ -72,11 +94,23 @@ extension PersonService {
           "end_date": endDate?.formatted(dateFormat),
           "page": page.map { String($0) },
         ]).url!
+      case let .combinedCredits(id, language):
+        return componentsForRoute(path: "person/\(id)/combined_credits", queryItems: [
+          "language": language,
+        ]).url!
       case let .details(id, appending, language, page):
         return componentsForRoute(path: "person/\(id)", queryItems: [
           "append_to_response": appending.map(\.rawValue).joined(separator: ","),
           "language": language,
           "page": page.map { String($0) },
+        ]).url!
+      case let .movieCredits(id, language):
+        return componentsForRoute(path: "person/\(id)/movie_credits", queryItems: [
+          "language": language,
+        ]).url!
+      case let .tvCredits(id, language):
+        return componentsForRoute(path: "person/\(id)/tv_credits", queryItems: [
+          "language": language,
         ]).url!
       }
     }

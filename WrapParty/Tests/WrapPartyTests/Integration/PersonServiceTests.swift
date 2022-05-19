@@ -29,6 +29,26 @@ final class PersonServiceIntegrationTests: XCTestCase {
     XCTAssertNotNil(changes)
   }
 
+  func testGetCredits() async throws {
+    let allCredits = try await Self.service.combinedCredits(for: Self.georgeLucasTmdbId)
+    let movieCredits = try await Self.service.movieCredits(for: Self.georgeLucasTmdbId)
+    let tvCredits = try await Self.service.tvCredits(for: Self.georgeLucasTmdbId)
+
+    let obiWanKenobiTvShowTmdbId = 92830
+    let empireStrikesBackMovieTmdbId = 1891
+
+    XCTAssertNotNil(movieCredits.crew.first(where: { $0.id == empireStrikesBackMovieTmdbId }))
+    XCTAssertNotNil(tvCredits.crew.first(where: { $0.id == obiWanKenobiTvShowTmdbId }))
+    XCTAssertNotNil(allCredits.crew.first(where: { combinedCredit in
+      if case let .movie(credit) = combinedCredit, credit.id == empireStrikesBackMovieTmdbId { return true }
+      return false
+    }))
+    XCTAssertNotNil(allCredits.crew.first(where: { combinedCredit in
+      if case let .tv(credit) = combinedCredit, credit.id == obiWanKenobiTvShowTmdbId { return true }
+      return false
+    }))
+  }
+
   func testGetDetails() async throws {
     let person = try await Self.service.details(for: Self.georgeLucasTmdbId)
 

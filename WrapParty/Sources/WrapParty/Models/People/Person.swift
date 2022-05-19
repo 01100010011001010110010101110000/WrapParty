@@ -19,11 +19,12 @@ import Foundation
 public struct Person: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, alsoKnownAs: [String], biography: String, birthday: String?, deathday: String?, gender: Gender, homepage: URL?, id: Int, imdbId: String?, knownForDepartment: String, name: String, placeOfBirth: String?, popularity: Double, profilePath: URL?) {
+  public init(adult: Bool, alsoKnownAs: [String], biography: String, birthday: String?, changes: MediaChanges?, deathday: String?, gender: Gender, homepage: URL?, id: Int, imdbId: String?, knownForDepartment: String, name: String, placeOfBirth: String?, popularity: Double, profilePath: URL?) {
     self.adult = adult
     self.alsoKnownAs = alsoKnownAs
     self.biography = biography
     self.birthday = birthday
+    self.changes = changes
     self.deathday = deathday
     self.gender = gender
     self.homepage = homepage
@@ -42,6 +43,7 @@ public struct Person: Codable {
   public let alsoKnownAs: [String]
   public let biography: String
   public let birthday: String?
+  public let changes: MediaChanges?
   public let deathday: String?
   public let gender: Gender
   public let homepage: URL?
@@ -60,6 +62,7 @@ public struct Person: Codable {
     case alsoKnownAs = "also_known_as"
     case biography
     case birthday
+    case changes
     case deathday
     case gender
     case homepage

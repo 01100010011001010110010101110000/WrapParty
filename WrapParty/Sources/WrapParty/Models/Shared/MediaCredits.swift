@@ -14,9 +14,9 @@
 
 import Foundation
 
-// MARK: - Credits
+// MARK: - MediaCredits
 
-public struct Credits: Codable {
+public struct MediaCredits: Codable {
   // MARK: Lifecycle
 
   public init(cast: [Credit], crew: [Credit], id: Int?) {
@@ -40,13 +40,13 @@ public struct Credits: Codable {
   }
 }
 
-public extension Credits {
+public extension MediaCredits {
   // MARK: - Cast
 
   struct Credit: Codable {
     // MARK: Lifecycle
 
-    public init(adult: Bool, castId: Int?, character: String?, creditId: String, gender: Int, id: Int, knownForDepartment: Department, name: String, order: Int?, originalName: String, popularity: Double, profilePath: URL?, department: Department?, job: String?) {
+    public init(adult: Bool, castId: Int?, character: String?, creditId: String, gender: Int, id: Int, knownForDepartment: String, name: String, order: Int?, originalName: String, popularity: Double, profilePath: URL?, department: String?, job: String?) {
       self.adult = adult
       self.castId = castId
       self.character = character
@@ -71,13 +71,13 @@ public extension Credits {
     public let creditId: String
     public let gender: Int
     public let id: Int
-    public let knownForDepartment: Department
+    public let knownForDepartment: String
     public let name: String
     public let order: Int?
     public let originalName: String
     public let popularity: Double
     public let profilePath: URL?
-    public let department: Department?
+    public let department: String?
     public let job: String?
 
     // MARK: Internal
@@ -98,19 +98,5 @@ public extension Credits {
       case department
       case job
     }
-  }
-
-  enum Department: String, Codable {
-    case acting = "Acting"
-    case art = "Art"
-    case camera = "Camera"
-    case costumeMakeUp = "Costume & Make-Up"
-    case crew = "Crew"
-    case directing = "Directing"
-    case editing = "Editing"
-    case lighting = "Lighting"
-    case production = "Production"
-    case sound = "Sound"
-    case writing = "Writing"
   }
 }

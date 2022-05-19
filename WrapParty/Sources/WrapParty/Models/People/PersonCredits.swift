@@ -15,8 +15,8 @@
 import Foundation
 
 public typealias PersonCombinedCredits = PersonCredits<Person.CombinedCastCredit, Person.CombinedCrewCredit>
-public typealias PersonMovieCredits = PersonCredits<Person.MovieCast, Person.MovieCrew>
-public typealias PersonTvCredits = PersonCredits<Person.TvCast, Person.TvCrew>
+public typealias PersonMovieCredits = PersonCredits<Person.MovieCastCredit, Person.MovieCrewCredit>
+public typealias PersonTvCredits = PersonCredits<Person.TvCastCredit, Person.TvCrewCredit>
 
 // MARK: - PersonCredits
 
@@ -48,8 +48,8 @@ extension PersonCredits: Codable where Cast: Codable, Crew: Codable {
 
 public extension Person {
   enum CombinedCastCredit: Codable {
-    case tv(credit: TvCast)
-    case movie(credit: MovieCast)
+    case tv(credit: TvCastCredit)
+    case movie(credit: MovieCastCredit)
 
     // MARK: Lifecycle
 
@@ -60,11 +60,11 @@ public extension Person {
       switch mediaType {
       case .tv:
         let tvContainer = try decoder.singleValueContainer()
-        let credit = try tvContainer.decode(TvCast.self)
+        let credit = try tvContainer.decode(TvCastCredit.self)
         self = .tv(credit: credit)
       case .movie:
         let movieContainer = try decoder.singleValueContainer()
-        let credit = try movieContainer.decode(MovieCast.self)
+        let credit = try movieContainer.decode(MovieCastCredit.self)
         self = .movie(credit: credit)
       }
     }
@@ -81,8 +81,8 @@ public extension Person {
   }
 
   enum CombinedCrewCredit: Codable {
-    case tv(credit: TvCrew)
-    case movie(credit: MovieCrew)
+    case tv(credit: TvCrewCredit)
+    case movie(credit: MovieCrewCredit)
 
     // MARK: Lifecycle
 
@@ -93,11 +93,11 @@ public extension Person {
       switch mediaType {
       case .tv:
         let tvContainer = try decoder.singleValueContainer()
-        let credit = try tvContainer.decode(TvCrew.self)
+        let credit = try tvContainer.decode(TvCrewCredit.self)
         self = .tv(credit: credit)
       case .movie:
         let movieContainer = try decoder.singleValueContainer()
-        let credit = try movieContainer.decode(MovieCrew.self)
+        let credit = try movieContainer.decode(MovieCrewCredit.self)
         self = .movie(credit: credit)
       }
     }
@@ -115,7 +115,7 @@ public extension Person {
 }
 
 public extension Person {
-  struct TvCast: Codable {
+  struct TvCastCredit: Codable {
     // MARK: Lifecycle
 
     public init(backdropPath: URL?, character: String, creditId: String, episodeCount: Int?, firstAirDate: String?, genreIds: [Int], id: Int, mediaType: MediaType?, name: String, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, voteAverage: Double, voteCount: Int) {
@@ -181,7 +181,7 @@ public extension Person {
     }
   }
 
-  struct TvCrew: Codable {
+  struct TvCrewCredit: Codable {
     // MARK: Lifecycle
 
     public init(backdropPath: URL?, creditId: String, department: String, episodeCount: Int?, firstAirDate: String?, genreIds: [Int], id: Int, job: String, mediaType: MediaType?, name: String, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, voteAverage: Double, voteCount: Int) {
@@ -254,7 +254,7 @@ public extension Person {
 public extension Person {
   // MARK: - MovieCast
 
-  struct MovieCast: Codable {
+  struct MovieCastCredit: Codable {
     // MARK: Lifecycle
 
     public init(adult: Bool, backdropPath: URL?, character: String, creditId: String, genreIds: [Int], id: Int, mediaType: MediaType?, order: Int, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, releaseDate: String?, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
@@ -323,7 +323,7 @@ public extension Person {
     }
   }
 
-  struct MovieCrew: Codable {
+  struct MovieCrewCredit: Codable {
     // MARK: Lifecycle
 
     public init(adult: Bool, backdropPath: URL?, creditId: String, department: String, genreIds: [Int], id: Int, job: String, mediaType: MediaType?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, releaseDate: String?, title: String, video: Bool, voteAverage: Double, voteCount: Int) {

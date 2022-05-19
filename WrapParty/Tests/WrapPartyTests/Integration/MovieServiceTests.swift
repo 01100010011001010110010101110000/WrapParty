@@ -31,7 +31,7 @@ final class MovieServiceIntegrationTests: XCTestCase {
   func testGetDetails() async throws {
     let movie = try await Self.service.details(for: Self.pulpFictionTmdbId)
 
-    XCTAssertTrue(movie.id == Self.pulpFictionTmdbId)
+    XCTAssertEqual(movie.id, Self.pulpFictionTmdbId)
   }
 
   func testGetChanges() async throws {
@@ -67,7 +67,7 @@ final class MovieServiceIntegrationTests: XCTestCase {
   func testGetListPage() async throws {
     let page = try await Self.service.lists(for: Self.pulpFictionTmdbId, page: 2)
 
-    XCTAssertTrue(page.page == 2)
+    XCTAssertEqual(page.page, 2)
     XCTAssertFalse(page.results.isEmpty)
   }
 
@@ -88,7 +88,7 @@ final class MovieServiceIntegrationTests: XCTestCase {
   func testGetRecommendationPage() async throws {
     let page = try await Self.service.recommendations(for: Self.pulpFictionTmdbId, page: 2)
 
-    XCTAssertTrue(page.page == 2)
+    XCTAssertEqual(page.page, 2)
     XCTAssertFalse(page.results.isEmpty)
   }
 

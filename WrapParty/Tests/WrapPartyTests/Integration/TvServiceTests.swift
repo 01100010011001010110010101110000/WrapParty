@@ -60,21 +60,21 @@ final class TvServiceIntegrationTests: XCTestCase {
   func testGetDetails() async throws {
     let details = try await Self.service.details(for: Self.wotId)
 
-    XCTAssertTrue(details.id == Self.wotId)
+    XCTAssertEqual(details.id, Self.wotId)
   }
 
   func testGetEpisodeGroups() async throws {
     let episodeGroups = try await Self.service.episodeGroups(for: Self.wotId)
 
-    XCTAssertTrue(episodeGroups.id == Self.wotId)
+    XCTAssertEqual(episodeGroups.id, Self.wotId)
     XCTAssertFalse(episodeGroups.results.isEmpty)
   }
 
   func testGetExternalIds() async throws {
     let externalIds = try await Self.service.externalIds(for: Self.wotId)
 
-    XCTAssertTrue(externalIds.imdbId == "tt7462410")
-    XCTAssertTrue(externalIds.tvdbId == 355_730)
+    XCTAssertEqual(externalIds.imdbId, "tt7462410")
+    XCTAssertEqual(externalIds.tvdbId, 355_730)
   }
 
   func testGetImages() async throws {

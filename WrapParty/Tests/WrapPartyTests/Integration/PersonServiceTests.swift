@@ -52,8 +52,8 @@ final class PersonServiceIntegrationTests: XCTestCase {
   func testGetDetails() async throws {
     let person = try await Self.service.details(for: Self.georgeLucasTmdbId)
 
-    XCTAssertTrue(person.id == Self.georgeLucasTmdbId)
-    XCTAssertTrue(person.birthday == "1944-05-14")
+    XCTAssertEqual(person.id, Self.georgeLucasTmdbId)
+    XCTAssertEqual(person.birthday, "1944-05-14")
   }
 
   func testGetExternalIds() async throws {

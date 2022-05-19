@@ -56,6 +56,12 @@ final class PersonServiceIntegrationTests: XCTestCase {
     XCTAssertTrue(person.birthday == "1944-05-14")
   }
 
+  func testGetExternalIds() async throws {
+    let externalIds = try await Self.service.externalIds(for: Self.georgeLucasTmdbId)
+
+    XCTAssertEqual(externalIds.imdbId, "nm0000184")
+  }
+
   // MARK: Private
 
   private static let service: PersonService = {

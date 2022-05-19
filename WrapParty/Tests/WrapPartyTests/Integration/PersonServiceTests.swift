@@ -62,6 +62,12 @@ final class PersonServiceIntegrationTests: XCTestCase {
     XCTAssertEqual(externalIds.imdbId, "nm0000184")
   }
 
+  func testGetImages() async throws {
+    let images = try await Self.service.images(for: Self.georgeLucasTmdbId)
+
+    XCTAssertFalse(images.profiles.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: PersonService = {

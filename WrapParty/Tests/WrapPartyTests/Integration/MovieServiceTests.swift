@@ -55,7 +55,7 @@ final class MovieServiceIntegrationTests: XCTestCase {
   func testGetImages() async throws {
     let images = try await Self.service.images(for: Self.pulpFictionTmdbId)
 
-    XCTAssertTrue(!images.posters.isEmpty)
+    XCTAssertFalse(images.posters.isEmpty)
   }
 
   func testGetKeywords() async throws {

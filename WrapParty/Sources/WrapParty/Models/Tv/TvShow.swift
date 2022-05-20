@@ -212,7 +212,7 @@ public struct CreatedBy: Codable {
 public struct RecentEpisode: Codable {
   // MARK: Lifecycle
 
-  public init(airDate: String, episodeNumber: Int, id: Int, name: String, overview: String, productionCode: String, runtime: Int, seasonNumber: Int, stillPath: URL?, voteAverage: Double, voteCount: Int) {
+  public init(airDate: String, episodeNumber: Int, id: Int, name: String, overview: String, productionCode: String, runtime: Int?, seasonNumber: Int, stillPath: URL?, voteAverage: Double, voteCount: Int) {
     self.airDate = airDate
     self.episodeNumber = episodeNumber
     self.id = id
@@ -234,7 +234,7 @@ public struct RecentEpisode: Codable {
   public let name: String
   public let overview: String
   public let productionCode: String
-  public let runtime: Int
+  public let runtime: Int?
   public let seasonNumber: Int
   public let stillPath: URL?
   public let voteAverage: Double

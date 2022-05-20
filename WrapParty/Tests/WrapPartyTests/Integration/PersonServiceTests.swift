@@ -85,6 +85,24 @@ final class PersonServiceIntegrationTests: XCTestCase {
     }
   }
 
+  func testGetLatest() async throws {
+    let latest = try await Self.service.latest()
+
+    XCTAssertNotNil(latest)
+  }
+
+//  func testGetAllPopular() async throws {
+//    let allPopular = try await Self.service.allPopular()
+//
+//    XCTAssertFalse(allPopular.isEmpty)
+//  }
+
+  func testGetPopular() async throws {
+    let popular = try await Self.service.popular()
+
+    XCTAssertFalse(popular.results.isEmpty)
+  }
+
   // MARK: Private
 
   private static let service: PersonService = {

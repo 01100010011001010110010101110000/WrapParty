@@ -85,6 +85,23 @@ struct PersonService: PersonServiceProviding {
   func tvCredits(for id: Int, language: String? = nil) async throws -> PersonTvCredits {
     try await callEndpoint(routable: Router.tvCredits(id: id, language: language))
   }
+
+  func latest(language: String? = nil) async throws -> Person {
+    try await callEndpoint(routable: Router.latest(language: language))
+  }
+
+  func allPopular(language: String? = nil) async throws -> [PopularPerson] {
+    try await popularSequence(language: language).allResults()
+  }
+
+  func popular(language: String? = nil, page: Int? = nil) async throws -> ResultPage<PopularPerson> {
+    try await callEndpoint(routable: Router.popular(language: language, page: page))
+  }
+
+  func popularSequence(language: String? = nil) async throws -> PagedQuerySequence<PopularPerson> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
 }
 
 extension PersonService {
@@ -111,6 +128,11 @@ extension PersonService {
     case taggedImages(id: Int, language: String?, page: Int?)
     case translations(id: Int, language: String?)
     case tvCredits(id: Int, language: String?)
+
+    // Meta endpoints
+
+    case latest(language: String?)
+    case popular(language: String?, page: Int?)
 
     // MARK: Internal
 
@@ -155,6 +177,16 @@ extension PersonService {
       case let .tvCredits(id, language):
         return componentsForRoute(path: "person/\(id)/tv_credits", queryItems: [
           "language": language,
+        ]).url!
+
+      case let .latest(language):
+        return componentsForRoute(path: "person/latest", queryItems: [
+          "language": language,
+        ]).url!
+      case let .popular(language, page):
+        return componentsForRoute(path: "person/popular", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
         ]).url!
       }
     }

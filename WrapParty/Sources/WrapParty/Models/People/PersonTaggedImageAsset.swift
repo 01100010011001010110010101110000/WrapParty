@@ -21,6 +21,46 @@ public enum MediaListResult: Codable {
   case movie(MovieListResult)
 }
 
+// MARK: - InlineMediaListResult
+
+public enum InlineMediaListResult: Codable {
+  case tv(TvListResult)
+  case movie(MovieListResult)
+
+  // MARK: Lifecycle
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let typeDecoder = try decoder.singleValueContainer()
+    let mediaType = try container.decode(MediaType.self, forKey: .mediaType)
+
+    switch mediaType {
+    case .tv:
+      self = .tv(try typeDecoder.decode(TvListResult.self))
+    case .movie:
+      self = .movie(try typeDecoder.decode(MovieListResult.self))
+    }
+  }
+
+  // MARK: Public
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    switch self {
+    case let .movie(movie):
+      try container.encode(movie)
+    case let .tv(tv):
+      try container.encode(tv)
+    }
+  }
+
+  // MARK: Internal
+
+  enum CodingKeys: String, CodingKey {
+    case mediaType = "media_type"
+  }
+}
+
 // MARK: - PersonTaggedImageAsset
 
 public struct PersonTaggedImageAsset: Codable {
@@ -37,6 +77,8 @@ public struct PersonTaggedImageAsset: Codable {
     self.voteCount = voteCount
     self.width = width
   }
+
+  // TODO: Implement encoding
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)

@@ -17,7 +17,7 @@ import Foundation
 public struct MovieListResult: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, backdropPath: URL?, genreIds: [Int], id: Int, mediaType: MediaType?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double, posterPath: URL?, releaseDate: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
+  public init(adult: Bool, backdropPath: URL?, genreIds: [Int], id: Int, mediaType: MediaType?, originalLanguage: String, originalTitle: String, overview: String, popularity: Double?, posterPath: URL?, releaseDate: String, title: String, video: Bool, voteAverage: Double, voteCount: Int) {
     self.adult = adult
     self.backdropPath = backdropPath
     self.genreIds = genreIds
@@ -45,7 +45,7 @@ public struct MovieListResult: Codable {
   public let originalLanguage: String
   public let originalTitle: String
   public let overview: String
-  public let popularity: Double
+  public let popularity: Double?
   public let posterPath: URL?
   public let releaseDate: String
   public let title: String

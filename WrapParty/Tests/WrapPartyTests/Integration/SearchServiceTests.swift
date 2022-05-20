@@ -50,6 +50,12 @@ final class SearchServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(resultPage.results.isEmpty)
   }
 
+  func testSearchMultiple() async throws {
+    let resultPage = try await Self.service.searchMultiple(matching: "lucas")
+
+    XCTAssertFalse(resultPage.results.isEmpty)
+  }
+
   // MARK: Private
 
 //  func testallMovieSearchResults() async throws {

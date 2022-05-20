@@ -42,7 +42,7 @@ struct TvService: TvServiceProviding {
     try await callEndpoint(routable: Router.contentRatings(id: id, language: language))
   }
 
-  func credits(for id: Int, language: String? = nil) async throws -> Credits {
+  func credits(for id: Int, language: String? = nil) async throws -> MediaCredits {
     try await callEndpoint(routable: Router.credits(id: id, language: language))
   }
 

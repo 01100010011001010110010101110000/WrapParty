@@ -36,8 +36,8 @@ struct SearchService: SearchServiceProviding {
   let logger: Logger
   let tokenManager: TokenManager
 
-  func searchMovies(matching query: String, page: Int = 1, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
-    try await callEndpoint(routable: Router.movies(query: query, page: page, parameters))
+  func searchMovies(matching query: String, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
+    try await callEndpoint(routable: Router.movies(query: query, parameters: parameters))
   }
 
   func allMovieSearchResults(matching query: String, parameters: [MovieSearchParams] = []) async throws -> [Movie] {
@@ -45,12 +45,25 @@ struct SearchService: SearchServiceProviding {
   }
 
   func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {
-    let request = await tokenManager.vendAuthenticatedRequest(for: Router.movies(query: query, page: 1, parameters))
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.movies(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchTv(matching query: String, page: Int = 1, parameters: [TvSearchParams] = []) async throws -> ResultPage<TvListResult> {
-    try await callEndpoint(routable: Router.tv(query: query, page: page, parameters))
+  func searchPeople(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> ResultPage<PersonListResult> {
+    try await callEndpoint(routable: Router.people(query: query, parameters: parameters))
+  }
+
+  func allPeopleSearchResults(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> [PersonListResult] {
+    try await searchPeopleSequence(matching: query, parameters: parameters).allResults()
+  }
+
+  func searchPeopleSequence(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> PagedQuerySequence<PersonListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.people(query: query, parameters: parameters))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func searchTv(matching query: String, parameters: [TvSearchParams] = []) async throws -> ResultPage<TvListResult> {
+    try await callEndpoint(routable: Router.tv(query: query, parameters: parameters))
   }
 
   func allTvSearchResults(matching query: String, parameters: [TvSearchParams] = []) async throws -> [TvListResult] {
@@ -58,7 +71,7 @@ struct SearchService: SearchServiceProviding {
   }
 
   func searchTvSequence(matching query: String, parameters: [TvSearchParams] = []) async -> PagedQuerySequence<TvListResult> {
-    let request = await tokenManager.vendAuthenticatedRequest(for: Router.tv(query: query, page: 1, parameters))
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.tv(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
@@ -102,6 +115,41 @@ extension SearchService {
         return String(includeAdult)
       case let .firstAirDateYear(year):
         return String(year)
+      }
+    }
+  }
+
+  public enum PeopleSearchParams: UrlQueryElement {
+    case language(String)
+    case page(Int)
+    case includeAdult(Bool)
+    case region(String)
+
+    // MARK: Internal
+
+    var queryKey: String {
+      switch self {
+      case .language:
+        return "language"
+      case .page:
+        return "page"
+      case .includeAdult:
+        return "include_adult"
+      case .region:
+        return "region"
+      }
+    }
+
+    var queryValue: String {
+      switch self {
+      case let .language(language):
+        return language
+      case let .page(page):
+        return String(page)
+      case let .includeAdult(includeAdult):
+        return String(includeAdult)
+      case let .region(region):
+        return region
       }
     }
   }
@@ -162,23 +210,26 @@ extension Collection where Element: UrlQueryElement {
 
 extension SearchService {
   enum Router: RequestRoutable {
-    case movies(query: String, page: Int, [MovieSearchParams])
-    case tv(query: String, page: Int, [TvSearchParams])
+    case movies(query: String, parameters: [MovieSearchParams])
+    case tv(query: String, parameters: [TvSearchParams])
+    case people(query: String, parameters: [PeopleSearchParams])
 
     // MARK: Internal
 
     func asUrl() -> URL {
       switch self {
-      case let .movies(query, page, parameters):
+      case let .movies(query, parameters):
         var queryItems = parameters.toQueryItems()
         queryItems["query"] = query
-        queryItems["page"] = String(page)
         return componentsForRoute(path: "search/movie", queryItems: queryItems).url!
-      case let .tv(query, page, parameters):
+      case let .tv(query, parameters):
         var queryItems = parameters.toQueryItems()
         queryItems["query"] = query
-        queryItems["page"] = String(page)
         return componentsForRoute(path: "search/tv", queryItems: queryItems).url!
+      case let .people(query, parameters):
+        var queryItems = parameters.toQueryItems()
+        queryItems["query"] = query
+        return componentsForRoute(path: "search/person", queryItems: queryItems).url!
       }
     }
   }

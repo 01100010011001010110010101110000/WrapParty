@@ -14,12 +14,18 @@
 
 import Foundation
 
-// MARK: - MediaTranslations
+// MARK: - TranslationData
 
-public struct MediaTranslations: Codable {
+public protocol TranslationData: Codable {}
+public typealias MediaTranslations = Translations<MediaTranslationData>
+public typealias PersonTranslations = Translations<PersonTranslationData>
+
+// MARK: - Translations
+
+public struct Translations<T: TranslationData>: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int?, translations: [Translation]) {
+  public init(id: Int?, translations: [Translation<T>]) {
     self.id = id
     self.translations = translations
   }
@@ -27,7 +33,7 @@ public struct MediaTranslations: Codable {
   // MARK: Public
 
   public let id: Int?
-  public let translations: [Translation]
+  public let translations: [Translation<T>]
 
   // MARK: Internal
 
@@ -39,10 +45,10 @@ public struct MediaTranslations: Codable {
 
 // MARK: - Translation
 
-public struct Translation: Codable {
+public struct Translation<T: TranslationData>: Codable {
   // MARK: Lifecycle
 
-  public init(data: TranslationData, englishName: String, iso3166_1: String, iso639_1: String, name: String) {
+  public init(data: T, englishName: String, iso3166_1: String, iso639_1: String, name: String) {
     self.data = data
     self.englishName = englishName
     self.iso3166_1 = iso3166_1
@@ -52,7 +58,7 @@ public struct Translation: Codable {
 
   // MARK: Public
 
-  public let data: TranslationData
+  public let data: T
   public let englishName: String
   public let iso3166_1: String
   public let iso639_1: String
@@ -69,9 +75,15 @@ public struct Translation: Codable {
   }
 }
 
-// MARK: - TranslationData
+// MARK: - PersonTranslationData
 
-public struct TranslationData: Codable {
+public struct PersonTranslationData: TranslationData {
+  let biography: String
+}
+
+// MARK: - MediaTranslationData
+
+public struct MediaTranslationData: TranslationData {
   // MARK: Lifecycle
 
   public init(homepage: String, overview: String, runtime: Int?, tagline: String, title: String?) {

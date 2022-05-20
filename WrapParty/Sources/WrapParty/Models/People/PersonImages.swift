@@ -14,31 +14,23 @@
 
 import Foundation
 
-// MARK: - MediaImages
-
-public struct MediaImages: Codable {
+public struct PersonImages: Codable {
   // MARK: Lifecycle
 
-  public init(backdrops: [ImageAsset], id: Int?, logos: [ImageAsset], posters: [ImageAsset]) {
-    self.backdrops = backdrops
+  public init(id: Int?, profiles: [ImageAsset]) {
     self.id = id
-    self.logos = logos
-    self.posters = posters
+    self.profiles = profiles
   }
 
   // MARK: Public
 
-  public let backdrops: [ImageAsset]
   public let id: Int?
-  public let logos: [ImageAsset]
-  public let posters: [ImageAsset]
+  public let profiles: [ImageAsset]
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case backdrops
     case id
-    case logos
-    case posters
+    case profiles
   }
 }

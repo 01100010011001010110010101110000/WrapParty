@@ -14,31 +14,41 @@
 
 import Foundation
 
-// MARK: - MediaImages
-
-public struct MediaImages: Codable {
+public struct PersonListResult: Codable {
   // MARK: Lifecycle
 
-  public init(backdrops: [ImageAsset], id: Int?, logos: [ImageAsset], posters: [ImageAsset]) {
-    self.backdrops = backdrops
+  public init(adult: Bool, gender: Int, id: Int, knownFor: [InlineMediaListResult], knownForDepartment: String, name: String, popularity: Double, profilePath: URL?) {
+    self.adult = adult
+    self.gender = gender
     self.id = id
-    self.logos = logos
-    self.posters = posters
+    self.knownFor = knownFor
+    self.knownForDepartment = knownForDepartment
+    self.name = name
+    self.popularity = popularity
+    self.profilePath = profilePath
   }
 
   // MARK: Public
 
-  public let backdrops: [ImageAsset]
-  public let id: Int?
-  public let logos: [ImageAsset]
-  public let posters: [ImageAsset]
+  public let adult: Bool
+  public let gender: Int
+  public let id: Int
+  public let knownFor: [InlineMediaListResult]
+  public let knownForDepartment: String
+  public let name: String
+  public let popularity: Double
+  public let profilePath: URL?
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case backdrops
+    case adult
+    case gender
     case id
-    case logos
-    case posters
+    case knownFor = "known_for"
+    case knownForDepartment = "known_for_department"
+    case name
+    case popularity
+    case profilePath = "profile_path"
   }
 }

@@ -56,6 +56,24 @@ final class SearchServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(resultPage.results.isEmpty)
   }
 
+  func testSearchCompanies() async throws {
+    let resultPage = try await Self.service.searchCompanies(matching: "lucas")
+
+    XCTAssertFalse(resultPage.results.isEmpty)
+  }
+
+  func testSearchCollections() async throws {
+    let resultPage = try await Self.service.searchCollections(matching: "star")
+
+    XCTAssertFalse(resultPage.results.isEmpty)
+  }
+
+  func testSearchKeywords() async throws {
+    let resultPage = try await Self.service.searchKeywords(matching: "star")
+
+    XCTAssertFalse(resultPage.results.isEmpty)
+  }
+
   // MARK: Private
 
 //  func testallMovieSearchResults() async throws {

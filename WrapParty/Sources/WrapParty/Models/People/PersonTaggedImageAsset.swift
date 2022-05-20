@@ -19,6 +19,7 @@ import Foundation
 public enum MediaListResult: Codable {
   case tv(TvListResult)
   case movie(MovieListResult)
+  case person(PersonListResult)
 }
 
 // MARK: - InlineMediaListResult
@@ -26,6 +27,7 @@ public enum MediaListResult: Codable {
 public enum InlineMediaListResult: Codable {
   case tv(TvListResult)
   case movie(MovieListResult)
+  case person(PersonListResult)
 
   // MARK: Lifecycle
 
@@ -39,6 +41,8 @@ public enum InlineMediaListResult: Codable {
       self = .tv(try typeDecoder.decode(TvListResult.self))
     case .movie:
       self = .movie(try typeDecoder.decode(MovieListResult.self))
+    case .person:
+      self = .person(try typeDecoder.decode(PersonListResult.self))
     }
   }
 
@@ -51,6 +55,8 @@ public enum InlineMediaListResult: Codable {
       try container.encode(movie)
     case let .tv(tv):
       try container.encode(tv)
+    case let .person(person):
+      try container.encode(person)
     }
   }
 
@@ -99,6 +105,9 @@ public struct PersonTaggedImageAsset: Codable {
     case .movie:
       let result = try container.decode(MovieListResult.self, forKey: .media)
       media = .movie(result)
+    case .person:
+      let result = try container.decode(PersonListResult.self, forKey: .media)
+      media = .person(result)
     }
   }
 

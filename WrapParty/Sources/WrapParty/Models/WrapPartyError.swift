@@ -16,4 +16,5 @@ import Foundation
 
 enum WrapPartyError: Error {
   case badUrl
+  case decodingError
 }

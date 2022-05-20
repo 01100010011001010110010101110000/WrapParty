@@ -67,17 +67,18 @@ public extension Person {
 extension Person.CombinedCredit: Codable where Movie: Codable, Tv: Codable {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: MediaTypeCodingKeys.self)
+    let typeContainer = try decoder.singleValueContainer()
 
     let mediaType = try container.decode(MediaType.self, forKey: .mediaType)
     switch mediaType {
     case .tv:
-      let tvContainer = try decoder.singleValueContainer()
-      let credit = try tvContainer.decode(Tv.self)
+      let credit = try typeContainer.decode(Tv.self)
       self = .tv(credit: credit)
     case .movie:
-      let movieContainer = try decoder.singleValueContainer()
-      let credit = try movieContainer.decode(Movie.self)
+      let credit = try typeContainer.decode(Movie.self)
       self = .movie(credit: credit)
+    case .person:
+      throw WrapPartyError.decodingError
     }
   }
 

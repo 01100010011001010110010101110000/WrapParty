@@ -49,6 +49,19 @@ struct SearchService: SearchServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
+  func searchMultiple(matching query: String, parameters: [MultiSearchParams] = []) async throws -> ResultPage<InlineMediaListResult> {
+    try await callEndpoint(routable: Router.multiple(query: query, parameters: parameters))
+  }
+
+  func allMultiSearchResults(matching query: String, parameters: [MultiSearchParams] = []) async throws -> [InlineMediaListResult] {
+    try await searchMultipleSequence(matching: query, parameters: parameters).allResults()
+  }
+
+  func searchMultipleSequence(matching query: String, parameters: [MultiSearchParams] = []) async -> PagedQuerySequence<InlineMediaListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.multiple(query: query, parameters: parameters))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
   func searchPeople(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> ResultPage<PersonListResult> {
     try await callEndpoint(routable: Router.people(query: query, parameters: parameters))
   }
@@ -57,7 +70,7 @@ struct SearchService: SearchServiceProviding {
     try await searchPeopleSequence(matching: query, parameters: parameters).allResults()
   }
 
-  func searchPeopleSequence(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> PagedQuerySequence<PersonListResult> {
+  func searchPeopleSequence(matching query: String, parameters: [PeopleSearchParams] = []) async -> PagedQuerySequence<PersonListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.people(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
@@ -154,6 +167,41 @@ extension SearchService {
     }
   }
 
+  public enum MultiSearchParams: UrlQueryElement {
+    case language(String)
+    case page(Int)
+    case includeAdult(Bool)
+    case region(String)
+
+    // MARK: Internal
+
+    var queryKey: String {
+      switch self {
+      case .language:
+        return "language"
+      case .page:
+        return "page"
+      case .includeAdult:
+        return "include_adult"
+      case .region:
+        return "region"
+      }
+    }
+
+    var queryValue: String {
+      switch self {
+      case let .language(language):
+        return language
+      case let .page(page):
+        return String(page)
+      case let .includeAdult(includeAdult):
+        return String(includeAdult)
+      case let .region(region):
+        return region
+      }
+    }
+  }
+
   public enum MovieSearchParams: UrlQueryElement {
     case language(String)
     case page(Int)
@@ -213,6 +261,7 @@ extension SearchService {
     case movies(query: String, parameters: [MovieSearchParams])
     case tv(query: String, parameters: [TvSearchParams])
     case people(query: String, parameters: [PeopleSearchParams])
+    case multiple(query: String, parameters: [MultiSearchParams])
 
     // MARK: Internal
 
@@ -230,6 +279,10 @@ extension SearchService {
         var queryItems = parameters.toQueryItems()
         queryItems["query"] = query
         return componentsForRoute(path: "search/person", queryItems: queryItems).url!
+      case let .multiple(query, parameters):
+        var queryItems = parameters.toQueryItems()
+        queryItems["query"] = query
+        return componentsForRoute(path: "search/multi", queryItems: queryItems).url!
       }
     }
   }

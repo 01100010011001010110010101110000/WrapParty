@@ -75,6 +75,16 @@ final class PersonServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(taggedImages.results.isEmpty)
   }
 
+  func testGetTranslations() async throws {
+    let translations = try await Self.service.translations(for: Self.georgeLucasTmdbId)
+    let knownTranslationsIso639: Set<String> = ["en", "de", "ru"]
+    let foundTranslations = Set(translations.translations.map(\.iso639_1))
+
+    for iso639 in knownTranslationsIso639 {
+      XCTAssertTrue(foundTranslations.contains(iso639))
+    }
+  }
+
   // MARK: Private
 
   private static let service: PersonService = {

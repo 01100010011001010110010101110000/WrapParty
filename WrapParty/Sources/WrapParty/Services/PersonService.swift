@@ -78,6 +78,10 @@ struct PersonService: PersonServiceProviding {
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
+  func translations(for id: Int, language: String? = nil) async throws -> PersonTranslations {
+    try await callEndpoint(routable: Router.translations(id: id, language: language))
+  }
+
   func tvCredits(for id: Int, language: String? = nil) async throws -> PersonTvCredits {
     try await callEndpoint(routable: Router.tvCredits(id: id, language: language))
   }
@@ -105,6 +109,7 @@ extension PersonService {
     case images(id: Int)
     case movieCredits(id: Int, language: String?)
     case taggedImages(id: Int, language: String?, page: Int?)
+    case translations(id: Int, language: String?)
     case tvCredits(id: Int, language: String?)
 
     // MARK: Internal
@@ -142,6 +147,10 @@ extension PersonService {
         return componentsForRoute(path: "person/\(id)/tagged_images", queryItems: [
           "language": language,
           "page": page.map { String($0) },
+        ]).url!
+      case let .translations(id, language):
+        return componentsForRoute(path: "person/\(id)/translations", queryItems: [
+          "language": language,
         ]).url!
       case let .tvCredits(id, language):
         return componentsForRoute(path: "person/\(id)/tv_credits", queryItems: [

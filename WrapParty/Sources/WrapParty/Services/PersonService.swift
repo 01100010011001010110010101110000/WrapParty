@@ -65,6 +65,19 @@ struct PersonService: PersonServiceProviding {
     try await callEndpoint(routable: Router.movieCredits(id: id, language: language))
   }
 
+  func allTaggedImages(for id: Int, language: String? = nil) async throws -> [PersonTaggedImageAsset] {
+    try await taggedImageSequence(for: id, language: language).allResults()
+  }
+
+  func taggedImages(for id: Int, language: String? = nil, page: Int? = nil) async throws -> ResultPage<PersonTaggedImageAsset> {
+    try await callEndpoint(routable: Router.taggedImages(id: id, language: language, page: page))
+  }
+
+  func taggedImageSequence(for id: Int, language: String? = nil) async throws -> PagedQuerySequence<PersonTaggedImageAsset> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.taggedImages(id: id, language: language, page: 1))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
   func tvCredits(for id: Int, language: String? = nil) async throws -> PersonTvCredits {
     try await callEndpoint(routable: Router.tvCredits(id: id, language: language))
   }
@@ -91,6 +104,7 @@ extension PersonService {
     case externalIds(id: Int, language: String?)
     case images(id: Int)
     case movieCredits(id: Int, language: String?)
+    case taggedImages(id: Int, language: String?, page: Int?)
     case tvCredits(id: Int, language: String?)
 
     // MARK: Internal
@@ -123,6 +137,11 @@ extension PersonService {
       case let .movieCredits(id, language):
         return componentsForRoute(path: "person/\(id)/movie_credits", queryItems: [
           "language": language,
+        ]).url!
+      case let .taggedImages(id, language, page):
+        return componentsForRoute(path: "person/\(id)/tagged_images", queryItems: [
+          "language": language,
+          "page": page.map { String($0) },
         ]).url!
       case let .tvCredits(id, language):
         return componentsForRoute(path: "person/\(id)/tv_credits", queryItems: [

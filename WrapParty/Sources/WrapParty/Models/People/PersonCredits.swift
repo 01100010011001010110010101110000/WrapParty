@@ -14,7 +14,9 @@
 
 import Foundation
 
-public typealias PersonCombinedCredits = PersonCredits<Person.CombinedCastCredit, Person.CombinedCrewCredit>
+public typealias CombinedCastCredit = Person.CombinedCredit<Person.MovieCastCredit, Person.TvCastCredit>
+public typealias CombinedCrewCredit = Person.CombinedCredit<Person.MovieCrewCredit, Person.TvCrewCredit>
+public typealias PersonCombinedCredits = PersonCredits<CombinedCastCredit, CombinedCrewCredit>
 public typealias PersonMovieCredits = PersonCredits<Person.MovieCastCredit, Person.MovieCrewCredit>
 public typealias PersonTvCredits = PersonCredits<Person.TvCastCredit, Person.TvCrewCredit>
 
@@ -47,71 +49,42 @@ extension PersonCredits: Codable where Cast: Codable, Crew: Codable {
 }
 
 public extension Person {
-  enum CombinedCastCredit: Codable {
-    case tv(credit: TvCastCredit)
-    case movie(credit: MovieCastCredit)
-
-    // MARK: Lifecycle
-
-    public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-
-      let mediaType = try container.decode(MediaType.self, forKey: .mediaType)
-      switch mediaType {
-      case .tv:
-        let tvContainer = try decoder.singleValueContainer()
-        let credit = try tvContainer.decode(TvCastCredit.self)
-        self = .tv(credit: credit)
-      case .movie:
-        let movieContainer = try decoder.singleValueContainer()
-        let credit = try movieContainer.decode(MovieCastCredit.self)
-        self = .movie(credit: credit)
-      }
-    }
-
-    // MARK: Public
-
-    public func encode(to _: Encoder) throws {}
+  // TODO: - Use protocols to ensure these are always matching cast/crew types
+  enum CombinedCredit<Movie, Tv> {
+    case tv(credit: Tv)
+    case movie(credit: Movie)
 
     // MARK: Internal
 
-    enum CodingKeys: String, CodingKey {
+    enum MediaTypeCodingKeys: String, CodingKey {
       case mediaType = "media_type"
     }
   }
+}
 
-  enum CombinedCrewCredit: Codable {
-    case tv(credit: TvCrewCredit)
-    case movie(credit: MovieCrewCredit)
+// MARK: - Person.CombinedCredit + Codable
 
-    // MARK: Lifecycle
+extension Person.CombinedCredit: Codable where Movie: Codable, Tv: Codable {
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: MediaTypeCodingKeys.self)
 
-    public init(from decoder: Decoder) throws {
-      let container = try decoder.container(keyedBy: CodingKeys.self)
-
-      let mediaType = try container.decode(MediaType.self, forKey: .mediaType)
-      switch mediaType {
-      case .tv:
-        let tvContainer = try decoder.singleValueContainer()
-        let credit = try tvContainer.decode(TvCrewCredit.self)
-        self = .tv(credit: credit)
-      case .movie:
-        let movieContainer = try decoder.singleValueContainer()
-        let credit = try movieContainer.decode(MovieCrewCredit.self)
-        self = .movie(credit: credit)
-      }
-    }
-
-    // MARK: Public
-
-    public func encode(to _: Encoder) throws {}
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-      case mediaType = "media_type"
+    let mediaType = try container.decode(MediaType.self, forKey: .mediaType)
+    switch mediaType {
+    case .tv:
+      let tvContainer = try decoder.singleValueContainer()
+      let credit = try tvContainer.decode(Tv.self)
+      self = .tv(credit: credit)
+    case .movie:
+      let movieContainer = try decoder.singleValueContainer()
+      let credit = try movieContainer.decode(Movie.self)
+      self = .movie(credit: credit)
     }
   }
+
+  // MARK: Public
+
+  // TODO: - Implement encoding
+  public func encode(to _: Encoder) throws {}
 }
 
 public extension Person {

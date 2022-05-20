@@ -14,31 +14,38 @@
 
 import Foundation
 
-// MARK: - MediaImages
-
-public struct MediaImages: Codable {
+public struct ImageAsset: Codable {
   // MARK: Lifecycle
 
-  public init(backdrops: [ImageAsset], id: Int?, logos: [ImageAsset], posters: [ImageAsset]) {
-    self.backdrops = backdrops
-    self.id = id
-    self.logos = logos
-    self.posters = posters
+  public init(aspectRatio: Double, filePath: String, height: Int, iso639_1: String?, voteAverage: Double, voteCount: Int, width: Int) {
+    self.aspectRatio = aspectRatio
+    self.filePath = filePath
+    self.height = height
+    self.iso639_1 = iso639_1
+    self.voteAverage = voteAverage
+    self.voteCount = voteCount
+    self.width = width
   }
 
   // MARK: Public
 
-  public let backdrops: [ImageAsset]
-  public let id: Int?
-  public let logos: [ImageAsset]
-  public let posters: [ImageAsset]
+  public let aspectRatio: Double
+  public let filePath: String
+  public let height: Int
+  public let iso639_1: String?
+  public let voteAverage: Double
+  public let voteCount: Int
+  public let width: Int
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case backdrops
-    case id
-    case logos
-    case posters
+    case aspectRatio = "aspect_ratio"
+    case filePath = "file_path"
+    case height
+    case iso639_1 = "iso_639_1"
+    case voteAverage = "vote_average"
+    case voteCount = "vote_count"
+    case width
   }
 }

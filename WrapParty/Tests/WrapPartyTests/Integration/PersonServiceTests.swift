@@ -22,6 +22,7 @@ final class PersonServiceIntegrationTests: XCTestCase {
 
   static let georgeLucasTmdbId = 1
   static let georgeLucasImdbId = "nm0000184"
+  static let tomHollandTmdbId = 1_136_406
 
   func testGetChanges() async throws {
     let changes = try await Self.service.changes(for: Self.georgeLucasTmdbId)
@@ -66,6 +67,12 @@ final class PersonServiceIntegrationTests: XCTestCase {
     let images = try await Self.service.images(for: Self.georgeLucasTmdbId)
 
     XCTAssertFalse(images.profiles.isEmpty)
+  }
+
+  func testGetTaggedImages() async throws {
+    let taggedImages = try await Self.service.taggedImages(for: Self.tomHollandTmdbId)
+
+    XCTAssertFalse(taggedImages.results.isEmpty)
   }
 
   // MARK: Private

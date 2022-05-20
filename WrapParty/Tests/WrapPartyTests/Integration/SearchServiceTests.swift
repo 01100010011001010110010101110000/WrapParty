@@ -28,6 +28,10 @@ final class SearchServiceIntegrationTests: XCTestCase {
     ("wheel of time", [])
   }()
 
+  static let basicPeopleQuery: (query: String, parameters: [SearchService.PeopleSearchParams]) = {
+    ("lucas", [])
+  }()
+
   func testSearchMovie() async throws {
     let resultPage = try await Self.service.searchMovies(matching: Self.basicMovieQuery.query, parameters: Self.basicMovieQuery.parameters)
 
@@ -36,6 +40,12 @@ final class SearchServiceIntegrationTests: XCTestCase {
 
   func testSearchTv() async throws {
     let resultPage = try await Self.service.searchTv(matching: Self.basicTvQuery.query, parameters: Self.basicTvQuery.parameters)
+
+    XCTAssertFalse(resultPage.results.isEmpty)
+  }
+
+  func testSearchPeople() async throws {
+    let resultPage = try await Self.service.searchPeople(matching: Self.basicPeopleQuery.query, parameters: Self.basicPeopleQuery.parameters)
 
     XCTAssertFalse(resultPage.results.isEmpty)
   }

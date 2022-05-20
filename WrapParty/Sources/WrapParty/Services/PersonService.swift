@@ -90,15 +90,15 @@ struct PersonService: PersonServiceProviding {
     try await callEndpoint(routable: Router.latest(language: language))
   }
 
-  func allPopular(language: String? = nil) async throws -> [PopularPerson] {
+  func allPopular(language: String? = nil) async throws -> [PersonListResult] {
     try await popularSequence(language: language).allResults()
   }
 
-  func popular(language: String? = nil, page: Int? = nil) async throws -> ResultPage<PopularPerson> {
+  func popular(language: String? = nil, page: Int? = nil) async throws -> ResultPage<PersonListResult> {
     try await callEndpoint(routable: Router.popular(language: language, page: page))
   }
 
-  func popularSequence(language: String? = nil) async throws -> PagedQuerySequence<PopularPerson> {
+  func popularSequence(language: String? = nil) async throws -> PagedQuerySequence<PersonListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }

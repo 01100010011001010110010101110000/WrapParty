@@ -14,7 +14,7 @@
 
 import Foundation
 
-public struct PopularPerson: Codable {
+public struct PersonListResult: Codable {
   // MARK: Lifecycle
 
   public init(adult: Bool, gender: Int, id: Int, knownFor: [InlineMediaListResult], knownForDepartment: String, name: String, popularity: Double, profilePath: URL?) {

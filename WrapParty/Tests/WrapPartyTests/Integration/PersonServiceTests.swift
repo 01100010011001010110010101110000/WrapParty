@@ -103,6 +103,19 @@ final class PersonServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(popular.results.isEmpty)
   }
 
+  func testAppending() async throws {
+    let person = try await Self.service.details(for: Self.georgeLucasTmdbId, including: Set(PersonService.Appendable.allCases))
+
+    XCTAssertNotNil(person.changes)
+    XCTAssertNotNil(person.combinedCredits)
+    XCTAssertNotNil(person.externalIds)
+    XCTAssertNotNil(person.images)
+    XCTAssertNotNil(person.movieCredits)
+    XCTAssertNotNil(person.taggedImages)
+    XCTAssertNotNil(person.translations)
+    XCTAssertNotNil(person.tvCredits)
+  }
+
   // MARK: Private
 
   private static let service: PersonService = {

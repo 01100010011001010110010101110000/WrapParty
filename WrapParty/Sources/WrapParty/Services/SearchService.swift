@@ -87,6 +87,45 @@ struct SearchService: SearchServiceProviding {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.tv(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
+
+  func searchCompanies(matching query: String, page: Int? = nil) async throws -> ResultPage<CompanyListResult> {
+    try await callEndpoint(routable: Router.companies(query: query, page: page))
+  }
+
+  func allCompanySearchResults(matching query: String) async throws -> [CompanyListResult] {
+    try await searchCompaniesSequence(matching: query, page: 1).allResults()
+  }
+
+  func searchCompaniesSequence(matching query: String, page: Int? = nil) async throws -> PagedQuerySequence<CompanyListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.companies(query: query, page: page))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func searchCollections(matching query: String, language: String? = nil, page: Int? = nil) async throws -> ResultPage<CollectionListResult> {
+    try await callEndpoint(routable: Router.collections(query: query, language: language, page: page))
+  }
+
+  func allCollectionSearchResults(matching query: String, language: String? = nil) async throws -> [CollectionListResult] {
+    try await searchCollectionsSequence(matching: query, language: language).allResults()
+  }
+
+  func searchCollectionsSequence(matching query: String, language: String? = nil, page: Int? = nil) async throws -> PagedQuerySequence<CollectionListResult> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.collections(query: query, language: language, page: page))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
+
+  func searchKeywords(matching query: String, page: Int? = nil) async throws -> ResultPage<Keyword> {
+    try await callEndpoint(routable: Router.keywords(query: query, page: page))
+  }
+
+  func allKeywordSearchResults(matching query: String) async throws -> [Keyword] {
+    try await searchKeywordsSequence(matching: query).allResults()
+  }
+
+  func searchKeywordsSequence(matching query: String, page: Int? = nil) async throws -> PagedQuerySequence<Keyword> {
+    let request = await tokenManager.vendAuthenticatedRequest(for: Router.keywords(query: query, page: page))
+    return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
+  }
 }
 
 // MARK: - UrlQueryElement
@@ -262,6 +301,9 @@ extension SearchService {
     case tv(query: String, parameters: [TvSearchParams])
     case people(query: String, parameters: [PeopleSearchParams])
     case multiple(query: String, parameters: [MultiSearchParams])
+    case companies(query: String, page: Int?)
+    case collections(query: String, language: String?, page: Int?)
+    case keywords(query: String, page: Int?)
 
     // MARK: Internal
 
@@ -283,6 +325,22 @@ extension SearchService {
         var queryItems = parameters.toQueryItems()
         queryItems["query"] = query
         return componentsForRoute(path: "search/multi", queryItems: queryItems).url!
+      case let .companies(query, page):
+        return componentsForRoute(path: "search/company", queryItems: [
+          "page": page.map { String($0) },
+          "query": query,
+        ]).url!
+      case let .collections(query, language, page):
+        return componentsForRoute(path: "search/collection", queryItems: [
+          "page": page.map { String($0) },
+          "query": query,
+          "language": language,
+        ]).url!
+      case let .keywords(query, page):
+        return componentsForRoute(path: "search/keyword", queryItems: [
+          "page": page.map { String($0) },
+          "query": query,
+        ]).url!
       }
     }
   }

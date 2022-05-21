@@ -17,6 +17,7 @@ import Foundation
 // MARK: - TranslationData
 
 public protocol TranslationData: Codable {}
+public typealias CollectionTranslations = Translations<CollectionTranslationData>
 public typealias MediaTranslations = Translations<MediaTranslationData>
 public typealias PersonTranslations = Translations<PersonTranslationData>
 
@@ -75,40 +76,26 @@ public struct Translation<T: TranslationData>: Codable {
   }
 }
 
+// MARK: - CollectionTranslationData
+
+public struct CollectionTranslationData: TranslationData {
+  public let homepage: String
+  public let overview: String
+  public let title: String
+}
+
 // MARK: - PersonTranslationData
 
 public struct PersonTranslationData: TranslationData {
-  let biography: String
+  public let biography: String
 }
 
 // MARK: - MediaTranslationData
 
 public struct MediaTranslationData: TranslationData {
-  // MARK: Lifecycle
-
-  public init(homepage: String, overview: String, runtime: Int?, tagline: String, title: String?) {
-    self.homepage = homepage
-    self.overview = overview
-    self.runtime = runtime
-    self.tagline = tagline
-    self.title = title
-  }
-
-  // MARK: Public
-
   public let homepage: String
   public let overview: String
   public let runtime: Int?
   public let tagline: String
   public let title: String?
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case homepage
-    case overview
-    case runtime
-    case tagline
-    case title
-  }
 }

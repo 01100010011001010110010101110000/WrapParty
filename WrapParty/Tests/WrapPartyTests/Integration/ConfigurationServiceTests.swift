@@ -26,6 +26,41 @@ final class ConfigurationServiceIntegrationTests: XCTestCase {
     XCTAssertFalse(configuration.changeKeys.isEmpty)
   }
 
+  func testGetCountries() async throws {
+    let countries = try await Self.service.countries()
+
+    XCTAssertFalse(countries.isEmpty)
+    XCTAssertNotNil(countries.first { $0.iso3166_1 == "US" })
+  }
+
+  func testGetJobs() async throws {
+    let jobs = try await Self.service.jobs()
+
+    XCTAssertFalse(jobs.isEmpty)
+    XCTAssertNotNil(jobs.first { $0.department == "Lighting" })
+  }
+
+  func testGetLanguages() async throws {
+    let languages = try await Self.service.languages()
+
+    XCTAssertFalse(languages.isEmpty)
+    XCTAssertNotNil(languages.first { $0.iso639_1 == "en" })
+  }
+
+  func testGetPrimaryTranslations() async throws {
+    let primaryTranslations = try await Self.service.primaryTranslations()
+
+    XCTAssertFalse(primaryTranslations.isEmpty)
+    XCTAssertTrue(primaryTranslations.contains("en-US"))
+  }
+
+  func testGetTimezones() async throws {
+    let timezones = try await Self.service.timezones()
+
+    XCTAssertFalse(timezones.isEmpty)
+    XCTAssertNotNil(timezones.first { $0.iso3166_1 == "US" })
+  }
+
   // MARK: Private
 
   private static let service: ConfigurationService = {

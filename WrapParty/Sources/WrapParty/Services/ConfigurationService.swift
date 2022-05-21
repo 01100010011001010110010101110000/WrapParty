@@ -39,11 +39,36 @@ struct ConfigurationService: SearchServiceProviding {
   func configuration() async throws -> TmdbConfiguration {
     try await callEndpoint(routable: Router.configuration)
   }
+
+  func countries() async throws -> [TmdbConfiguration.Country] {
+    try await callEndpoint(routable: Router.countries)
+  }
+
+  func jobs() async throws -> [TmdbConfiguration.DepartmentJobs] {
+    try await callEndpoint(routable: Router.jobs)
+  }
+
+  func languages() async throws -> [SpokenLanguage] {
+    try await callEndpoint(routable: Router.languages)
+  }
+
+  func primaryTranslations() async throws -> [String] {
+    try await callEndpoint(routable: Router.primaryTranslations)
+  }
+
+  func timezones() async throws -> [TmdbConfiguration.Timezones] {
+    try await callEndpoint(routable: Router.timezones)
+  }
 }
 
 extension ConfigurationService {
   enum Router: RequestRoutable {
     case configuration
+    case countries
+    case jobs
+    case languages
+    case primaryTranslations
+    case timezones
 
     // MARK: Internal
 
@@ -51,6 +76,16 @@ extension ConfigurationService {
       switch self {
       case .configuration:
         return componentsForRoute(path: "configuration").url!
+      case .countries:
+        return componentsForRoute(path: "configuration/countries").url!
+      case .jobs:
+        return componentsForRoute(path: "configuration/jobs").url!
+      case .languages:
+        return componentsForRoute(path: "configuration/languages").url!
+      case .primaryTranslations:
+        return componentsForRoute(path: "configuration/primary_translations").url!
+      case .timezones:
+        return componentsForRoute(path: "configuration/timezones").url!
       }
     }
   }

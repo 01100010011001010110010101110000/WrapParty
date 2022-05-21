@@ -25,7 +25,7 @@ public typealias PersonTvCredits = PersonCredits<Person.TvCastCredit, Person.TvC
 public struct PersonCredits<Cast, Crew> {
   // MARK: Lifecycle
 
-  public init(cast: [Cast], crew: [Crew], id: Int) {
+  public init(cast: [Cast], crew: [Crew], id: Int?) {
     self.cast = cast
     self.crew = crew
     self.id = id
@@ -35,7 +35,7 @@ public struct PersonCredits<Cast, Crew> {
 
   public let cast: [Cast]
   public let crew: [Crew]
-  public let id: Int
+  public let id: Int?
 }
 
 // MARK: Codable

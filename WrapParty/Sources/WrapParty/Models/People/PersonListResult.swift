@@ -17,7 +17,7 @@ import Foundation
 public struct PersonListResult: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, gender: Int, id: Int, knownFor: [InlineMediaListResult], knownForDepartment: String, name: String, popularity: Double, profilePath: URL?) {
+  public init(adult: Bool, gender: Int, id: Int, knownFor: [InlineMediaListResult], knownForDepartment: String, name: String, popularity: Double?, profilePath: URL?) {
     self.adult = adult
     self.gender = gender
     self.id = id
@@ -36,7 +36,7 @@ public struct PersonListResult: Codable {
   public let knownFor: [InlineMediaListResult]
   public let knownForDepartment: String
   public let name: String
-  public let popularity: Double
+  public let popularity: Double?
   public let profilePath: URL?
 
   // MARK: Internal

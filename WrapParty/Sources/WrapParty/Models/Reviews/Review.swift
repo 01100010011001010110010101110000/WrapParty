@@ -19,12 +19,16 @@ import Foundation
 public struct Review: Codable {
   // MARK: Lifecycle
 
-  public init(author: String, authorDetails: AuthorDetails, content: String, createdAt: String, id: String, updatedAt: String, url: URL) {
+  public init(author: String, authorDetails: AuthorDetails, content: String, createdAt: String, id: String, iso639_1: String?, mediaId: Int?, mediaTitle: String?, mediaType: MediaType?, updatedAt: String, url: URL) {
     self.author = author
     self.authorDetails = authorDetails
     self.content = content
     self.createdAt = createdAt
     self.id = id
+    self.iso639_1 = iso639_1
+    self.mediaId = mediaId
+    self.mediaTitle = mediaTitle
+    self.mediaType = mediaType
     self.updatedAt = updatedAt
     self.url = url
   }
@@ -36,6 +40,10 @@ public struct Review: Codable {
   public let content: String
   public let createdAt: String
   public let id: String
+  public let iso639_1: String?
+  public let mediaId: Int?
+  public let mediaTitle: String?
+  public let mediaType: MediaType?
   public let updatedAt: String
   public let url: URL
 
@@ -47,6 +55,10 @@ public struct Review: Codable {
     case content
     case createdAt = "created_at"
     case id
+    case iso639_1 = "iso_639_1"
+    case mediaId = "media_id"
+    case mediaTitle = "media_title"
+    case mediaType = "media_type"
     case updatedAt = "updated_at"
     case url
   }
@@ -58,7 +70,7 @@ public extension Review {
   struct AuthorDetails: Codable {
     // MARK: Lifecycle
 
-    public init(avatarPath: URL, name: String, rating: Int, username: String) {
+    public init(avatarPath: URL?, name: String, rating: Int, username: String) {
       self.avatarPath = avatarPath
       self.name = name
       self.rating = rating
@@ -67,7 +79,7 @@ public extension Review {
 
     // MARK: Public
 
-    public let avatarPath: URL
+    public let avatarPath: URL?
     public let name: String
     public let rating: Int
     public let username: String

@@ -260,3 +260,24 @@ public struct RecentEpisode: Codable {
 // MARK: - TvShow + Identifiable
 
 extension TvShow: Identifiable {}
+
+public extension TvShow {
+  enum ShowStatus: Int {
+    case returningSeries = 0
+    case planned = 1
+    case inProduction = 2
+    case ended = 3
+    case canceled = 4
+    case pilot = 5
+  }
+
+  enum ShowType: Int {
+    case documentary = 0
+    case news = 1
+    case miniseries = 2
+    case reality = 3
+    case scripted = 4
+    case talkShow = 5
+    case video = 6
+  }
+}

@@ -94,3 +94,13 @@ public extension WatchProviders {
     }
   }
 }
+
+public extension WatchProviders {
+  enum MonetizationType: String {
+    case ads
+    case buy
+    case flatrate
+    case free
+    case rent
+  }
+}

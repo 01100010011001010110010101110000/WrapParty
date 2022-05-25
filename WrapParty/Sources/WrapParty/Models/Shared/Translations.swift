@@ -20,6 +20,7 @@ public protocol TranslationData: Codable {}
 public typealias CollectionTranslations = Translations<CollectionTranslationData>
 public typealias MediaTranslations = Translations<MediaTranslationData>
 public typealias PersonTranslations = Translations<PersonTranslationData>
+public typealias TvSeasonTranslations = Translations<TvSeasonTranslationData>
 
 // MARK: - Translations
 
@@ -88,6 +89,13 @@ public struct CollectionTranslationData: TranslationData {
 
 public struct PersonTranslationData: TranslationData {
   public let biography: String
+}
+
+// MARK: - TvSeasonTranslationData
+
+public struct TvSeasonTranslationData: TranslationData {
+  public let name: String
+  public let overview: String
 }
 
 // MARK: - MediaTranslationData

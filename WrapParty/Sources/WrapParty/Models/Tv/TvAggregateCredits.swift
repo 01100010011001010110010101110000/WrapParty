@@ -19,6 +19,7 @@ import Foundation
 public struct TvAggregateCredits: Codable {
   // MARK: Lifecycle
 
+  // TODO: Disambiguate cast/crew credit type
   public init(cast: [Cast], crew: [Cast], id: Int?) {
     self.cast = cast
     self.crew = crew

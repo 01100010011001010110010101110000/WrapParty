@@ -14,40 +14,16 @@
 
 import Foundation
 
-// MARK: - Season
-
-public struct TvSeason: Codable {
-  // MARK: Lifecycle
-
-  public init(airDate: String?, episodeCount: Int, id: Int, name: String, overview: String, posterPath: URL?, seasonNumber: Int) {
-    self.airDate = airDate
-    self.episodeCount = episodeCount
-    self.id = id
-    self.name = name
-    self.overview = overview
-    self.posterPath = posterPath
-    self.seasonNumber = seasonNumber
-  }
-
+public struct TvSeasonExternalIds: Codable {
   // MARK: Public
 
-  public let airDate: String?
-  public let episodeCount: Int
-  public let id: Int
-  public let name: String
-  public let overview: String
-  public let posterPath: URL?
-  public let seasonNumber: Int
+  public let id: Int?
+  public let tvdbId: Int?
 
   // MARK: Internal
 
   enum CodingKeys: String, CodingKey {
-    case airDate = "air_date"
-    case episodeCount = "episode_count"
     case id
-    case name
-    case overview
-    case posterPath = "poster_path"
-    case seasonNumber = "season_number"
+    case tvdbId = "tvdb_id"
   }
 }

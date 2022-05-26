@@ -21,6 +21,8 @@ public typealias CollectionTranslations = Translations<CollectionTranslationData
 public typealias MediaTranslations = Translations<MediaTranslationData>
 public typealias PersonTranslations = Translations<PersonTranslationData>
 public typealias TvSeasonTranslations = Translations<TvSeasonTranslationData>
+public typealias TvEpisodeTranslationData = TvSeasonTranslationData
+public typealias TvEpisodeTranslations = Translations<TvEpisodeTranslationData>
 
 // MARK: - Translations
 

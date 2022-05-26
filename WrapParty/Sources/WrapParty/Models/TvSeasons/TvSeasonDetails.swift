@@ -19,7 +19,7 @@ import Foundation
 public struct TvSeasonDetails: Codable {
   // MARK: Lifecycle
 
-  public init(id: Int, aggregateCredits: TvAggregateCredits?, airDate: String, credits: MediaCredits?, episodes: [TvEpisode], externalIds: TvSeasonExternalIds?, images: TvSeasonImages?, name: String, overview: String, posterPath: URL?, seasonNumber: Int, translations: TvSeasonTranslations?, videos: Results<MediaVideo>?) {
+  public init(id: Int, aggregateCredits: TvAggregateCredits?, airDate: String, credits: MediaCredits?, episodes: [TvEpisodeDetails], externalIds: TvSeasonExternalIds?, images: TvSeasonImages?, name: String, overview: String, posterPath: URL?, seasonNumber: Int, translations: TvSeasonTranslations?, videos: Results<MediaVideo>?) {
     self.id = id
     self.aggregateCredits = aggregateCredits
     self.airDate = airDate
@@ -42,7 +42,7 @@ public struct TvSeasonDetails: Codable {
   public let aggregateCredits: TvAggregateCredits?
   public let airDate: String
   public let credits: MediaCredits?
-  public let episodes: [TvEpisode]
+  public let episodes: [TvEpisodeDetails]
   public let externalIds: TvSeasonExternalIds?
   public let images: TvSeasonImages?
 //  public let tvSeasonId: Int
@@ -73,63 +73,7 @@ public struct TvSeasonDetails: Codable {
   }
 }
 
-// MARK: - TvEpisode
-
-public struct TvEpisode: Codable {
-  // MARK: Lifecycle
-
-  public init(airDate: String, crew: [MediaCredits.Credit], episodeNumber: Int, guestStars: [MediaCredits.Credit], id: Int, name: String, overview: String, productionCode: String, runtime: Int, seasonNumber: Int, stillPath: URL?, voteAverage: Double, voteCount: Int) {
-    self.airDate = airDate
-    self.crew = crew
-    self.episodeNumber = episodeNumber
-    self.guestStars = guestStars
-    self.id = id
-    self.name = name
-    self.overview = overview
-    self.productionCode = productionCode
-    self.runtime = runtime
-    self.seasonNumber = seasonNumber
-    self.stillPath = stillPath
-    self.voteAverage = voteAverage
-    self.voteCount = voteCount
-  }
-
-  // MARK: Public
-
-  public let airDate: String
-  public let crew: [MediaCredits.Credit]
-  public let episodeNumber: Int
-  public let guestStars: [MediaCredits.Credit]
-  public let id: Int
-  public let name: String
-  public let overview: String
-  public let productionCode: String
-  public let runtime: Int
-  public let seasonNumber: Int
-  public let stillPath: URL?
-  public let voteAverage: Double
-  public let voteCount: Int
-
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case airDate = "air_date"
-    case crew
-    case episodeNumber = "episode_number"
-    case guestStars = "guest_stars"
-    case id
-    case name
-    case overview
-    case productionCode = "production_code"
-    case runtime
-    case seasonNumber = "season_number"
-    case stillPath = "still_path"
-    case voteAverage = "vote_average"
-    case voteCount = "vote_count"
-  }
-}
-
-// MARK: - TvSeasonDetails + Identifiable
+// MARK: Identifiable
 
 extension TvSeasonDetails: Identifiable {}
 

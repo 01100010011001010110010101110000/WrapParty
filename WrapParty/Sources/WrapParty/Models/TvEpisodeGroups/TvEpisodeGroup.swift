@@ -17,10 +17,11 @@
 public struct TvEpisodeGroup: Codable {
   // MARK: Lifecycle
 
-  public init(description: String, episodeCount: Int, groupCount: Int, id: String, name: String, network: Network?, type: GroupType) {
+  public init(description: String, episodeCount: Int, groupCount: Int, groups: [EpisodeGroup]?, id: String, name: String, network: Network?, type: GroupType) {
     self.description = description
     self.episodeCount = episodeCount
     self.groupCount = groupCount
+    self.groups = groups
     self.id = id
     self.name = name
     self.network = network
@@ -32,6 +33,7 @@ public struct TvEpisodeGroup: Codable {
   public let description: String
   public let episodeCount: Int
   public let groupCount: Int
+  public let groups: [EpisodeGroup]?
   public let id: String
   public let name: String
   public let network: Network?
@@ -43,10 +45,21 @@ public struct TvEpisodeGroup: Codable {
     case description
     case episodeCount = "episode_count"
     case groupCount = "group_count"
+    case groups
     case id
     case name
     case network
     case type
+  }
+}
+
+public extension TvEpisodeGroup {
+  struct EpisodeGroup: Codable {
+    public let episodes: [RecentEpisode]
+    public let id: String
+    public let locked: Bool
+    public let name: String
+    public let order: Int
   }
 }
 

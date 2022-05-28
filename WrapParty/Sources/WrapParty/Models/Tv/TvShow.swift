@@ -19,7 +19,7 @@ import Foundation
 public struct TvShow: Codable {
   // MARK: Lifecycle
 
-  public init(adult: Bool, aggregateCredits: TvAggregateCredits?, alternativeTitles: Results<AlternativeTitle>?, backdropPath: URL?, changes: MediaChanges?, contentRatings: Results<TvContentRating>?, createdBy: [CreatedBy], credits: MediaCredits?, episodeGroups: Results<TvEpisodeGroup>?, episodeRunTime: [Int], externalIds: ExternalIds?, firstAirDate: String?, genres: [Genre], homepage: String, id: Int, images: MediaImages?, inProduction: Bool, keywords: Results<Keyword>?, languages: [String], lastAirDate: String?, lastEpisodeToAir: RecentEpisode?, name: String, networks: [Network], nextEpisodeToAir: RecentEpisode?, numberOfEpisodes: Int, numberOfSeasons: Int, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<TvListResult>?, reviews: ResultPage<Review>?, screenedTheatrically: Results<TvScreenedEpisode>?, seasons: [TvSeason], similar: ResultPage<TvListResult>?, spokenLanguages: [SpokenLanguage], status: String, tagline: String, translations: MediaTranslations?, type: String, videos: Results<MediaVideo>?, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
+  public init(adult: Bool, aggregateCredits: TvAggregateCredits?, alternativeTitles: Results<AlternativeTitle>?, backdropPath: URL?, changes: MediaChanges?, contentRatings: Results<TvContentRating>?, createdBy: [CreatedBy], credits: MediaCredits?, episodeGroups: Results<TvEpisodeGroup>?, episodeRunTime: [Int], externalIds: ExternalIds?, firstAirDate: String?, genres: [Genre], homepage: String, id: Int, images: MediaImages?, inProduction: Bool, keywords: Results<Keyword>?, languages: [String], lastAirDate: String?, lastEpisodeToAir: RecentEpisode?, name: String, networks: [NetworkListResult], nextEpisodeToAir: RecentEpisode?, numberOfEpisodes: Int, numberOfSeasons: Int, originCountry: [String], originalLanguage: String, originalName: String, overview: String, popularity: Double, posterPath: URL?, productionCompanies: [ProductionCompany], productionCountries: [ProductionCountry], recommendations: ResultPage<TvListResult>?, reviews: ResultPage<Review>?, screenedTheatrically: Results<TvScreenedEpisode>?, seasons: [TvSeason], similar: ResultPage<TvListResult>?, spokenLanguages: [SpokenLanguage], status: String, tagline: String, translations: MediaTranslations?, type: String, videos: Results<MediaVideo>?, voteAverage: Double, voteCount: Int, watchProviders: WatchProviders?) {
     self.adult = adult
     self.aggregateCredits = aggregateCredits
     self.alternativeTitles = alternativeTitles
@@ -94,7 +94,7 @@ public struct TvShow: Codable {
   public let lastAirDate: String?
   public let lastEpisodeToAir: RecentEpisode?
   public let name: String
-  public let networks: [Network]
+  public let networks: [NetworkListResult]
   public let nextEpisodeToAir: RecentEpisode?
   public let numberOfEpisodes: Int
   public let numberOfSeasons: Int

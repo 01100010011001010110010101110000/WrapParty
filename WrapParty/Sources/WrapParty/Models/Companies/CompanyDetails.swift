@@ -14,29 +14,30 @@
 
 import Foundation
 
-public struct Network: Codable {
-  // MARK: Lifecycle
-
-  public init(id: Int, logoPath: URL?, name: String, originCountry: String) {
-    self.id = id
-    self.logoPath = logoPath
-    self.name = name
-    self.originCountry = originCountry
-  }
-
+public struct CompanyDetails: Codable {
   // MARK: Public
 
+  public let companyDetailsDescription: String
+  public let headquarters: String
+  public let homepage: String
   public let id: Int
   public let logoPath: URL?
   public let name: String
-  public let originCountry: String
+  public let originCountry: String?
 
   // MARK: Internal
 
+  // TODO: Find example of object with this populated
+//  public let parentCompany: CompanyDetails
+
   enum CodingKeys: String, CodingKey {
+    case companyDetailsDescription = "description"
+    case headquarters
+    case homepage
     case id
     case logoPath = "logo_path"
     case name
     case originCountry = "origin_country"
+//    case parentCompany = "parent_company"
   }
 }

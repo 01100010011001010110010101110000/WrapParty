@@ -36,8 +36,8 @@ struct ChangesService: ChangesServiceProviding {
   let logger: Logger
   let tokenManager: TokenManager
 
-  func changes(for _: MediaType, start: Date? = nil, end: Date? = nil, page: Int? = nil) async throws -> ResultPage<ChangedEntity> {
-    try await callEndpoint(routable: Router.changes(mediaType: .tv, start: start, end: end, page: page))
+  func changes(for mediaType: MediaType, start: Date? = nil, end: Date? = nil, page: Int? = nil) async throws -> ResultPage<ChangedEntity> {
+    try await callEndpoint(routable: Router.changes(mediaType: mediaType, start: start, end: end, page: page))
   }
 
   func changesSequence(for mediaType: MediaType, start: Date? = nil, end: Date? = nil) async -> PagedQuerySequence<ChangedEntity> {

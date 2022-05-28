@@ -14,12 +14,15 @@
 
 import Foundation
 
+// MARK: - ImageAsset
+
 public struct ImageAsset: Codable {
   // MARK: Lifecycle
 
-  public init(aspectRatio: Double, filePath: String, height: Int, iso639_1: String?, voteAverage: Double, voteCount: Int, width: Int) {
+  public init(aspectRatio: Double, filePath: String, fileType: FileType, height: Int, iso639_1: String?, voteAverage: Double, voteCount: Int, width: Int) {
     self.aspectRatio = aspectRatio
     self.filePath = filePath
+    self.fileType = fileType
     self.height = height
     self.iso639_1 = iso639_1
     self.voteAverage = voteAverage
@@ -31,6 +34,7 @@ public struct ImageAsset: Codable {
 
   public let aspectRatio: Double
   public let filePath: String
+  public let fileType: FileType?
   public let height: Int
   public let iso639_1: String?
   public let voteAverage: Double
@@ -42,10 +46,19 @@ public struct ImageAsset: Codable {
   enum CodingKeys: String, CodingKey {
     case aspectRatio = "aspect_ratio"
     case filePath = "file_path"
+    case fileType = "file_type"
     case height
     case iso639_1 = "iso_639_1"
     case voteAverage = "vote_average"
     case voteCount = "vote_count"
     case width
+  }
+}
+
+public extension ImageAsset {
+  /// File type of the originally uploaded asset
+  enum FileType: String, Codable {
+    case png = ".png"
+    case svg = ".svg"
   }
 }

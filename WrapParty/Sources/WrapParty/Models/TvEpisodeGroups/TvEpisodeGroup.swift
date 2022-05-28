@@ -55,7 +55,7 @@ public struct TvEpisodeGroup: Codable {
 
 public extension TvEpisodeGroup {
   struct EpisodeGroup: Codable {
-    public let episodes: [RecentEpisode]
+    public let episodes: [TvEpisodeListResult]
     public let id: String
     public let locked: Bool
     public let name: String

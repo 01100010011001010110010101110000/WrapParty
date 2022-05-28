@@ -16,10 +16,10 @@ import Foundation
 
 // MARK: - Season
 
-public struct TvSeason: Codable {
+public struct TvSeasonListResult: Codable {
   // MARK: Lifecycle
 
-  public init(airDate: String?, episodeCount: Int, id: Int, name: String, overview: String, posterPath: URL?, seasonNumber: Int) {
+  public init(airDate: String?, episodeCount: Int, id: Int, name: String, overview: String, posterPath: URL?, seasonNumber: Int, showId: Int?) {
     self.airDate = airDate
     self.episodeCount = episodeCount
     self.id = id
@@ -27,6 +27,7 @@ public struct TvSeason: Codable {
     self.overview = overview
     self.posterPath = posterPath
     self.seasonNumber = seasonNumber
+    self.showId = showId
   }
 
   // MARK: Public
@@ -38,6 +39,7 @@ public struct TvSeason: Codable {
   public let overview: String
   public let posterPath: URL?
   public let seasonNumber: Int
+  public let showId: Int?
 
   // MARK: Internal
 
@@ -49,5 +51,6 @@ public struct TvSeason: Codable {
     case overview
     case posterPath = "poster_path"
     case seasonNumber = "season_number"
+    case showId = "show_id"
   }
 }

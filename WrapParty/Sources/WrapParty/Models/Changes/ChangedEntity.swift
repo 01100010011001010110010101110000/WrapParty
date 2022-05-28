@@ -14,8 +14,16 @@
 
 import Foundation
 
-public enum MediaType: String, CaseIterable, Codable {
-  case movie
-  case tv
-  case person
+public struct ChangedEntity: Codable {
+  // MARK: Public
+
+  public let adult: Bool?
+  public let id: Int
+
+  // MARK: Internal
+
+  enum CodingKeys: String, CodingKey {
+    case adult
+    case id
+  }
 }

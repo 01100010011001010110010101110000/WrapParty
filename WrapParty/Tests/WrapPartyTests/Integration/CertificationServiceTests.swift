@@ -17,25 +17,21 @@
 import Foundation
 import XCTest
 
-final class CertificationServiceIntegrationTests: XCTestCase {
+final class ChangesServiceIntegrationTests: XCTestCase {
   // MARK: Internal
 
-  func testGetMovieCertifications() async throws {
-    let results = try await Self.service.movieCertifications()
+  func testAllChangeTypes() async throws {
+    for mediaType in MediaType.allCases {
+      let results = try await Self.service.changes(for: mediaType)
 
-    XCTAssertFalse(results.certifications.values.isEmpty)
-  }
-
-  func testGetTvCertifications() async throws {
-    let results = try await Self.service.tvCertifications()
-
-    XCTAssertFalse(results.certifications.values.isEmpty)
+      XCTAssertFalse(results.results.isEmpty)
+    }
   }
 
   // MARK: Private
 
-  private static let service: CertificationService = {
+  private static let service: ChangesService = {
     let config = DefaultConfiguration()
-    return CertificationService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
+    return ChangesService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
   }()
 }

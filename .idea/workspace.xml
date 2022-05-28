@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Checkin package resolved file" />
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Checkin package resolved file">
+      <change beforePath="$PROJECT_DIR$/WrapParty/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/WrapParty.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/git_toolbox_prj.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/markdown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/.swiftpm/xcode/package.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-alternative-titles.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-alternative-titles.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-changes.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-changes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-images.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-images.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-videos.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-videos.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-with-alternative-titles.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-with-alternative-titles.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-with-changes.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-with-changes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-with-images.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-with-images.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie-with-videos.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie-with-videos.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Assets/ApiResponseFixtures/Movie/movie.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ApiResponseFixtures/Movie/movie.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Package.resolved" beforeDir="false" afterPath="$PROJECT_DIR$/Package.resolved" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Package.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Package.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Configuration.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Configuration.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/DataLoader.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/DataLoader.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Certifications/Certification.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Certifications/Certification.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Certifications/CertificationList.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Certifications/CertificationList.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Changes/ChangedEntity.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Changes/ChangedEntity.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Collections/CollectionDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Collections/CollectionDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Collections/CollectionImages.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Collections/CollectionImages.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Collections/CollectionListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Collections/CollectionListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Companies/CompanyDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Companies/CompanyDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Companies/CompanyListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Companies/CompanyListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Configuration/Country.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Configuration/Country.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Configuration/DepartmentJobs.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Configuration/DepartmentJobs.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Configuration/Timezones.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Configuration/Timezones.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Configuration/TmdbConfiguration.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Configuration/TmdbConfiguration.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Credits/CreditDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Credits/CreditDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Credits/CreditType.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Credits/CreditType.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Find/ExternalSource.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Find/ExternalSource.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Find/FindResults.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Find/FindResults.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Genres/TmdbGenres.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Genres/TmdbGenres.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Keywords/Keyword.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Keywords/Keyword.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/MediaStatus.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/MediaStatus.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/Movie.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/Movie.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/MovieAlternativeTitles.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/MovieAlternativeTitles.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/MovieKeywords.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/MovieKeywords.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/MovieListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/MovieListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/MovieLists.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/MovieLists.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Movie/MovieReleaseDates.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/MovieReleaseDates.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Networks/NetworkDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Networks/NetworkDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Networks/NetworkListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Networks/NetworkListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/People/Person.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/People/Person.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/People/PersonCredits.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/People/PersonCredits.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/People/PersonImages.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/People/PersonImages.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/People/PersonListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/People/PersonListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/People/PersonTaggedImageAsset.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/People/PersonTaggedImageAsset.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Reviews/Review.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Reviews/Review.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/AlternativeName.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/AlternativeName.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/AlternativeTitle.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/AlternativeTitle.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/CorporateImages.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/CorporateImages.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/ExternalIds.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/ExternalIds.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/Genre.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/Genre.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/ImageAsset.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/ImageAsset.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/MediaChanges.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/MediaChanges.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/MediaCredits.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/MediaCredits.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/MediaImages.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/MediaImages.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/MediaType.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/MediaType.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/MediaVideo.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/MediaVideo.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/ProductionCompany.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/ProductionCompany.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/ProductionCountry.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/ProductionCountry.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/SpokenLanguage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/SpokenLanguage.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/Translations.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/Translations.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Shared/WatchProviders.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Shared/WatchProviders.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Trending/TrendingMediaType.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Trending/TrendingMediaType.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Trending/TrendingTimeWindow.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Trending/TrendingTimeWindow.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Tv/TvAggregateCredits.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvAggregateCredits.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Tv/TvContentRating.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvContentRating.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Tv/TvListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Tv/TvScreenedEpisode.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvScreenedEpisode.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Tv/TvSeasonListResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvSeasonListResult.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/Tv/TvShow.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvShow.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvEpisodeGroups/TvEpisodeGroup.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodeGroups/TvEpisodeGroup.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvEpisodes/TvEpisodeDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvEpisodes/TvEpisodeExternalIds.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeExternalIds.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvEpisodes/TvEpisodeImages.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeImages.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvSeasons/TvSeasonDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvSeasons/TvSeasonExternalIds.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonExternalIds.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/TvSeasons/TvSeasonImages.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonImages.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Models/WrapPartyError.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/WrapPartyError.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Protocols/DetailAppendable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/DetailAppendable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Protocols/RequestConvertibles.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/RequestConvertibles.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Protocols/ServiceProviding.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/ServiceProviding.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/CertificationService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CertificationService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/ChangesService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/CollectionService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CollectionService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/CompanyService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CompanyService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/ConfigurationService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ConfigurationService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/CreditService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CreditService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/DiscoveryService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/DiscoveryService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/FindService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/FindService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/GenreService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/GenreService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/KeywordService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/KeywordService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/MovieService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/NetworkService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/NetworkService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/PersonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/ReviewService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ReviewService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/SearchService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/SearchService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/TrendingService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TrendingService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/TvEpisodeGroupService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeGroupService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/TvEpisodeService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/TvSeasonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/TvService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Services/WatchProviderService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/WatchProviderService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Utilities/PagedQuery.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Utilities/PagedQuery.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Utilities/Results.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Utilities/Results.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/Utilities/TokenManager.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Utilities/TokenManager.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Sources/WrapParty/WrapParty.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/CertificationServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/CertificationServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/ChangesServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/ChangesServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/CollectionServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/CollectionServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/CompanyServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/CompanyServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/ConfigurationServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/ConfigurationServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/CreditServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/CreditServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/DiscoveryServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/DiscoveryServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/FindServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/FindServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/GenreServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/GenreServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/KeywordServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/KeywordServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/MovieServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/MovieServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/NetworkServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/NetworkServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/PersonServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/PersonServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/ReviewServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/ReviewServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/SearchServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/SearchServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/TrendingServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/TrendingServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/TvEpisodeGroupServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/TvEpisodeGroupServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/TvEpisodeServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/TvEpisodeServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/TvSeasonServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/TvSeasonServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/TvServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/TvServiceTests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WrapParty/Tests/WrapPartyTests/Integration/WatchProviderServiceTests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/WrapPartyTests/Integration/WatchProviderServiceTests.swift" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
   </component>
   <component name="GithubProjectSettings">
     <option name="branchProtectionPatterns">
@@ -23,24 +172,53 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="AppCode" />
+    <option name="majorVersion" value="2022" />
+    <option name="minorVersion" value="1.1" />
+  </component>
   <component name="ProjectId" id="28NsBT7ur1IyVbZLO3ar4zlQit4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "TF_FMT": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/Users/tgregory/AppCodeProjects/WrapParty",
-    "settings.editor.selected.configurable": "project.scopes"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;TF_FMT&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tgregory/AppCodeProjects/WrapParty&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="Swift Package Test.ChangesServiceIntegrationTests">
+    <configuration name="WrapParty" type="SwiftPackageManagerRunConfiguration" factoryName="Swift Package Run" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapParty" CONFIG_NAME="WrapParty">
+      <method v="2">
+        <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChangesServiceIntegrationTests" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapPartyTests" CONFIG_NAME="WrapPartyTests" RUN_TARGET_PROJECT_NAME="WrapParty" RUN_TARGET_NAME="WrapPartyTests" TEST_CLASS="ChangesServiceIntegrationTests" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WrapPartyTests" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapPartyTests" CONFIG_NAME="WrapPartyTests" RUN_TARGET_PROJECT_NAME="WrapParty" RUN_TARGET_NAME="WrapPartyTests" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Swift Package Test.ChangesServiceIntegrationTests" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,6 +228,7 @@
       <option name="presentableId" value="Default" />
       <updated>1651068242295</updated>
       <workItem from="1651068243977" duration="716000" />
+      <workItem from="1653765750145" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>

@@ -14,7 +14,7 @@
 
 import Foundation
 
-struct Certification: Codable {
+public struct Certification: Codable {
   // MARK: Public
 
   public let certification: String

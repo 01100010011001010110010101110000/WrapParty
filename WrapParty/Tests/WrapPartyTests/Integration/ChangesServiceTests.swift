@@ -12,10 +12,30 @@
 // You should have received a copy of the GNU General Public License along with
 // this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import Foundation
+@testable import WrapParty
 
-public enum MediaType: String, CaseIterable, Codable {
-  case movie
-  case tv
-  case person
+import Foundation
+import XCTest
+
+final class CertificationServiceIntegrationTests: XCTestCase {
+  // MARK: Internal
+
+  func testGetMovieCertifications() async throws {
+    let results = try await Self.service.movieCertifications()
+
+    XCTAssertFalse(results.certifications.values.isEmpty)
+  }
+
+  func testGetTvCertifications() async throws {
+    let results = try await Self.service.tvCertifications()
+
+    XCTAssertFalse(results.certifications.values.isEmpty)
+  }
+
+  // MARK: Private
+
+  private static let service: CertificationService = {
+    let config = DefaultConfiguration()
+    return CertificationService(dataLoader: config.loader, logger: config.logger, tokenManager: TokenManager(token: config.apiToken))
+  }()
 }

@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Make DefaultConfiguration public">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Configuration.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Configuration.swift" afterDir="false" />
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Small DRY">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +166,7 @@
       <updated>1651068242295</updated>
       <workItem from="1651068243977" duration="716000" />
       <workItem from="1653765750145" duration="4813000" />
-      <workItem from="1653855330126" duration="1745000" />
+      <workItem from="1653855330126" duration="2170000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>
@@ -239,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653858347768</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Small DRY">
+      <created>1653858779787</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1653858779787</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +270,8 @@
     <MESSAGE value="Make services public" />
     <MESSAGE value="Add public factory methods for every service struct" />
     <MESSAGE value="Make DefaultConfiguration public" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make DefaultConfiguration public" />
+    <MESSAGE value="Small DRY" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small DRY" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

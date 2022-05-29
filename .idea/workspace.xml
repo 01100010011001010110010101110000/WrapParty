@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Add public factory methods for every service struct">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Make DefaultConfiguration public">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Configuration.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Configuration.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +167,7 @@
       <updated>1651068242295</updated>
       <workItem from="1651068243977" duration="716000" />
       <workItem from="1653765750145" duration="4813000" />
-      <workItem from="1653855330126" duration="1384000" />
+      <workItem from="1653855330126" duration="1745000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>
@@ -234,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653854877554</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Make DefaultConfiguration public">
+      <created>1653858347768</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653858347768</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,7 +263,8 @@
     <MESSAGE value="Add other platform targets" />
     <MESSAGE value="Make services public" />
     <MESSAGE value="Add public factory methods for every service struct" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add public factory methods for every service struct" />
+    <MESSAGE value="Make DefaultConfiguration public" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make DefaultConfiguration public" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

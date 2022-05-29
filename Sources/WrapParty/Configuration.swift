@@ -48,9 +48,7 @@ public struct DefaultConfiguration: Configuration {
   }
 
   public init(apiToken: String, logger: Logger = Logger(label: "com.knossos.WrapParty.logger")) {
-    loader = DataLoader()
-    self.logger = logger
-    self.apiToken = apiToken
+    self.init(apiToken: apiToken, loader: DataLoader(), logger: logger)
   }
 
   // MARK: Public
@@ -58,7 +56,6 @@ public struct DefaultConfiguration: Configuration {
   public let logger: Logger
   public let loader: DataLoading
   public let apiToken: String
-
   // MARK: Private
 
   private static let apiTokenEnvVar: String = "TMDB_API_READ_ACCESS_TOKEN"

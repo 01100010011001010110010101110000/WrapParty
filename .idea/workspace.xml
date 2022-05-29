@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Make services public">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" afterDir="false" />
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Small DRY">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="service-factory-methods" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,6 +34,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="public-default-config" />
+                    <option name="lastUsedInstant" value="1653856025" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="service-factory-methods" />
                     <option name="lastUsedInstant" value="1653853911" />
@@ -95,22 +92,22 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/tgregory/AppCodeProjects/WrapParty&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;XcodeSettings&quot;
   }
 }</component>
-  <component name="RunManager" selected="Swift Package Test.GenreServiceIntegrationTests">
+  <component name="RunManager" selected="Swift Package Test.CompanyServiceIntegrationTests.testGetDetails">
     <configuration name="WrapParty" type="SwiftPackageManagerRunConfiguration" factoryName="Swift Package Run" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapParty" CONFIG_NAME="WrapParty">
       <method v="2">
         <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CollectionServiceIntegrationTests.testGetCollectionTranslations" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapPartyTests" CONFIG_NAME="WrapPartyTests" RUN_TARGET_PROJECT_NAME="WrapParty" RUN_TARGET_NAME="WrapPartyTests" TEST_CLASS="CollectionServiceIntegrationTests" TEST_METHOD="testGetCollectionTranslations" TEST_MODE="SUITE_TEST">
+    <configuration name="CompanyServiceIntegrationTests" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapPartyTests" CONFIG_NAME="WrapPartyTests" RUN_TARGET_PROJECT_NAME="WrapParty" RUN_TARGET_NAME="WrapPartyTests" TEST_CLASS="CompanyServiceIntegrationTests" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CompanyServiceIntegrationTests" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapPartyTests" CONFIG_NAME="WrapPartyTests" RUN_TARGET_PROJECT_NAME="WrapParty" RUN_TARGET_NAME="WrapPartyTests" TEST_CLASS="CompanyServiceIntegrationTests" TEST_MODE="SUITE_TEST">
+    <configuration name="CompanyServiceIntegrationTests.testGetDetails" type="SwiftPackageManagerTestRunConfiguration" factoryName="Swift Package Test" temporary="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="WrapParty" TARGET_NAME="WrapPartyTests" CONFIG_NAME="WrapPartyTests" RUN_TARGET_PROJECT_NAME="WrapParty" RUN_TARGET_NAME="WrapPartyTests" TEST_CLASS="CompanyServiceIntegrationTests" TEST_METHOD="testGetDetails" TEST_MODE="SUITE_TEST">
       <method v="2">
         <option name="SPM.BUILD_TASK_PROVIDER" enabled="true" />
         <option name="BeforeTestRunTask" enabled="true" />
@@ -140,13 +137,22 @@
         <option name="BeforeTestRunTask" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Swift Package Run.WrapParty" />
+      <item itemvalue="Swift Package Test.WrapPartyTests" />
+      <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests.testGetDetails" />
+      <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests" />
+      <item itemvalue="Swift Package Test.GenreServiceIntegrationTests" />
+      <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testallMovieSearchResults" />
+      <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testSearchMovie" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests.testGetDetails" />
         <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testSearchMovie" />
         <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testallMovieSearchResults" />
         <item itemvalue="Swift Package Test.GenreServiceIntegrationTests" />
         <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests" />
-        <item itemvalue="Swift Package Test.CollectionServiceIntegrationTests.testGetCollectionTranslations" />
       </list>
     </recent_temporary>
   </component>
@@ -159,7 +165,8 @@
       <option name="presentableId" value="Default" />
       <updated>1651068242295</updated>
       <workItem from="1651068243977" duration="716000" />
-      <workItem from="1653765750145" duration="4368000" />
+      <workItem from="1653765750145" duration="4813000" />
+      <workItem from="1653855330126" duration="2170000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>
@@ -217,7 +224,28 @@
       <option name="project" value="LOCAL" />
       <updated>1653853835856</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add public factory methods for every service struct">
+      <created>1653854877554</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1653854877554</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Make DefaultConfiguration public">
+      <created>1653858347768</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1653858347768</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Small DRY">
+      <created>1653858779787</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1653858779787</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +268,10 @@
     <MESSAGE value="Correct directory structure" />
     <MESSAGE value="Add other platform targets" />
     <MESSAGE value="Make services public" />
-    <option name="LAST_COMMIT_MESSAGE" value="Make services public" />
+    <MESSAGE value="Add public factory methods for every service struct" />
+    <MESSAGE value="Make DefaultConfiguration public" />
+    <MESSAGE value="Small DRY" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small DRY" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

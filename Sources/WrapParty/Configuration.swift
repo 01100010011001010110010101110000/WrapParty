@@ -29,7 +29,7 @@ public protocol Configuration {
 public struct DefaultConfiguration: Configuration {
   // MARK: Lifecycle
 
-  init() {
+  public init() {
     var localLogger = Logger(label: "com.knossos.WrapParty.logger")
     #if DEBUG
     localLogger.logLevel = .debug
@@ -41,10 +41,14 @@ public struct DefaultConfiguration: Configuration {
     apiToken = ProcessInfo.processInfo.environment[Self.apiTokenEnvVar, default: ""]
   }
 
-  init(apiToken: String) {
-    logger = Logger(label: "com.knossos.WrapParty.logger")
-    loader = DataLoader()
+  public init<D: DataLoading>(apiToken: String, loader: D, logger: Logger = Logger(label: "com.knossos.WrapParty.logger")) {
+    self.loader = loader
+    self.logger = logger
     self.apiToken = apiToken
+  }
+
+  public init(apiToken: String, logger: Logger = Logger(label: "com.knossos.WrapParty.logger")) {
+    self.init(apiToken: apiToken, loader: DataLoader(), logger: logger)
   }
 
   // MARK: Public
@@ -52,7 +56,6 @@ public struct DefaultConfiguration: Configuration {
   public let logger: Logger
   public let loader: DataLoading
   public let apiToken: String
-
   // MARK: Private
 
   private static let apiTokenEnvVar: String = "TMDB_API_READ_ACCESS_TOKEN"

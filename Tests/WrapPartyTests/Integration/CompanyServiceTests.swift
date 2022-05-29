@@ -26,7 +26,6 @@ final class CompanyServiceIntegrationTests: XCTestCase {
     let details = try await Self.service.details(for: Self.lucasFilmId)
 
     XCTAssertTrue(details.id == Self.lucasFilmId)
-    XCTAssertTrue(details.name == "Lucasfilm")
   }
 
   func testGetAlternativeNames() async throws {

@@ -109,7 +109,7 @@ extension TvSeasonService {
           "language": language,
         ]).url!
       case let .changes(seasonId, startDate, endDate, page):
-        let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
+        let dateFormat: Date.ISO8601FormatStyle = WrapParty.tmdbDefaultDateFormat
         return componentsForRoute(path: "tv/season/\(seasonId)/changes", queryItems: [
           "start_date": startDate?.formatted(dateFormat),
           "end_date": endDate?.formatted(dateFormat),

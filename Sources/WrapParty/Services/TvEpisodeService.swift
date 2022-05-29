@@ -99,7 +99,7 @@ extension TvEpisodeService {
     func asUrl() -> URL {
       switch self {
       case let .changes(episodeId, startDate, endDate, page):
-        let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
+        let dateFormat: Date.ISO8601FormatStyle = WrapParty.tmdbDefaultDateFormat
         return componentsForRoute(path: "tv/episode/\(episodeId)/changes", queryItems: [
           "start_date": startDate?.formatted(dateFormat),
           "end_date": endDate?.formatted(dateFormat),

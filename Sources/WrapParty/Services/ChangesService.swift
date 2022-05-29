@@ -57,7 +57,7 @@ extension ChangesService {
     // MARK: Internal
 
     func asUrl() -> URL {
-      let dateFormat: Date.ISO8601FormatStyle = .iso8601.year().month().day()
+      let dateFormat: Date.ISO8601FormatStyle = WrapParty.tmdbDefaultDateFormat
       switch self {
       case let .changes(mediaType, start, end, page):
         return componentsForRoute(path: "\(mediaType.rawValue)/changes", queryItems: [

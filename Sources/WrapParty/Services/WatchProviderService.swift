@@ -21,10 +21,10 @@ protocol WatchProviderServiceProviding: ServiceProviding {}
 
 // MARK: - WatchProviderService
 
-struct WatchProviderService: WatchProviderServiceProviding {
+public struct WatchProviderService: WatchProviderServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,19 +32,19 @@ struct WatchProviderService: WatchProviderServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func regions(language: String? = nil) async throws -> Results<TmdbConfiguration.Country> {
+  public func regions(language: String? = nil) async throws -> Results<TmdbConfiguration.Country> {
     try await callEndpoint(routable: Router.regions(language: language))
   }
 
-  func movieProviders(language: String? = nil, region: String? = nil) async throws -> Results<WatchProviders.Provider> {
+  public func movieProviders(language: String? = nil, region: String? = nil) async throws -> Results<WatchProviders.Provider> {
     try await callEndpoint(routable: Router.movie(language: language, region: region))
   }
 
-  func tvProviders(language: String? = nil, region: String? = nil) async throws -> Results<WatchProviders.Provider> {
+  public func tvProviders(language: String? = nil, region: String? = nil) async throws -> Results<WatchProviders.Provider> {
     try await callEndpoint(routable: Router.tv(language: language, region: region))
   }
 }

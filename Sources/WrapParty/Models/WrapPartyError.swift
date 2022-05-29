@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum WrapPartyError: Error {
+public enum WrapPartyError: Error {
   case badUrl
   case decodingError
 }

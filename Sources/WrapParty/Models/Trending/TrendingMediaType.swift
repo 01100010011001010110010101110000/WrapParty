@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum TrendingMediaType: String, CaseIterable, Codable {
+public enum TrendingMediaType: String, CaseIterable, Codable {
   case all
   case movie
   case person

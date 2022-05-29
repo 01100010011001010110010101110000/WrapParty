@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - ServiceProviding
 
-protocol ServiceProviding {
+public protocol ServiceProviding {
   var dataLoader: DataLoading { get }
   var logger: Logger { get }
   var tokenManager: TokenManager { get }

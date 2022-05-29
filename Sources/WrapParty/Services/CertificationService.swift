@@ -21,10 +21,10 @@ protocol CertificationServiceProviding: ServiceProviding {}
 
 // MARK: - CertificationService
 
-struct CertificationService: CertificationServiceProviding {
+public struct CertificationService: CertificationServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,15 +32,15 @@ struct CertificationService: CertificationServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func movieCertifications() async throws -> CertificationList {
+  public func movieCertifications() async throws -> CertificationList {
     try await callEndpoint(routable: Router.movie)
   }
 
-  func tvCertifications() async throws -> CertificationList {
+  public func tvCertifications() async throws -> CertificationList {
     try await callEndpoint(routable: Router.tv)
   }
 }

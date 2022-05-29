@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum TrendingTimeWindow: String, CaseIterable, Codable {
+public enum TrendingTimeWindow: String, CaseIterable, Codable {
   case day
   case week
 }

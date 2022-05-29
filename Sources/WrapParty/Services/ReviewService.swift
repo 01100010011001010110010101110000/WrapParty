@@ -21,10 +21,10 @@ protocol ReviewServiceProviding: ServiceProviding {}
 
 // MARK: - ReviewService
 
-struct ReviewService: SearchServiceProviding {
+public struct ReviewService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,11 +32,11 @@ struct ReviewService: SearchServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func review(id: String) async throws -> Review {
+  public func review(id: String) async throws -> Review {
     try await callEndpoint(routable: Router.review(id: id))
   }
 }

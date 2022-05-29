@@ -22,10 +22,10 @@ protocol TvEpisodeServiceProviding: ServiceProviding & DetailAppendable {}
 
 // MARK: - TvEpisodeService
 
-struct TvEpisodeService: TvEpisodeServiceProviding {
+public struct TvEpisodeService: TvEpisodeServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -33,49 +33,49 @@ struct TvEpisodeService: TvEpisodeServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func details(for id: Int, including: Set<Appendable> = []) async throws -> TvEpisodeDetails {
+  public func details(for id: Int, including: Set<Appendable> = []) async throws -> TvEpisodeDetails {
     try await details(forShow: id, forSeason: 1, episodeNumber: 1, including: including, language: nil)
   }
 
-  func details(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, including: Set<Appendable> = []) async throws -> TvEpisodeDetails {
+  public func details(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, including: Set<Appendable> = []) async throws -> TvEpisodeDetails {
     try await details(forShow: id, forSeason: seasonNumber, episodeNumber: episodeNumber, including: including, language: nil)
   }
 
-  func details(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, including: Set<Appendable> = [], language: String? = nil) async throws -> TvEpisodeDetails {
+  public func details(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, including: Set<Appendable> = [], language: String? = nil) async throws -> TvEpisodeDetails {
     try await callEndpoint(routable: Router.details(showId: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber, language: language, appending: including))
   }
 
-  func changes(forEpisodeId episodeId: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
+  public func changes(forEpisodeId episodeId: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
     try await callEndpoint(routable: Router.changes(episodeId: episodeId, startDate: startDate, endDate: endDate, page: page))
   }
 
-  func credits(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil) async throws -> MediaCredits {
+  public func credits(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil) async throws -> MediaCredits {
     try await callEndpoint(routable: Router.credits(showId: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber, language: language))
   }
 
-  func externalIds(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil) async throws -> TvEpisodeExternalIds {
+  public func externalIds(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil) async throws -> TvEpisodeExternalIds {
     try await callEndpoint(routable: Router.externalIds(showId: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber, language: language))
   }
 
-  func images(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> TvEpisodeImages {
+  public func images(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil, imageLanguages: Set<String>? = []) async throws -> TvEpisodeImages {
     try await callEndpoint(routable: Router.images(id: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber, language: language, imageLanguages: imageLanguages))
   }
 
-  func translations(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil) async throws -> TvEpisodeTranslations {
+  public func translations(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil) async throws -> TvEpisodeTranslations {
     try await callEndpoint(routable: Router.translations(id: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber, language: language))
   }
 
-  func videos(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil, videoLanguages: Set<String>? = []) async throws -> Results<MediaVideo> {
+  public func videos(forShow id: Int, forSeason seasonNumber: Int, episodeNumber: Int, language: String? = nil, videoLanguages: Set<String>? = []) async throws -> Results<MediaVideo> {
     try await callEndpoint(routable: Router.videos(id: id, seasonNumber: seasonNumber, episodeNumber: episodeNumber, language: language, videoLanguages: videoLanguages))
   }
 }
 
 extension TvEpisodeService {
-  enum Appendable: String, CaseIterable {
+  public enum Appendable: String, CaseIterable {
     case credits
     case externalIds = "external_ids"
     case images

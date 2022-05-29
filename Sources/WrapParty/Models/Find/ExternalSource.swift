@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum ExternalSource: String, Codable {
+public enum ExternalSource: String, Codable {
   case imdb = "imdb_id"
   case tvdb = "tvdb_id"
   case facebook = "facebook_id"

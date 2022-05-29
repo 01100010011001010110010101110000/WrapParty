@@ -18,13 +18,13 @@ import Logging
 public class WrapParty {
   // MARK: Lifecycle
 
-  init<C: Configuration>(configuration: C) {
+  public init<C: Configuration>(configuration: C) {
     loader = configuration.loader
     logger = configuration.logger
     tokenManager = TokenManager(token: configuration.apiToken)
   }
 
-  convenience init() {
+  public convenience init() {
     let configuration = DefaultConfiguration()
     self.init(configuration: configuration)
   }

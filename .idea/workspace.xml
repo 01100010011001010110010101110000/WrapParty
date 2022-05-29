@@ -4,9 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Correct directory structure">
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Add other platform targets">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Package.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Package.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/WrapPartyError.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/WrapPartyError.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Protocols/DetailAppendable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/DetailAppendable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Protocols/ServiceProviding.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/ServiceProviding.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CertificationService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CertificationService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CollectionService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CollectionService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CompanyService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CompanyService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ConfigurationService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ConfigurationService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CreditService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CreditService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/DiscoveryService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/DiscoveryService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/FindService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/FindService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/GenreService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/GenreService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/KeywordService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/KeywordService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/NetworkService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/NetworkService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ReviewService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ReviewService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/SearchService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/SearchService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TrendingService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TrendingService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeGroupService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeGroupService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/WatchProviderService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/WatchProviderService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Utilities/TokenManager.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Utilities/TokenManager.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,10 +43,38 @@
     </projectState>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="make-services-public" />
+                    <option name="lastUsedInstant" value="1653852745" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1653849520" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="GithubProjectSettings">
     <option name="branchProtectionPatterns">
@@ -104,11 +156,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testallMovieSearchResults" />
         <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testSearchMovie" />
-        <item itemvalue="Swift Package Test.CollectionServiceIntegrationTests.testGetCollectionTranslations" />
+        <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testallMovieSearchResults" />
         <item itemvalue="Swift Package Test.GenreServiceIntegrationTests" />
         <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests" />
+        <item itemvalue="Swift Package Test.CollectionServiceIntegrationTests.testGetCollectionTranslations" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +173,7 @@
       <option name="presentableId" value="Default" />
       <updated>1651068242295</updated>
       <workItem from="1651068243977" duration="716000" />
-      <workItem from="1653765750145" duration="1142000" />
+      <workItem from="1653765750145" duration="3306000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>
@@ -158,7 +210,21 @@
       <option name="project" value="LOCAL" />
       <updated>1653765819699</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add other platform targets">
+      <created>1653849037729</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653849037729</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add other platform targets">
+      <created>1653849059185</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653849059185</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,7 +245,15 @@
     <MESSAGE value="Add project config files to git" />
     <MESSAGE value="Checkin package resolved file" />
     <MESSAGE value="Correct directory structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct directory structure" />
+    <MESSAGE value="Add other platform targets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add other platform targets" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint enabled="true" log-message="true" log-stack="true" type="CidrExceptionBreakpoint" />
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

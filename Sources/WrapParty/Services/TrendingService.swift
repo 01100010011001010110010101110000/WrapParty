@@ -21,10 +21,10 @@ protocol TrendingServiceProviding: ServiceProviding {}
 
 // MARK: - TrendingService
 
-struct TrendingService: TrendingServiceProviding {
+public struct TrendingService: TrendingServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,20 +32,20 @@ struct TrendingService: TrendingServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func trending(for mediaType: TrendingMediaType, in window: TrendingTimeWindow, page: Int? = nil) async throws -> ResultPage<InlineMediaListResult> {
+  public func trending(for mediaType: TrendingMediaType, in window: TrendingTimeWindow, page: Int? = nil) async throws -> ResultPage<InlineMediaListResult> {
     try await callEndpoint(routable: Router.trending(mediaType: mediaType, window: window, page: page))
   }
 
-  func trendingSequence(for mediaType: TrendingMediaType, in window: TrendingTimeWindow) async -> PagedQuerySequence<InlineMediaListResult> {
+  public func trendingSequence(for mediaType: TrendingMediaType, in window: TrendingTimeWindow) async -> PagedQuerySequence<InlineMediaListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.trending(mediaType: mediaType, window: window, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func allTrending(for mediaType: TrendingMediaType, in window: TrendingTimeWindow) async throws -> [InlineMediaListResult] {
+  public func allTrending(for mediaType: TrendingMediaType, in window: TrendingTimeWindow) async throws -> [InlineMediaListResult] {
     try await trendingSequence(for: mediaType, in: window).allResults()
   }
 }

@@ -21,10 +21,10 @@ protocol ConfigurationServiceProviding: ServiceProviding {}
 
 // MARK: - ConfigurationService
 
-struct ConfigurationService: SearchServiceProviding {
+public struct ConfigurationService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,31 +32,31 @@ struct ConfigurationService: SearchServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func configuration() async throws -> TmdbConfiguration {
+  public func configuration() async throws -> TmdbConfiguration {
     try await callEndpoint(routable: Router.configuration)
   }
 
-  func countries() async throws -> [TmdbConfiguration.Country] {
+  public func countries() async throws -> [TmdbConfiguration.Country] {
     try await callEndpoint(routable: Router.countries)
   }
 
-  func jobs() async throws -> [TmdbConfiguration.DepartmentJobs] {
+  public func jobs() async throws -> [TmdbConfiguration.DepartmentJobs] {
     try await callEndpoint(routable: Router.jobs)
   }
 
-  func languages() async throws -> [SpokenLanguage] {
+  public func languages() async throws -> [SpokenLanguage] {
     try await callEndpoint(routable: Router.languages)
   }
 
-  func primaryTranslations() async throws -> [String] {
+  public func primaryTranslations() async throws -> [String] {
     try await callEndpoint(routable: Router.primaryTranslations)
   }
 
-  func timezones() async throws -> [TmdbConfiguration.Timezones] {
+  public func timezones() async throws -> [TmdbConfiguration.Timezones] {
     try await callEndpoint(routable: Router.timezones)
   }
 }

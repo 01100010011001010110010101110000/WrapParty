@@ -21,10 +21,10 @@ protocol ChangesServiceProviding: ServiceProviding {}
 
 // MARK: - ChangesService
 
-struct ChangesService: ChangesServiceProviding {
+public struct ChangesService: ChangesServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,20 +32,20 @@ struct ChangesService: ChangesServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func changes(for mediaType: MediaType, start: Date? = nil, end: Date? = nil, page: Int? = nil) async throws -> ResultPage<ChangedEntity> {
+  public func changes(for mediaType: MediaType, start: Date? = nil, end: Date? = nil, page: Int? = nil) async throws -> ResultPage<ChangedEntity> {
     try await callEndpoint(routable: Router.changes(mediaType: mediaType, start: start, end: end, page: page))
   }
 
-  func changesSequence(for mediaType: MediaType, start: Date? = nil, end: Date? = nil) async -> PagedQuerySequence<ChangedEntity> {
+  public func changesSequence(for mediaType: MediaType, start: Date? = nil, end: Date? = nil) async -> PagedQuerySequence<ChangedEntity> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.changes(mediaType: mediaType, start: start, end: end, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func allChanges(for mediaType: MediaType, start: Date? = nil, end: Date? = nil) async throws -> [ChangedEntity] {
+  public func allChanges(for mediaType: MediaType, start: Date? = nil, end: Date? = nil) async throws -> [ChangedEntity] {
     try await changesSequence(for: mediaType, start: start, end: end).allResults()
   }
 }

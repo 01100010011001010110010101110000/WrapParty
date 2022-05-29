@@ -21,10 +21,10 @@ protocol CollectionServiceProviding: ServiceProviding {}
 
 // MARK: - CollectionService
 
-struct CollectionService: SearchServiceProviding {
+public struct CollectionService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,19 +32,19 @@ struct CollectionService: SearchServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func collection(id: Int, language: String? = nil) async throws -> CollectionDetails {
+  public func collection(id: Int, language: String? = nil) async throws -> CollectionDetails {
     try await callEndpoint(routable: Router.collection(id: id, language: language))
   }
 
-  func images(id: Int, language: String? = nil) async throws -> CollectionImages {
+  public func images(id: Int, language: String? = nil) async throws -> CollectionImages {
     try await callEndpoint(routable: Router.images(id: id, language: language))
   }
 
-  func translations(id: Int, language: String? = nil) async throws -> CollectionTranslations {
+  public func translations(id: Int, language: String? = nil) async throws -> CollectionTranslations {
     try await callEndpoint(routable: Router.translations(id: id, language: language))
   }
 }

@@ -21,10 +21,10 @@ protocol CompanyServiceProviding: ServiceProviding {}
 
 // MARK: - CompanyService
 
-struct CompanyService: CompanyServiceProviding {
+public struct CompanyService: CompanyServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,19 +32,19 @@ struct CompanyService: CompanyServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func details(for id: Int) async throws -> CompanyDetails {
+  public func details(for id: Int) async throws -> CompanyDetails {
     try await callEndpoint(routable: Router.details(id: id))
   }
 
-  func alternativeNames(for id: Int) async throws -> Results<AlternativeName> {
+  public func alternativeNames(for id: Int) async throws -> Results<AlternativeName> {
     try await callEndpoint(routable: Router.alternativeNames(id: id))
   }
 
-  func images(for id: Int) async throws -> CorporateImages {
+  public func images(for id: Int) async throws -> CorporateImages {
     try await callEndpoint(routable: Router.images(id: id))
   }
 }

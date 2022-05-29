@@ -21,10 +21,10 @@ protocol CreditServiceProviding: ServiceProviding {}
 
 // MARK: - CreditService
 
-struct CreditService: SearchServiceProviding {
+public struct CreditService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,11 +32,11 @@ struct CreditService: SearchServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func credit(id: String) async throws -> CreditDetails {
+  public func credit(id: String) async throws -> CreditDetails {
     try await callEndpoint(routable: Router.credit(id: id))
   }
 }

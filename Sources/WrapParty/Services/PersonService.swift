@@ -22,10 +22,10 @@ protocol PersonServiceProviding: ServiceProviding {}
 
 // MARK: - PersonService
 
-struct PersonService: PersonServiceProviding {
+public struct PersonService: PersonServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -33,79 +33,79 @@ struct PersonService: PersonServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
+  public func changes(for id: Int, startDate: Date? = nil, endDate: Date? = nil, page: Int? = nil) async throws -> MediaChanges {
     try await callEndpoint(routable: Router.changes(id: id, startDate: startDate, endDate: endDate, page: page))
   }
 
-  func combinedCredits(for id: Int, language: String? = nil) async throws -> PersonCombinedCredits {
+  public func combinedCredits(for id: Int, language: String? = nil) async throws -> PersonCombinedCredits {
     try await callEndpoint(routable: Router.combinedCredits(id: id, language: language))
   }
 
-  func details(for id: Int, including: Set<Appendable> = []) async throws -> Person {
+  public func details(for id: Int, including: Set<Appendable> = []) async throws -> Person {
     try await callEndpoint(routable: Router.details(id: id, appending: including, language: nil, page: nil))
   }
 
-  func details(for id: Int, including: Set<Appendable> = [], language: String? = nil, page: Int? = nil) async throws -> Person {
+  public func details(for id: Int, including: Set<Appendable> = [], language: String? = nil, page: Int? = nil) async throws -> Person {
     try await callEndpoint(routable: Router.details(id: id, appending: including, language: language, page: page))
   }
 
-  func externalIds(for id: Int, language: String? = nil) async throws -> ExternalIds {
+  public func externalIds(for id: Int, language: String? = nil) async throws -> ExternalIds {
     try await callEndpoint(routable: Router.externalIds(id: id, language: language))
   }
 
-  func images(for id: Int) async throws -> PersonImages {
+  public func images(for id: Int) async throws -> PersonImages {
     try await callEndpoint(routable: Router.images(id: id))
   }
 
-  func movieCredits(for id: Int, language: String? = nil) async throws -> PersonMovieCredits {
+  public func movieCredits(for id: Int, language: String? = nil) async throws -> PersonMovieCredits {
     try await callEndpoint(routable: Router.movieCredits(id: id, language: language))
   }
 
-  func allTaggedImages(for id: Int, language: String? = nil) async throws -> [PersonTaggedImageAsset] {
+  public func allTaggedImages(for id: Int, language: String? = nil) async throws -> [PersonTaggedImageAsset] {
     try await taggedImageSequence(for: id, language: language).allResults()
   }
 
-  func taggedImages(for id: Int, language: String? = nil, page: Int? = nil) async throws -> ResultPage<PersonTaggedImageAsset> {
+  public func taggedImages(for id: Int, language: String? = nil, page: Int? = nil) async throws -> ResultPage<PersonTaggedImageAsset> {
     try await callEndpoint(routable: Router.taggedImages(id: id, language: language, page: page))
   }
 
-  func taggedImageSequence(for id: Int, language: String? = nil) async throws -> PagedQuerySequence<PersonTaggedImageAsset> {
+  public func taggedImageSequence(for id: Int, language: String? = nil) async throws -> PagedQuerySequence<PersonTaggedImageAsset> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.taggedImages(id: id, language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func translations(for id: Int, language: String? = nil) async throws -> PersonTranslations {
+  public func translations(for id: Int, language: String? = nil) async throws -> PersonTranslations {
     try await callEndpoint(routable: Router.translations(id: id, language: language))
   }
 
-  func tvCredits(for id: Int, language: String? = nil) async throws -> PersonTvCredits {
+  public func tvCredits(for id: Int, language: String? = nil) async throws -> PersonTvCredits {
     try await callEndpoint(routable: Router.tvCredits(id: id, language: language))
   }
 
-  func latest(language: String? = nil) async throws -> Person {
+  public func latest(language: String? = nil) async throws -> Person {
     try await callEndpoint(routable: Router.latest(language: language))
   }
 
-  func allPopular(language: String? = nil) async throws -> [PersonListResult] {
+  public func allPopular(language: String? = nil) async throws -> [PersonListResult] {
     try await popularSequence(language: language).allResults()
   }
 
-  func popular(language: String? = nil, page: Int? = nil) async throws -> ResultPage<PersonListResult> {
+  public func popular(language: String? = nil, page: Int? = nil) async throws -> ResultPage<PersonListResult> {
     try await callEndpoint(routable: Router.popular(language: language, page: page))
   }
 
-  func popularSequence(language: String? = nil) async throws -> PagedQuerySequence<PersonListResult> {
+  public func popularSequence(language: String? = nil) async throws -> PagedQuerySequence<PersonListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.popular(language: language, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 
 extension PersonService {
-  enum Appendable: String, CaseIterable {
+  public enum Appendable: String, CaseIterable {
     case changes
     case combinedCredits = "combined_credits"
     case externalIds = "external_ids"

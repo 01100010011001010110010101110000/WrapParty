@@ -14,10 +14,10 @@
 
 import Foundation
 
-actor TokenManager {
+public actor TokenManager {
   // MARK: Lifecycle
 
-  init(token: String) {
+  public init(token: String) {
     apiToken = token
   }
 

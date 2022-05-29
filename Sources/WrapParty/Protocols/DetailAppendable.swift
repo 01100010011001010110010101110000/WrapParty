@@ -15,7 +15,7 @@
 import Foundation
 
 /// Conforming services support TMDB's `append_to_response` query parameter on their detail endpoint
-protocol DetailAppendable: ServiceProviding {
+public protocol DetailAppendable: ServiceProviding {
   /// The model this service vends
   associatedtype DetailModel: Identifiable & Codable
   associatedtype Appendable: Hashable & RawRepresentable where Appendable.RawValue == String

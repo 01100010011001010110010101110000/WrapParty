@@ -21,10 +21,10 @@ protocol GenreServiceProviding: ServiceProviding {}
 
 // MARK: - GenreService
 
-struct GenreService: GenreServiceProviding {
+public struct GenreService: GenreServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,15 +32,15 @@ struct GenreService: GenreServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func movieGenres(language: String? = nil) async throws -> TmdbGenres {
+  public func movieGenres(language: String? = nil) async throws -> TmdbGenres {
     try await callEndpoint(routable: Router.movie(language: language))
   }
 
-  func tvGenres(language: String? = nil) async throws -> TmdbGenres {
+  public func tvGenres(language: String? = nil) async throws -> TmdbGenres {
     try await callEndpoint(routable: Router.tv(language: language))
   }
 }

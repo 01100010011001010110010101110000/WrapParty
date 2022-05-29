@@ -21,10 +21,10 @@ protocol TvEpisodeGroupServiceProviding: ServiceProviding {}
 
 // MARK: - TvEpisodeGroupService
 
-struct TvEpisodeGroupService: TvEpisodeGroupServiceProviding {
+public struct TvEpisodeGroupService: TvEpisodeGroupServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,11 +32,11 @@ struct TvEpisodeGroupService: TvEpisodeGroupServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func details(for id: String, language: String? = nil) async throws -> TvEpisodeGroup {
+  public func details(for id: String, language: String? = nil) async throws -> TvEpisodeGroup {
     try await callEndpoint(routable: Router.details(id: id, language: language))
   }
 }

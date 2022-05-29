@@ -21,10 +21,10 @@ protocol FindServiceProviding: ServiceProviding {}
 
 // MARK: - FindService
 
-struct FindService: FindServiceProviding {
+public struct FindService: FindServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,11 +32,11 @@ struct FindService: FindServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func find(externalId: String, externalSource: ExternalSource, language: String? = nil) async throws -> FindResults {
+  public func find(externalId: String, externalSource: ExternalSource, language: String? = nil) async throws -> FindResults {
     try await callEndpoint(routable: Router.find(externalId: externalId, externalSource: externalSource, language: language))
   }
 }

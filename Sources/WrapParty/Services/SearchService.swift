@@ -21,10 +21,10 @@ protocol SearchServiceProviding: ServiceProviding {}
 
 // MARK: - SearchService
 
-struct SearchService: SearchServiceProviding {
+public struct SearchService: SearchServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,97 +32,97 @@ struct SearchService: SearchServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func searchMovies(matching query: String, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
+  public func searchMovies(matching query: String, parameters: [MovieSearchParams] = []) async throws -> ResultPage<Movie> {
     try await callEndpoint(routable: Router.movies(query: query, parameters: parameters))
   }
 
-  func allMovieSearchResults(matching query: String, parameters: [MovieSearchParams] = []) async throws -> [Movie] {
+  public func allMovieSearchResults(matching query: String, parameters: [MovieSearchParams] = []) async throws -> [Movie] {
     try await searchMovieSequence(matching: query, parameters: parameters).allResults()
   }
 
-  func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {
+  public func searchMovieSequence(matching query: String, parameters: [MovieSearchParams] = []) async -> PagedQuerySequence<Movie> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.movies(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchMultiple(matching query: String, parameters: [MultiSearchParams] = []) async throws -> ResultPage<InlineMediaListResult> {
+  public func searchMultiple(matching query: String, parameters: [MultiSearchParams] = []) async throws -> ResultPage<InlineMediaListResult> {
     try await callEndpoint(routable: Router.multiple(query: query, parameters: parameters))
   }
 
-  func allMultiSearchResults(matching query: String, parameters: [MultiSearchParams] = []) async throws -> [InlineMediaListResult] {
+  public func allMultiSearchResults(matching query: String, parameters: [MultiSearchParams] = []) async throws -> [InlineMediaListResult] {
     try await searchMultipleSequence(matching: query, parameters: parameters).allResults()
   }
 
-  func searchMultipleSequence(matching query: String, parameters: [MultiSearchParams] = []) async -> PagedQuerySequence<InlineMediaListResult> {
+  public func searchMultipleSequence(matching query: String, parameters: [MultiSearchParams] = []) async -> PagedQuerySequence<InlineMediaListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.multiple(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchPeople(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> ResultPage<PersonListResult> {
+  public func searchPeople(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> ResultPage<PersonListResult> {
     try await callEndpoint(routable: Router.people(query: query, parameters: parameters))
   }
 
-  func allPeopleSearchResults(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> [PersonListResult] {
+  public func allPeopleSearchResults(matching query: String, parameters: [PeopleSearchParams] = []) async throws -> [PersonListResult] {
     try await searchPeopleSequence(matching: query, parameters: parameters).allResults()
   }
 
-  func searchPeopleSequence(matching query: String, parameters: [PeopleSearchParams] = []) async -> PagedQuerySequence<PersonListResult> {
+  public func searchPeopleSequence(matching query: String, parameters: [PeopleSearchParams] = []) async -> PagedQuerySequence<PersonListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.people(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchTv(matching query: String, parameters: [TvSearchParams] = []) async throws -> ResultPage<TvListResult> {
+  public func searchTv(matching query: String, parameters: [TvSearchParams] = []) async throws -> ResultPage<TvListResult> {
     try await callEndpoint(routable: Router.tv(query: query, parameters: parameters))
   }
 
-  func allTvSearchResults(matching query: String, parameters: [TvSearchParams] = []) async throws -> [TvListResult] {
+  public func allTvSearchResults(matching query: String, parameters: [TvSearchParams] = []) async throws -> [TvListResult] {
     try await searchTvSequence(matching: query, parameters: parameters).allResults()
   }
 
-  func searchTvSequence(matching query: String, parameters: [TvSearchParams] = []) async -> PagedQuerySequence<TvListResult> {
+  public func searchTvSequence(matching query: String, parameters: [TvSearchParams] = []) async -> PagedQuerySequence<TvListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.tv(query: query, parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchCompanies(matching query: String, page: Int? = nil) async throws -> ResultPage<CompanyListResult> {
+  public func searchCompanies(matching query: String, page: Int? = nil) async throws -> ResultPage<CompanyListResult> {
     try await callEndpoint(routable: Router.companies(query: query, page: page))
   }
 
-  func allCompanySearchResults(matching query: String) async throws -> [CompanyListResult] {
+  public func allCompanySearchResults(matching query: String) async throws -> [CompanyListResult] {
     try await searchCompaniesSequence(matching: query, page: 1).allResults()
   }
 
-  func searchCompaniesSequence(matching query: String, page: Int? = nil) async throws -> PagedQuerySequence<CompanyListResult> {
+  public func searchCompaniesSequence(matching query: String, page: Int? = nil) async throws -> PagedQuerySequence<CompanyListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.companies(query: query, page: page))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchCollections(matching query: String, language: String? = nil, page: Int? = nil) async throws -> ResultPage<CollectionListResult> {
+  public func searchCollections(matching query: String, language: String? = nil, page: Int? = nil) async throws -> ResultPage<CollectionListResult> {
     try await callEndpoint(routable: Router.collections(query: query, language: language, page: page))
   }
 
-  func allCollectionSearchResults(matching query: String, language: String? = nil) async throws -> [CollectionListResult] {
+  public func allCollectionSearchResults(matching query: String, language: String? = nil) async throws -> [CollectionListResult] {
     try await searchCollectionsSequence(matching: query, language: language).allResults()
   }
 
-  func searchCollectionsSequence(matching query: String, language: String? = nil, page: Int? = nil) async throws -> PagedQuerySequence<CollectionListResult> {
+  public func searchCollectionsSequence(matching query: String, language: String? = nil, page: Int? = nil) async throws -> PagedQuerySequence<CollectionListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.collections(query: query, language: language, page: page))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func searchKeywords(matching query: String, page: Int? = nil) async throws -> ResultPage<Keyword> {
+  public func searchKeywords(matching query: String, page: Int? = nil) async throws -> ResultPage<Keyword> {
     try await callEndpoint(routable: Router.keywords(query: query, page: page))
   }
 
-  func allKeywordSearchResults(matching query: String) async throws -> [Keyword] {
+  public func allKeywordSearchResults(matching query: String) async throws -> [Keyword] {
     try await searchKeywordsSequence(matching: query).allResults()
   }
 
-  func searchKeywordsSequence(matching query: String, page: Int? = nil) async throws -> PagedQuerySequence<Keyword> {
+  public func searchKeywordsSequence(matching query: String, page: Int? = nil) async throws -> PagedQuerySequence<Keyword> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.keywords(query: query, page: page))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }

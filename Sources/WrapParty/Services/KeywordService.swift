@@ -21,10 +21,10 @@ protocol KeywordServiceProviding: ServiceProviding {}
 
 // MARK: - KeywordService
 
-struct KeywordService: KeywordServiceProviding {
+public struct KeywordService: KeywordServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,24 +32,24 @@ struct KeywordService: KeywordServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func details(id: Int) async throws -> Keyword {
+  public func details(id: Int) async throws -> Keyword {
     try await callEndpoint(routable: Router.details(id: id))
   }
 
-  func moviesWithKeyword(id: Int, language: String? = nil, includeAdult: Bool? = nil, page: Int? = nil) async throws -> ResultPage<MovieListResult> {
+  public func moviesWithKeyword(id: Int, language: String? = nil, includeAdult: Bool? = nil, page: Int? = nil) async throws -> ResultPage<MovieListResult> {
     try await callEndpoint(routable: Router.movieWithKeyword(keywordId: id, language: language, includeAdult: includeAdult, page: page))
   }
 
-  func moviesWithKeywordSequence(id: Int, language: String? = nil, includeAdult: Bool? = nil) async -> PagedQuerySequence<MovieListResult> {
+  public func moviesWithKeywordSequence(id: Int, language: String? = nil, includeAdult: Bool? = nil) async -> PagedQuerySequence<MovieListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.movieWithKeyword(keywordId: id, language: language, includeAdult: includeAdult, page: 1))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func allMoviesWithKeyword(id: Int, language: String? = nil, includeAdult: Bool? = nil) async throws -> [MovieListResult] {
+  public func allMoviesWithKeyword(id: Int, language: String? = nil, includeAdult: Bool? = nil) async throws -> [MovieListResult] {
     try await moviesWithKeywordSequence(id: id, language: language, includeAdult: includeAdult).allResults()
   }
 }

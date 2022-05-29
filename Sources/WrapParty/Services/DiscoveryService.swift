@@ -21,10 +21,10 @@ protocol DiscoveryServiceProviding: ServiceProviding {}
 
 // MARK: - DiscoveryService
 
-struct DiscoveryService: DiscoveryServiceProviding {
+public struct DiscoveryService: DiscoveryServiceProviding {
   // MARK: Lifecycle
 
-  init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
+  public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {
     self.dataLoader = dataLoader
     self.logger = logger
     self.tokenManager = tokenManager
@@ -32,31 +32,31 @@ struct DiscoveryService: DiscoveryServiceProviding {
 
   // MARK: Internal
 
-  let dataLoader: DataLoading
-  let logger: Logger
-  let tokenManager: TokenManager
+  public let dataLoader: DataLoading
+  public let logger: Logger
+  public let tokenManager: TokenManager
 
-  func discoverMovie(parameters: [MovieDiscoveryParameters] = []) async throws -> ResultPage<MovieListResult> {
+  public func discoverMovie(parameters: [MovieDiscoveryParameters] = []) async throws -> ResultPage<MovieListResult> {
     try await callEndpoint(routable: Router.movie(parameters: parameters))
   }
 
-  func discoverMovieSequence(parameters: [MovieDiscoveryParameters] = []) async throws -> PagedQuerySequence<MovieListResult> {
+  public func discoverMovieSequence(parameters: [MovieDiscoveryParameters] = []) async throws -> PagedQuerySequence<MovieListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.movie(parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 
-  func discoverTv(parameters: [TvDiscoveryParameters] = []) async throws -> ResultPage<TvListResult> {
+  public func discoverTv(parameters: [TvDiscoveryParameters] = []) async throws -> ResultPage<TvListResult> {
     try await callEndpoint(routable: Router.tv(parameters: parameters))
   }
 
-  func discoverTvSequence(parameters: [TvDiscoveryParameters] = []) async throws -> PagedQuerySequence<TvListResult> {
+  public func discoverTvSequence(parameters: [TvDiscoveryParameters] = []) async throws -> PagedQuerySequence<TvListResult> {
     let request = await tokenManager.vendAuthenticatedRequest(for: Router.tv(parameters: parameters))
     return .init(initialRequest: request, dataLoader: dataLoader, logger: logger)
   }
 }
 
 extension DiscoveryService {
-  enum MovieDiscoverySort: String {
+  public enum MovieDiscoverySort: String {
     case popularityAscending = "popularity.asc"
     case popularityDescending = "popularity.desc"
     case releaseDateAscending = "release_date.asc"
@@ -268,7 +268,7 @@ extension DiscoveryService {
     }
   }
 
-  enum TvDiscoverySort: String {
+  public enum TvDiscoverySort: String {
     case popularityAscending = "popularity.asc"
     case popularityDescending = "popularity.desc"
     case firstAirDateAscending = "first_air_date.asc"

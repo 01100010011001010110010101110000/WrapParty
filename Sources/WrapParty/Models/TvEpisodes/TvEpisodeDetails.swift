@@ -61,7 +61,3 @@ public struct TvEpisodeDetails: Codable {
     case voteCount = "vote_count"
   }
 }
-
-// MARK: Identifiable
-
-extension TvEpisodeDetails: Identifiable {}

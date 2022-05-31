@@ -260,10 +260,6 @@ public struct TvEpisodeListResult: Codable {
   }
 }
 
-// MARK: - TvShow + Identifiable
-
-extension TvShow: Identifiable {}
-
 public extension TvShow {
   enum ShowStatus: Int {
     case returningSeries = 0

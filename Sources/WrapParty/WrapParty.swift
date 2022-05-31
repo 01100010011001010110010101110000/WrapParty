@@ -48,32 +48,26 @@ public class WrapParty {
   private let tokenManager: TokenManager
 }
 
-public extension WrapParty {
-  func tmdbConfiguration() async throws -> TmdbConfiguration {
-    try await configurationService().configuration()
-  }
-}
-
-public extension WrapParty {
-  func certificationService() -> CertificationService { CertificationService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func changesService() -> ChangesService { ChangesService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func collectionService() -> CollectionService { CollectionService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func companyService() -> CompanyService { CompanyService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func configurationService() -> ConfigurationService { ConfigurationService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func creditService() -> CreditService { CreditService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func discoveryService() -> DiscoveryService { DiscoveryService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func findService() -> FindService { FindService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func genreService() -> GenreService { GenreService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func keywordService() -> KeywordService { KeywordService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func movieService() -> MovieService { MovieService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func networkService() -> NetworkService { NetworkService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func personService() -> PersonService { PersonService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func reviewService() -> ReviewService { ReviewService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func searchService() -> SearchService { SearchService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func trendingService() -> TrendingService { TrendingService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func tvEpisodeGroupService() -> TvEpisodeGroupService { TvEpisodeGroupService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func tvEpisodeService() -> TvEpisodeService { TvEpisodeService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func tvSeasonService() -> TvSeasonService { TvSeasonService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func tvService() -> TvService { TvService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
-  func watchProviderService() -> WatchProviderService { WatchProviderService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+extension WrapParty: WrapPartyProviding {
+  public func certificationService() -> CertificationService { CertificationService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func changesService() -> ChangesService { ChangesService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func collectionService() -> CollectionService { CollectionService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func companyService() -> CompanyService { CompanyService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func configurationService() -> ConfigurationService { ConfigurationService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func creditService() -> CreditService { CreditService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func discoveryService() -> DiscoveryService { DiscoveryService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func findService() -> FindService { FindService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func genreService() -> GenreService { GenreService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func keywordService() -> KeywordService { KeywordService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func movieService() -> MovieService { MovieService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func networkService() -> NetworkService { NetworkService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func personService() -> PersonService { PersonService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func reviewService() -> ReviewService { ReviewService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func searchService() -> SearchService { SearchService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func trendingService() -> TrendingService { TrendingService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func tvEpisodeGroupService() -> TvEpisodeGroupService { TvEpisodeGroupService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func tvEpisodeService() -> TvEpisodeService { TvEpisodeService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func tvSeasonService() -> TvSeasonService { TvSeasonService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func tvService() -> TvService { TvService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
+  public func watchProviderService() -> WatchProviderService { WatchProviderService(dataLoader: loader, logger: logger, tokenManager: tokenManager) }
 }

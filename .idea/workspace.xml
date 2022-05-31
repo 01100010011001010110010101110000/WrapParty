@@ -4,15 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Re-add gitignore">
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Use stable swift log version">
+      <change afterPath="$PROJECT_DIR$/Sources/WrapParty/Extensions/Models+Identifiable.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/WrapPartyProviding.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Package.resolved" beforeDir="false" afterPath="$PROJECT_DIR$/Package.resolved" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Package.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Package.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/Movie.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/Movie.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvShow.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvShow.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -28,7 +38,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="service-factory-methods" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,6 +52,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="additional-protocols" />
+                    <option name="lastUsedInstant" value="1654030948" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="public-default-config" />
                     <option name="lastUsedInstant" value="1653856025" />
@@ -178,7 +192,8 @@
       <workItem from="1653934701206" duration="74000" />
       <workItem from="1653934783219" duration="634000" />
       <workItem from="1653936078718" duration="1118000" />
-      <workItem from="1654009460282" duration="954000" />
+      <workItem from="1654009460282" duration="3959000" />
+      <workItem from="1654030307753" duration="2330000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>
@@ -257,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653858779787</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Use stable swift log version">
+      <created>1654010435791</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1654010435791</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,7 +305,8 @@
     <MESSAGE value="Add public factory methods for every service struct" />
     <MESSAGE value="Make DefaultConfiguration public" />
     <MESSAGE value="Small DRY" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small DRY" />
+    <MESSAGE value="Use stable swift log version" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use stable swift log version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

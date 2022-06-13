@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - MovieServiceProviding
 
-protocol MovieServiceProviding: ServiceProviding & DetailAppendable {
+public protocol MovieServiceProviding: ServiceProviding & DetailAppendable {
   func details(for id: Int, including: Set<Appendable>, language: String?, imageLanguages: Set<String>?, page: Int?) async throws -> Movie
 }
 

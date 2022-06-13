@@ -17,7 +17,9 @@ import Logging
 
 // MARK: - TrendingServiceProviding
 
-protocol TrendingServiceProviding: ServiceProviding {}
+public protocol TrendingServiceProviding: ServiceProviding {
+  func trending(for mediaType: TrendingMediaType, in window: TrendingTimeWindow, page: Int?) async throws -> ResultPage<InlineMediaListResult>
+}
 
 // MARK: - TrendingService
 

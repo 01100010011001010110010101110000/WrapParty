@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - FindServiceProviding
 
-protocol FindServiceProviding: ServiceProviding {}
+public protocol FindServiceProviding: ServiceProviding {}
 
 // MARK: - FindService
 

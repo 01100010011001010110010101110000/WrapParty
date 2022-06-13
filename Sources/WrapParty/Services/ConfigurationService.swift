@@ -17,7 +17,9 @@ import Logging
 
 // MARK: - ConfigurationServiceProviding
 
-protocol ConfigurationServiceProviding: ServiceProviding {}
+public protocol ConfigurationServiceProviding: ServiceProviding {
+  func configuration() async throws -> TmdbConfiguration
+}
 
 // MARK: - ConfigurationService
 

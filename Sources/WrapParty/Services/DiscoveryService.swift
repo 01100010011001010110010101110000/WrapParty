@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - DiscoveryServiceProviding
 
-protocol DiscoveryServiceProviding: ServiceProviding {}
+public protocol DiscoveryServiceProviding: ServiceProviding {}
 
 // MARK: - DiscoveryService
 

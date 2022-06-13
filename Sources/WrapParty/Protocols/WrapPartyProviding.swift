@@ -27,9 +27,3 @@ public protocol WrapPartyProviding {
   func tvService() -> TvService
   func watchProviderService() -> WatchProviderService
 }
-
-public extension WrapPartyProviding {
-  func tmdbConfiguration() async throws -> TmdbConfiguration {
-    try await configurationService().configuration()
-  }
-}

@@ -18,7 +18,7 @@ import Logging
 
 // MARK: - TvEpisodeServiceProviding
 
-protocol TvEpisodeServiceProviding: ServiceProviding & DetailAppendable {}
+public protocol TvEpisodeServiceProviding: ServiceProviding & DetailAppendable {}
 
 // MARK: - TvEpisodeService
 

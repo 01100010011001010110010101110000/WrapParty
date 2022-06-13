@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - GenreServiceProviding
 
-protocol GenreServiceProviding: ServiceProviding {}
+public protocol GenreServiceProviding: ServiceProviding {}
 
 // MARK: - GenreService
 

@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - CompanyServiceProviding
 
-protocol CompanyServiceProviding: ServiceProviding {}
+public protocol CompanyServiceProviding: ServiceProviding {}
 
 // MARK: - CompanyService
 

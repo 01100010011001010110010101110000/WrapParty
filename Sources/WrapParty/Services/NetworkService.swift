@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - NetworkServiceProviding
 
-protocol NetworkServiceProviding: ServiceProviding {}
+public protocol NetworkServiceProviding: ServiceProviding {}
 
 // MARK: - NetworkService
 

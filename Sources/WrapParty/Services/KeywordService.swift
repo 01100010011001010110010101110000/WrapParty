@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - KeywordServiceProviding
 
-protocol KeywordServiceProviding: ServiceProviding {}
+public protocol KeywordServiceProviding: ServiceProviding {}
 
 // MARK: - KeywordService
 

@@ -4,15 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Use stable swift log version">
-      <change afterPath="$PROJECT_DIR$/Sources/WrapParty/Extensions/Models+Identifiable.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/WrapPartyProviding.swift" afterDir="false" />
+    <list default="true" id="4494747e-856a-48f6-9a2e-476376f41451" name="Changes" comment="Add WrapPartyProviding and conform objects with trivial conformance to Identifiable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/Movie.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Movie/Movie.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvShow.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/Tv/TvShow.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvEpisodes/TvEpisodeDetails.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Models/TvSeasons/TvSeasonDetails.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/WrapParty.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Protocols/WrapPartyProviding.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Protocols/WrapPartyProviding.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CertificationService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CertificationService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ChangesService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CollectionService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CollectionService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CompanyService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CompanyService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ConfigurationService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ConfigurationService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/CreditService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/CreditService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/DiscoveryService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/DiscoveryService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/FindService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/FindService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/GenreService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/GenreService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/KeywordService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/KeywordService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/MovieService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/NetworkService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/NetworkService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/PersonService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/ReviewService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/ReviewService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/SearchService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/SearchService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TrendingService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TrendingService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeGroupService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeGroupService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvEpisodeService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvSeasonService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/TvService.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sources/WrapParty/Services/WatchProviderService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/Sources/WrapParty/Services/WatchProviderService.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,24 +68,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="additional-protocols" />
-                    <option name="lastUsedInstant" value="1654030948" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="public-default-config" />
-                    <option name="lastUsedInstant" value="1653856025" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="service-factory-methods" />
-                    <option name="lastUsedInstant" value="1653853911" />
+                    <option name="branchName" value="better-protocols" />
+                    <option name="lastUsedInstant" value="1654994520" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="main" />
                     <option name="lastUsedInstant" value="1653853895" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="make-services-public" />
-                    <option name="lastUsedInstant" value="1653852745" />
                   </RecentBranch>
                 </list>
               </option>
@@ -170,10 +173,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests.testGetDetails" />
-        <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testSearchMovie" />
         <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testallMovieSearchResults" />
+        <item itemvalue="Swift Package Test.SearchServiceIntegrationTests.testSearchMovie" />
         <item itemvalue="Swift Package Test.GenreServiceIntegrationTests" />
+        <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests.testGetDetails" />
         <item itemvalue="Swift Package Test.CompanyServiceIntegrationTests" />
       </list>
     </recent_temporary>
@@ -194,6 +197,10 @@
       <workItem from="1653936078718" duration="1118000" />
       <workItem from="1654009460282" duration="3959000" />
       <workItem from="1654030307753" duration="2330000" />
+      <workItem from="1654892329261" duration="11000" />
+      <workItem from="1654892358387" duration="242000" />
+      <workItem from="1654892611787" duration="826000" />
+      <workItem from="1654991454742" duration="4538000" />
     </task>
     <task id="LOCAL-00001" summary="Add project config files to git">
       <created>1651068645186</created>

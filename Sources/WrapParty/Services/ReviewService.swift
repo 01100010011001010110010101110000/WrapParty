@@ -17,8 +17,8 @@ import Logging
 
 // MARK: - ReviewServiceProviding
 
-protocol ReviewServiceProviding: ServiceProviding {}
-
+public protocol ReviewServiceProviding: ServiceProviding {}
+dnsjfnjfkdnsjk
 // MARK: - ReviewService
 
 public struct ReviewService: SearchServiceProviding {

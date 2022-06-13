@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - ChangesServiceProviding
 
-protocol ChangesServiceProviding: ServiceProviding {}
+public protocol ChangesServiceProviding: ServiceProviding {}
 
 // MARK: - ChangesService
 

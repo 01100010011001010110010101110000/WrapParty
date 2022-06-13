@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - CertificationServiceProviding
 
-protocol CertificationServiceProviding: ServiceProviding {}
+public protocol CertificationServiceProviding: ServiceProviding {}
 
 // MARK: - CertificationService
 

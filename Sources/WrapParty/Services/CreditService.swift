@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - CreditServiceProviding
 
-protocol CreditServiceProviding: ServiceProviding {}
+public protocol CreditServiceProviding: ServiceProviding {}
 
 // MARK: - CreditService
 

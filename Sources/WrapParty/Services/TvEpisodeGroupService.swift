@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - TvEpisodeGroupServiceProviding
 
-protocol TvEpisodeGroupServiceProviding: ServiceProviding {}
+public protocol TvEpisodeGroupServiceProviding: ServiceProviding {}
 
 // MARK: - TvEpisodeGroupService
 

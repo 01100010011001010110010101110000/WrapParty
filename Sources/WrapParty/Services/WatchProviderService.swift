@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - WatchProviderServiceProviding
 
-protocol WatchProviderServiceProviding: ServiceProviding {}
+public protocol WatchProviderServiceProviding: ServiceProviding {}
 
 // MARK: - WatchProviderService
 

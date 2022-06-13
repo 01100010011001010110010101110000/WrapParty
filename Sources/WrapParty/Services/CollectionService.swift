@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - CollectionServiceProviding
 
-protocol CollectionServiceProviding: ServiceProviding {}
+public protocol CollectionServiceProviding: ServiceProviding {}
 
 // MARK: - CollectionService
 

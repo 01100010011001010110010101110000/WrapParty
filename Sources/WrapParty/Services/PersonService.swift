@@ -18,7 +18,7 @@ import Logging
 
 // MARK: - PersonServiceProviding
 
-protocol PersonServiceProviding: ServiceProviding {}
+public protocol PersonServiceProviding: ServiceProviding {}
 
 // MARK: - PersonService
 

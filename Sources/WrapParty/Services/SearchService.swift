@@ -17,7 +17,7 @@ import Logging
 
 // MARK: - SearchServiceProviding
 
-protocol SearchServiceProviding: ServiceProviding {}
+public protocol SearchServiceProviding: ServiceProviding {}
 
 // MARK: - SearchService
 

@@ -23,7 +23,7 @@ public protocol ConfigurationServiceProviding: ServiceProviding {
 
 // MARK: - ConfigurationService
 
-public struct ConfigurationService: SearchServiceProviding {
+public struct ConfigurationService: ConfigurationServiceProviding {
   // MARK: Lifecycle
 
   public init(dataLoader: DataLoading, logger: Logger, tokenManager: TokenManager) {

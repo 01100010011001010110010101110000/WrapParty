@@ -38,12 +38,65 @@ public struct TmdbConfiguration: Codable {
 }
 
 public extension TmdbConfiguration {
+  /// The dimension that was fixed when resizing occurred
+  enum ImageSizeDimension: String, Codable {
+    /// The image was resized with a fixed height
+    case height = "h"
+    /// The image was resized with a fixed width
+    case width = "w"
+
+    init?(character: Character) {
+      switch character {
+      case "h":
+        self = .height
+      case "w":
+        self = .width
+      default:
+        return nil
+      }
+    }
+  }
+
+  /// An enum wrapping the available sizes TMDB offers for its images
+  enum ImageSize: Codable {
+    /// The original image asset, without resizing
+    case original
+    /// A resized image
+    case resized(fixedDimension: ImageSizeDimension, length: Int)
+
+    public init(from decoder: Decoder) throws {
+      let container = try decoder.singleValueContainer()
+
+      let dimensionString = try container.decode(String.self)
+      if dimensionString == "original" {
+        self = .original
+      } else {
+        guard let dimensionChar = dimensionString.first,
+              let dimension = ImageSizeDimension(character: dimensionChar),
+              let tail = dimensionString.tail,
+              let length = Int(tail) else { throw WrapPartyError.decodingError }
+        self = .resized(fixedDimension: dimension, length: length)
+      }
+    }
+
+    public func encode(to encoder: Encoder) throws {
+      var container = encoder.singleValueContainer()
+      
+      switch self {
+      case .original:
+        try container.encode("original")
+      case let .resized(fixedDimension, length):
+        try container.encode("\(fixedDimension)\(length)")
+      }
+    }
+  }
+
   // MARK: - Images
 
   struct Images: Codable {
     // MARK: Lifecycle
 
-    public init(backdropSizes: [String], baseUrl: URL, logoSizes: [String], posterSizes: [String], profileSizes: [String], secureBaseUrl: URL, stillSizes: [String]) {
+    public init(backdropSizes: [ImageSize], baseUrl: URL, logoSizes: [ImageSize], posterSizes: [ImageSize], profileSizes: [ImageSize], secureBaseUrl: URL, stillSizes: [ImageSize]) {
       self.backdropSizes = backdropSizes
       self.baseUrl = baseUrl
       self.logoSizes = logoSizes
@@ -55,13 +108,13 @@ public extension TmdbConfiguration {
 
     // MARK: Public
 
-    public let backdropSizes: [String]
+    public let backdropSizes: [ImageSize]
     public let baseUrl: URL
-    public let logoSizes: [String]
-    public let posterSizes: [String]
-    public let profileSizes: [String]
+    public let logoSizes: [ImageSize]
+    public let posterSizes: [ImageSize]
+    public let profileSizes: [ImageSize]
     public let secureBaseUrl: URL
-    public let stillSizes: [String]
+    public let stillSizes: [ImageSize]
 
     // MARK: Internal
 

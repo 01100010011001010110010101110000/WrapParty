@@ -79,15 +79,19 @@ public extension TmdbConfiguration {
       }
     }
 
+    public var tmdbSizeSlug: String {
+      switch self {
+      case .original:
+        return "original"
+      case let .resized(fixedDimension, length):
+        return "\(fixedDimension)\(length)"
+      }
+    }
+
     public func encode(to encoder: Encoder) throws {
       var container = encoder.singleValueContainer()
       
-      switch self {
-      case .original:
-        try container.encode("original")
-      case let .resized(fixedDimension, length):
-        try container.encode("\(fixedDimension)\(length)")
-      }
+      try container.encode(tmdbSizeSlug)
     }
   }
 

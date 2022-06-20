@@ -84,7 +84,7 @@ public extension TmdbConfiguration {
       case .original:
         return "original"
       case let .resized(fixedDimension, length):
-        return "\(fixedDimension)\(length)"
+        return "\(fixedDimension.rawValue)\(length)"
       }
     }
 
